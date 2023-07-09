@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <title>Expressive Robot Face for Tablet</title>
+  <link rel="stylesheet" href="css/marrtino.css">
+  
+</head>
+
+<body>
+  <div class="buttons">
+    <button onclick="eyes.startBlinking()">Start Blinking</button>
+    <button onclick="eyes.stopBlinking()">Stop Blinking</button>
+    <button onclick="eyes.blink()" >Blink</button>
+    <button onclick="eyes.express({type: 'happy'})" >Happy</button>
+    <button onclick="eyes.express({type: 'sad'})" >Sad</button>
+    <button onclick="eyes.express({type: 'angry'})" >Mad</button>
+    <button onclick="eyes.express({type: 'focused'})" >Focused</button>
+    <button onclick="eyes.express({type: 'confused'})" >Confused</button>
+
+  </div>
+  <div class="face">
+   <div class="bulb left">
+   	<img src="image/bulbo.png" width="70%">
+    <div class="eye left">
+	<img src="image/pupilla.png" width="90%">
+      <div class="eyelid upper"></div>
+      <div class="eyelid lower"></div>
+    </div>
+   </div>	
+   <div class="bulb right">
+   	<img src="image/bulbo.png" width="70%">
+    <div class="eye right">
+	  <img src="image/pupilla.png" width="90%">
+      <div class="eyelid upper"></div>
+      <div class="eyelid lower"></div>
+    </div>
+	</div>
+    <div class="nose"></div>
+    <div  class="mouth">
+	<img src="image/giphy.gif" width="90%">
+      <div class="mouthlid upper"></div>
+      <div class="mouthlid lower"></div>
+    </div>
+    
+  </div>
+  
+  <script  src="js/face.js"></script>
+</body>

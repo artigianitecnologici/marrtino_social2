@@ -1,0 +1,122 @@
+# Docker file for MARRtino software
+# ROS Noetic, navigation, perception & additional packages
+# System image - noetic
+
+# docker build -t marrtino:noetic_system -f Dockerfile.noetic_system .
+
+#FROM ros:noetic-ros-core-buster
+FROM ros:noetic-ros-core-focal
+
+ARG MARRTINO_SYSTEM_VERSION=4.2.2
+
+ARG MACHTYPE=default
+ARG UID=1000
+ARG GID=1000
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+###### User root ######
+
+# install libraries and ros packages 
+
+#RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+
+# install bootstrap tools
+RUN apt-get update && apt-get install --no-install-recommends -y \
+    tmux less sudo eom nano git \
+    openssl shellinabox netcat \
+    wget iputils-ping net-tools openssh-client nginx \
+    python3-pip libwebsockets-dev \
+    build-essential \
+    python3-rosdep \
+    python3-rosinstall \
+    python3-vcstools \
+    && rm -rf /var/lib/apt/lists/*
+
+# bootstrap rosdep
+RUN rosdep init && \
+  rosdep update --rosdistro $ROS_DISTRO
+
+# install ros packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ros-noetic-ros-base=1.5.0-1* \
+    ros-noetic-desktop ros-noetic-move-base-msgs \
+    && rm -rf /var/lib/apt/lists/*
+
+# User: robot (password: robot) with sudo power
+
+RUN useradd -ms /bin/bash robot && echo "robot:robot" | chpasswd && adduser robot sudo
+
+RUN usermod -u $UID robot && groupmod -g $GID robot
+
+RUN adduser robot audio
+RUN adduser robot video
+RUN adduser robot dialout
+
+
+###### User robot ######
+
+USER robot
+
+# Configuration
+
+RUN echo "set -g mouse on" > $HOME/.tmux.conf 
+
+# Python packages
+
+RUN pip3 install --user tornado==5.0.2
+
+# Init ROS workspace
+
+RUN mkdir -p $HOME/ros/catkin_ws/src
+
+RUN /bin/bash -c "source /opt/ros/noetic/setup.bash; cd $HOME/ros/catkin_ws/src; catkin_init_workspace; cd ..; catkin_make"
+
+RUN echo "source \$HOME/ros/catkin_ws/devel/setup.bash" >> $HOME/.bashrc
+
+RUN rosdep update
+
+RUN /bin/bash -ci "cd $HOME/ros/catkin_ws && catkin_make"
+
+
+# Set up .bashrc
+
+RUN echo "export MARRTINO_APPS_HOME=$HOME/src/marrtino_apps" >> $HOME/.bashrc
+
+RUN echo "export MARRTINO_VERSION=\"docker\"" >> $HOME/.bashrc
+
+RUN echo "docker $MARRTINO_SYSTEM_VERSION" >> $HOME/.marrtino_version
+
+RUN touch ~/.sudo_as_admin_successful
+
+
+
+RUN mkdir -p $HOME/src 
+
+# Create ROS node with useful messages
+
+
+# thin_state_publisher (with patch)
+
+#RUN cd $HOME/src/ && \
+#    git clone https://bitbucket.org/ggrisetti/thin_drivers.git 
+
+#COPY thin_state_publisher.patch /home/robot/src/thin_drivers/thin_state_publisher.patch 
+
+#RUN cd $HOME/src/thin_drivers && \
+#    git apply thin_state_publisher.patch
+
+
+#RUN cd $HOME/ros/catkin_ws/src && \
+#    ln -s $HOME/src/apriltags_ros . && \
+#    ln -s $HOME/src/thin_drivers/thin_state_publisher .
+
+#RUN bash -ci "cd $HOME/ros/catkin_ws; catkin_make -j2"
+
+# Set working dir and container command
+
+WORKDIR /home/robot
+
+CMD [ "/usr/bin/tmux" ]
+
+

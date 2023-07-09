@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <title>MARRtina Robot Face</title>
+  <!-- Bootstrap CSS 
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>-->
+  <script type="text/javascript" src="js/roslib.min.js"></script>
+  <script type="text/javascript" src="js/eventemitter2.min.js"></script>
+  <script type="text/javascript" type="text/javascript">
+    function refreshPage(t){
+  
+      setTimeout("location.reload(true);", t);
+  
+    } 
+    </script>
+  <script type="text/javascript" type="text/javascript">
+    var teleop;
+    var ros = new ROSLIB.Ros({
+      	 url: 'ws:' + window.location.hostname +':9090'
+    });
+
+    ros.on('connection', function () {
+        console.log("Connected"); 
+    });
+
+    ros.on('error', function (error) {
+        console.log("Error"); 
+    });
+
+    ros.on('close', function () {
+       console.log("Close"); 
+    });
+    // 
+    
+	// SONAR
+	var sonar0_listener = new ROSLIB.Topic({
+      ros: ros,
+      name: 'social/emotion/',
+      messageType: 'std_msgs/String'
+  });
+
+  sonar0_listener.subscribe(function (m) {
+      //document.getElementById("emotion").innerHTML = m.data;
+      console.log("Emotion");
+      console.log(m.data);
+	  
+	  if (m.data == "normal") {
+        eyes.normal();
+      } 
+      if (m.data == "happy") {
+        eyes.happy();
+      } 
+	  if (m.data == "surprise") {
+        eyes.surprise();
+      }
+	  if (m.data == "angry") {
+        eyes.angry();
+      } 
+	  if (m.data == "sad") {
+        eyes.sad();
+      } 
+      if (m.data == "speak") {
+        eyes.speak();
+      } 
+	  if (m.data == "sings") {
+        eyes.sings();
+      }
+      if (m.data == "fear") {
+        eyes.fear();
+      }
+      if (m.data == "startblinking") {
+        eyes.startBlinking();
+      } 
+      if (m.data == "stopblinking") {
+        eyes.stopBlinking();
+      }
+   });
+
+   
+
+     
+    window.onload = function () {
+	  
+      
+	  
+    }
+
+  </script>
+
+
+  <link rel="stylesheet" href="css/marrtina03.css">
+  
+</head>
+
+<body onload= "JavaScript:refreshPage(90000);>
+  
+  <div class="buttons">
+    <button onclick="eyes.startBlinking()">Start Blinking</button>
+    <button onclick="eyes.stopBlinking()">Stop Blinking</button>
+    <button onclick="eyes.blink()" >Blink</button>
+	<button onclick="eyes.normal()" >Normal</button>
+	<button onclick="eyes.speak()" >Speak</button>
+    <button onclick="eyes.happy()" >Happy</button>
+    <button onclick="eyes.sad()" >Sad</button>
+    <button onclick="eyes.fear()" >Fear</button>
+    <button onclick="eyes.angry()" >Mad</button>
+    <button onclick="eyes.focused()" >Focused</button>
+	 <button onclick="eyes.surprise()" >surprise</button>
+    <button onclick="eyes.confused()" >Confused</button>
+  
+  </div>
+
+  <div class="face">
+    <div class="bulb left">
+    <img id="occhiosx" src="image/face03/normal/occhio sx.png" width="100%">
+     <div class="eye left">
+	  
+      <div class="eyelid upper"></div>
+      <div class="eyelid lower"></div>
+    </div>
+   </div>	
+    <div class="bulb right">
+   <img id="occhiodx" src="image/face03/normal/occhio sx.png" width="100%">
+    <div class="eye right">
+      <div class="eyelid upper"></div>
+      <div class="eyelid lower"></div>
+    </div>
+	</div>
+    <div class="nose">
+      <img id="naso" src="image/face03/normal/naso.png" width="100%">
+    </div>
+    <div  class="mouth">
+	  <img id="bocca" src="image/face03/normal/bocca.png" width="170%">
+     
+    </div>
+    
+  </div>
+  
+  <p>Connection status: <span id="status"></span></p>
+  <p> on /emotion: <span id="emotion"></span></p>
+ 
+  
+    <script  src="js/marrtina03.js"></script>
+</body>

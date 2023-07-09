@@ -1,0 +1,23 @@
+system:
+  nginx: on
+  nginx_port: 80    # nginx server port
+
+simulator:
+  stage: off        # off|on|x11|vnc
+  vnc_port: 3000    # vnc server port
+
+robot:
+  motorboard: marrtino2019   # arduino|ln298|pka03|marrtino2019
+  4wd: off
+  joystick: on
+  laser: rplidar      # hokuyo | rplidar
+  camera: usbcam       # usbcam | astra | xtion
+  camera_resolution: (640, 480)   # (width, height)
+
+functions:
+  navigation: on
+  vision: on
+  speech: on
+  mapping: on
+  social: on
+

@@ -1,0 +1,35 @@
+#Arduino MEGA
+
+SUBSYSTEMS=="usb", KERNEL=="ttyACM[0-9]*", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="0042", SYMLINK+="orazio arduino_mega_$attr{serial}", MODE="0666"
+SUBSYSTEMS=="usb", KERNEL=="ttyACM[0-9]*", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="0242", SYMLINK+="orazio arduino_mega_$attr{serial}", MODE="0666"
+SUBSYSTEMS=="usb", KERNEL=="ttyACM[0-9]*", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="0010", SYMLINK+="orazio arduino_mega_$attr{serial}", MODE="0666"
+SUBSYSTEMS=="usb", KERNEL=="ttyACM[0-9]*", ATTRS{idVendor}=="2a03", ATTRS{idProduct}=="0042", SYMLINK+="orazio arduino_mega_$attr{serial}", MODE="0666"
+
+# hokuyo
+
+SUBSYSTEMS=="usb", KERNEL=="ttyACM[0-9]*", ACTION=="add", ATTRS{idVendor}=="15d1", ATTRS{idProduct}=="0000", MODE="666", SYMLINK+="hokuyo", GROUP="dialout"
+
+# rplidar
+
+KERNEL=="ttyUSB*", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE="0777", SYMLINK+="rplidar"
+
+# dynamyxel
+KERNEL=="ttyUSB*", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6014", MODE="0777", SYMLINK+="dinamixel"   
+# Orbec Astra
+
+SUBSYSTEM=="usb", ATTR{idVendor}=="2bc5", ATTR{idProduct}=="040[0-9]", MODE="0666", OWNER="root", GROUP="video"
+SUBSYSTEM=="usb", ATTR{idVendor}=="2bc5", ATTR{idProduct}=="040[a-f]", MODE="0666", OWNER="root", GROUP="video"
+SUBSYSTEM=="usb", ATTR{idVendor}=="2bc5", ATTR{idProduct}=="050[0-9]", MODE="0666", OWNER="root", GROUP="video"
+SUBSYSTEM=="usb", ATTR{idVendor}=="2bc5", ATTR{idProduct}=="050[a-f]", MODE="0666", OWNER="root", GROUP="video"
+SUBSYSTEM=="usb", ATTR{idVendor}=="2bc5", ATTR{idProduct}=="060[0-9]", MODE="0666", OWNER="root", GROUP="video"
+SUBSYSTEM=="usb", ATTR{idVendor}=="2bc5", ATTR{idProduct}=="060[a-f]", MODE="0666", OWNER="root", GROUP="video"
+
+# Xtion
+
+SUBSYSTEM=="usb", ATTRS{idVendor}=="1d27", ATTRS{idProduct}=="0601", MODE:="0666", OWNER="root", GROUP="video"
+
+# Logitech C920
+
+SUBSYSTEM=="usb", ATTRS{idProduct}=="082d", ATTRS{idVendor}=="046d", MODE:="0666", OWNER="root", GROUP="video"
+
+

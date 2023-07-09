@@ -1,0 +1,52 @@
+version: "3.3"
+
+services:
+
+  websocial:
+        image: nginx:alpine
+        volumes:
+            - "./etc/nginx/default.conf:/etc/nginx/conf.d/default.conf"
+            - "./etc/ssl:/etc/ssl"
+            - "./web:/var/www/html"
+            - "./etc/nginx/default.template.conf:/etc/nginx/conf.d/default.template"
+        ports:
+            - "8080:80"
+            - "443:443"
+        environment:
+            - NGINX_HOST=${NGINX_HOST}
+        command: /bin/sh -c "envsubst '$$NGINX_HOST' < /etc/nginx/conf.d/default.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+        restart: always
+        depends_on:
+            - php
+            
+
+  php:
+        image: nanoninja/php-fpm:${PHP_VERSION}
+        restart: always
+        volumes:
+            - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
+            - "./web:/var/www/html"
+
+ 
+  social:
+    image: marrtino:social
+    build:
+      context: $MARRTINO_SOCIAL/docker
+      dockerfile: Dockerfile.social
+    container_name: social
+    dns: 8.8.8.8
+    network_mode: "host"
+    tty: true
+    privileged: true
+    environment:
+    - ROS_IP=$ROS_IP
+    volumes:
+    - /dev:/dev
+    - $MARRTINO_APPS_HOME:/home/robot/src/marrtino_apps
+    - $MARRTINO_SOCIAL:/home/robot/src/marrtino_social
+
+
+networks:
+  default:
+    name: marrtino-social-network
+

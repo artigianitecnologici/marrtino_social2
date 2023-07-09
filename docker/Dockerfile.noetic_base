@@ -1,0 +1,24 @@
+# Docker file for MARRtino software
+# ROS Noetic , navigation, perception & additional packages
+# Version base
+
+# docker build -t marrtino:noetic_base -f Dockerfile.noetic_base .
+
+FROM marrtino:noetic_system
+
+USER robot
+
+# Trick to force build from here
+
+RUN echo "20210910" > /tmp/lastdockerbuild
+
+# marrtino_apps
+
+RUN cd $HOME/src && \
+    git clone --depth 1 https://github.com/artigianitecnologici/marrtino_apps.git
+
+WORKDIR /home/robot
+
+CMD [ "/bin/bash", "-ci", "/home/robot/src/marrtino_apps/bringup/1-bringup_noetic.bash" ]
+
+

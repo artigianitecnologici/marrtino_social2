@@ -1,0 +1,14 @@
+<launch>
+ 
+  <!-- Launching USB CAM launch -->
+  <include file="webcam.launch"/> 
+  
+   <!-- Start ROS Bridge Server  -->
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
+  <!--
+  <node name="web_video_server" pkg="web_video_server" type="web_video_server" respawn="false" output="screen">
+    <param name="port" value="29090" />
+  </node>  
+  -->
+  
+ </launch>

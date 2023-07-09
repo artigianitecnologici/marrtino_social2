@@ -1,0 +1,20 @@
+<launch>
+ 
+  <!-- Launching USB CAM launch 
+  <include file="webcam.launch"/> -->
+   <!-- Starting face tracker node 
+  <rosparam file="$(find face_tracker_pkg)/config/track.yaml" command="load"/>
+  <node name="face_tracker" pkg="face_tracker_pkg" type="face_tracker_node" output="screen" />
+  <include file="$(find face_tracker_control)/launch/start_dynamixel.launch"/> 
+-->
+  <!-- Starting face tracker node 
+ <node name="face_controller" pkg="face_tracker_control" type="face_tracker_controller" output="screen" />-->
+   <!-- Start ROS Bridge Server  -->
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
+ 
+  <node name="web_video_server" pkg="web_video_server" type="web_video_server" respawn="false" output="screen">
+    <param name="port" value="29090" />
+  </node>  
+
+  
+ </launch>

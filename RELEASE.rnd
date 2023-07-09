@@ -1,0 +1,6 @@
+
+
+DATA       FILE           DESCRIZIONE
+-----------------------------------------------------------------------------------------------------------
+15/04/2022 facestart.sh   Script per far partire il viso automaticamente
+                          prerequisiti sudo apt install xdotool

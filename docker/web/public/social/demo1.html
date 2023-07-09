@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>MARRtino Social Interface</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/roslib.min.js"></script>
+  <script type="text/javascript" src="js/eventemitter2.min.js"></script>
+  <script type="text/javascript" type="text/javascript">
+    
+    var ros = new ROSLIB.Ros({
+      url: 'ws:' + window.location.hostname +':9090'
+    });
+
+    ros.on('connection', function () {
+      document.getElementById("status").innerHTML = "Connected";
+    });
+
+    ros.on('error', function (error) {
+      document.getElementById("status").innerHTML = "Error";
+    });
+
+    ros.on('close', function () {
+      document.getElementById("status").innerHTML = "Closed";
+    });
+    // 
+    var txt_listener = new ROSLIB.Topic({
+      ros: ros,
+      name: '/txt_msg',
+      messageType: 'std_msgs/String'
+    });
+
+    txt_listener.subscribe(function (m) {
+      document.getElementById("msg").innerHTML = m.data;
+      
+    });
+    
+    
+
+   //* A topic for messaging.
+var emotionTopic = new ROSLIB.Topic({
+  ros: ros,
+  name : '/social/emotion',
+  messageType: 'std_msgs/String'
+});
+
+   //* A topic for messaging.
+   
+var speechTopic = new ROSLIB.Topic({
+  ros: ros,
+  name : '/speech/to_speak',
+  messageType: 'std_msgs/String'
+});
+
+
+function speak( testo){
+var msg_speak = new ROSLIB.Message({
+      text: testo  ,
+      wav:  ''   
+ });
+ start_speak();
+ speechTopic.publish(msg_speak); // error here als
+ console.log(msg_speak);
+ normal();
+ console.log("speak");   
+}
+
+function normal(){
+var msg_happy = new ROSLIB.Message({
+      data :  'happy'   
+ });
+ emotionTopic.publish(msg_happy); // error here als
+ console.log("happy");   
+}
+
+function start_speak(){
+var msg_speak = new ROSLIB.Message({
+      data :  'speak'   
+ });
+ emotionTopic.publish(msg_speak); // error here als
+ console.log("start speak");   
+}
+
+
+function FaceExpression( face){
+  var mymsg = new ROSLIB.Message({
+       data :  face   
+  });
+  emotionTopic.publish(mymsg); // error here als
+
+  console.log(face);   
+}
+
+
+
+
+function normal(){
+  var mymsg = new ROSLIB.Message({
+       data :  'normal'   
+  });
+  emotionTopic.publish(mymsg); // error here als
+
+  console.log("normal");   
+}
+
+
+function startBlinking(){
+  var mymsg = new ROSLIB.Message({
+       data :   'startblinking'   
+  });
+  emotionTopic.publish(mymsg); // error here als
+
+  console.log("startblinking");   
+}
+
+function LeggiMurphy(){
+ num = Math.floor(Math.random() * 2) + 1;
+ //document.getElementById("demo").innerHTML = num;
+
+if (num == 1) {
+   speak("la probabilità che qualcosa accada è inversamente proporzionale alla sua desiderabilità");
+} else if (num == 2) {
+    speak("le cose vengono danneggiate in proporzione al loro valore");
+} else {
+ speak(",se sei di buon umore, non ti preoccupare. Ti passera");
+ }
+}
+
+function Barzelletta(){
+ num = Math.floor(Math.random() * 2) + 1;
+ //document.getElementById("demo").innerHTML = num;
+
+if (num == 1) {
+   speak("ma se il mio capo si droga allora  io sono un tossico dipendente?");
+} else if (num == 2) {
+    speak(" Scusate.. ma per aprire un buon vino dòc, mi è sufficiente aprire  WORD?");
+} else {
+ speak(" Che cosa dice un uccello specializzato in elettronica? , , , cip cip");
+ }
+}
+
+function Presentazione(){
+ 
+   speak(" ciao ragazzi, io sono Martina e sono un robot sociale, sono nata dalla collaborazione tra robotics 3d e l'università la sapienza di Roma. dopo anni di programmazione e miglioramenti estetici, eccomi qua! Posso parlare, cantare, ballare.  posso rispondere alle domande ed interagire con gli essere umani. Vi aspetto piu tardi per divertirci insieme! mi raccomando tenete la mascherina alta  e rispettate il distanziamento sociale.");
+
+}
+     
+    window.onload = function () {
+	  
+      
+	  
+    }
+
+  </script>
+ 
+  
+
+</head>
+
+<body>
+   
+<!-- Eof Nav Bar -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12"  style="background-color: #db3636;" align="center" ><h2>DEMO INTERFACE </h2></div>
+
+  </div>
+  <div class="row">
+    <div class="col-md-12"><h1></h1></div>
+  </div>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <div class="thumbnail">
+        <h1> </h1>
+        <h1> </h1>
+        <a href="https://www.robotics-3d.com">
+          <img style="display: block;margin-left: auto;margin-right: auto;" src="image/RSTORE-1000x220.png" alt="robotics-3d.com"width="60%">
+
+        </a>
+      </div>
+    </div>
+    <div class="col-md-2">  </div>
+    <div class="col-md-4">
+      <div class="thumbnail">
+        <a href="https://www.artigianitecnologici.it">
+          <img style="display: block;margin-left: auto;margin-right: auto;" src="image/logo2.jpeg" alt="artigianitecnologici.it" width="20%">
+          
+        </a>
+      </div>
+    </div>
+    <div class="col-md-1">  </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">. </div>
+
+  </div>
+  <div class="row">
+	
+		<div class="col-md-3"><button  class="btn btn-outline-danger btn-lg" onclick="Presentazione()">Presentazione</button></div>
+ 	        <div class="col-md-3"><button  class="btn btn-outline-danger btn-lg" onclick="LeggiMurphy()">Leggy di Murphy</button></div>
+             	<div class="col-md-3"><a href="../quiz/index.html"  class="btn btn-outline-danger btn-lg" role="button">QUIZ DEMO</a></div>
+                <div class="col-md-3">
+               
+				    <button  class="btn btn-outline-danger btn-lg" onclick="Barzelletta()">
+                                            <img src="image/scimmia-ride.jpg" class="img-rounded" alt="Risate" width="60%">
+                                     </button>
+                   
+ 	        </div>
+ 
+				
+			 
+    </div>
+
+    <div class="row">
+	
+      <div class="col-md-3"></div>
+      <div class="col-md-3"></div>
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
+         <button  class="btn btn-danger btn-lg btn-block " onclick="Barzelletta()">Barzellette</button>
+       </div>
+    
+    </div>     
+    <div class="row">
+	
+      <div class="col-md-3">
+        <div class="col-md-3"><a href="../3domande/index.html"  class="btn btn-outline-danger btn-lg" role="button">MISURA LA TUA INTELLIGENZA</a></div>
+           
+      </div>
+      <div class="col-md-3"></div>
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
+         </div>
+    
+    </div>     
+            
+</diV>
+
+
+ 
+
+      <p style="color: bisque;">Connection status: <span id="status"></span></p>
+      <p style="color: bisque;"> on /emotion: <span id="emotion"></span></p>
+</body>
+
+</html>
+
+
+

@@ -1,0 +1,8 @@
+# Parameters for USB camera ROS node
+# v4l2-ctl --device=0 --list-formats-ext
+
+image_width: 640
+image_height: 480
+pixel_format: yuyv  # mjpeg, yuyv
+io_method: mmap
+

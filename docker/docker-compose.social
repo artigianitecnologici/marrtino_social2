@@ -1,0 +1,17 @@
+  social:
+    image: marrtino:social
+    build:
+      context: $MARRTINO_APPS_HOME/docker
+      dockerfile: Dockerfile.social
+    container_name: social
+    dns: 8.8.8.8
+    network_mode: "host"
+    tty: true
+    privileged: true
+    environment:
+    - ROS_IP=$ROS_IP
+    volumes:
+    - /dev:/dev
+    - $MARRTINO_APPS_HOME:/home/robot/src/marrtino_apps
+    - $MARRTINO_SOCIAL:/home/robot/src/social
+

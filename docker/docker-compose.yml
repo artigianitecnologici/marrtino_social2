@@ -18,16 +18,16 @@ services:
         restart: always
         depends_on:
             - php
-            
+
 
   php:
         image: nanoninja/php-fpm:${PHP_VERSION}
         restart: always
         volumes:
             - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
-            - $MARRTINO_SOCIAL2/web:/var/www/html
+            - ./web:/var/www/html
 
- 
+
   social:
     image: marrtino:social
     build:

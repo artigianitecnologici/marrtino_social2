@@ -77,5 +77,5 @@ WORKDIR /home/robot
 #CMD [ "/usr/bin/tmux" ]
 #CMD [ "/bin/bash", "-ci", "/home/robot/src/marrtino_social/bringup/1-bringup.bash", "-docker" ]
 
-CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_social/bringup && python social_bringup.py -server_port 9250" ]
+CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_social2/bringup && python social_bringup.py -server_port 9250" ]
 

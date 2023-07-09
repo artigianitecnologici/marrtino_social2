@@ -71,7 +71,7 @@ RUN bash -ci "cd $HOME/ros/catkin_ws; catkin_make -j1"
 RUN echo "20220608" > /tmp/lastdockerbuild
 
 # marrtino_apps
-
+ 
 WORKDIR /home/robot
 
 #CMD [ "/usr/bin/tmux" ]

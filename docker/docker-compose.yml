@@ -28,7 +28,7 @@ services:
             - ./web:/var/www/html
 
 
-  social:
+  social: 
     image: marrtino:social
     build:
       context: $MARRTINO_SOCIAL2/docker

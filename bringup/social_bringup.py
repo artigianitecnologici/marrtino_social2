@@ -68,9 +68,9 @@ def run_server(port):
                 connected = False
             else:
                 print("rec [%s]" %data)
-                rfolder = "~/src/marrtino_social/launch"
-                cfolder = "~/src/marrtino_social/config"
-                sfolder = "~/src/marrtino_social/script"
+                rfolder = "~/src/marrtino_social2/launch"
+                cfolder = "~/src/marrtino_social2/config"
+                sfolder = "~/src/marrtino_social2/script"
                 homefolder = "~/src/marrtino_social"
              
                 # social normale con pan e tilt

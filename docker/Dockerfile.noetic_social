@@ -1,12 +1,12 @@
 # Docker file for MARRtino social package
 # Ferrarini Fabio - robotics-3d.com 
 
-# docker build -t marrtino:social -f Dockerfile.social .
+# docker build -t marrtino:social -f Dockerfile.noetic_social .
 ## remove
 ## docker rmi marrtino:social -f
 # Docker access
 ##  docker exec -it social tmux a
-FROM marrtino:system
+FROM marrtino:noetic_system
 
 ARG MACHTYPE=default
 
@@ -16,17 +16,15 @@ USER root
 
 RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
-RUN apt-get update && \
-    apt-get install -y \
-        v4l-utils python-pip \
-        cmake g++ git \
-        ros-melodic-rgbd-launch ros-melodic-web-video-server \
-        ros-melodic-camera-info-manager ros-melodic-libuvc \
-        ros-melodic-image-view ros-melodic-rosbridge-server  && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+#RUN apt-get update && \
+#    apt-get install -y && \
+#        cmake g++ git && \
+#    apt-get clean && \
+#    rm -rf /var/lib/apt/lists/*
 
-
+#  ros-noetic-rgbd-launch ros-noetic-web-video-server && \
+#        ros-noetic-camera-info-manager ros-noetic-libuvc && \
+#        ros-noetic-image-view ros-noetic-rosbridge-server  && \
 USER robot
 
 
@@ -75,7 +73,7 @@ RUN echo "20220608" > /tmp/lastdockerbuild
 WORKDIR /home/robot
 
 #CMD [ "/usr/bin/tmux" ]
-#CMD [ "/bin/bash", "-ci", "/home/robot/src/marrtino_social/bringup/1-bringup.bash", "-docker" ]
+#CMD [ "/bin/bash", "-ci", "/home/robot/src/marrtino_social2/bringup/1-bringup.bash", "-docker" ]
 
-CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_social/bringup && python social_bringup.py -server_port 9250" ]
+CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_social2/bringup && python social_bringup.py -server_port 9250" ]
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source $MARRTINO_APPS_HOME/docker/stop_docker.bash 
+source $MARRTINO_APPS_HOME2/docker/stop_docker.bash 
 
 sleep 5
 
@@ -10,7 +10,7 @@ while (( $DPS > 1 )) ; do
   DPS=` docker ps | wc -l`
 done
 
-source $MARRTINO_APPS_HOME/docker/start_docker.bash
+source $MARRTINO_APPS_HOME2/docker/start_docker.bash
 
 DPS=`docker ps | wc -l`
 while (( $DPS == 1 )) ; do

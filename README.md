@@ -9,8 +9,8 @@
 
 # config env
 
-    export MARRTINO_APPS_HOME=$HOME/src/marrtino_apps
-    export MARRTINO_SOCIAL=$HOME/src/marrtino_social
+    export MARRTINO_APPS_HOME2=$HOME/src/marrtino_apps2
+    export MARRTINO_SOCIAL2=$HOME/src/marrtino_social2
     export ROS_IP=127.0.0.1
     export ROBOT_TYPE=marrtino
 
@@ -40,12 +40,12 @@ Enable the `social` feature in `system_config.yaml`
 
 ## Update and build
 
-        cd $MARRTINO_APPS_HOME/docker
+        cd $MARRTINO_APPS_HOME2/docker
         ./system_update.bash
 
 ## Run
 
-        cd $MARRTINO_APPS_HOME/docker
+        cd $MARRTINO_APPS_HOME2/docker
         ./start_docker.bash
 
 ## Quit

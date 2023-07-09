@@ -15,7 +15,7 @@ echo "Running image $IMAGENAME ..."
 docker run -it \
     --name marrtinonoeticoak --rm \
     -v /dev/:/dev/ \
-    -v $HOME/src/marrtino_social/script:/home/robot/script \
+    -v $HOME/src/marrtino_social2/script:/home/robot/script \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
     -v $HOME/.Xauthority:/home/robot/.Xauthority:rw \
     -e DISPLAY=$DISPLAY \
@@ -24,7 +24,7 @@ docker run -it \
     --privileged \
     --net=host \
     -v $MARRTINO_PLAYGROUND:/home/robot/playground \
-    -v $MARRTINO_APPS_HOME:/home/robot/src/marrtino_apps \
+    -v $MARRTINO_APPS_HOME2:/home/robot/src/marrtino_apps \
     $IMAGENAME \
     tmux
 

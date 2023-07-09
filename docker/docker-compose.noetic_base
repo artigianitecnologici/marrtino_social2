@@ -1,7 +1,7 @@
   noetic_base:
     image: marrtino:noetic_base
     build:
-      context: $MARRTINO_APPS_HOME/docker
+      context: $MARRTINO_APPS_HOME2/docker
       dockerfile: Dockerfile.noetic_base
     container_name: noetic_base
     dns: 8.8.8.8
@@ -12,6 +12,6 @@
     - ROS_IP=$ROS_IP
     - ROBOT_TYPE=$ROBOT_TYPE
     volumes:
-    - $MARRTINO_APPS_HOME:/home/robot/src/marrtino_apps
+    - $MARRTINO_APPS_HOME2:/home/robot/src/marrtino_apps
     - $HOME/log:/home/robot/log
 

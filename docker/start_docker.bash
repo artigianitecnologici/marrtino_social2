@@ -7,7 +7,7 @@ docker-compose up
 
 #tmux rename-window -t $SESSION:0 'compose up'
 
-#tmux send-keys -t $SESSION:0 "cd \$MARRTINO_SOCIAL/docker" C-m
+#tmux send-keys -t $SESSION:0 "cd \$MARRTINO_SOCIAL2/docker" C-m
 
 #tmux send-keys -t $SESSION:0 "python3 dockerconfig.py " C-m
 #sleep 1 # needed to complete writing /tmp/* files

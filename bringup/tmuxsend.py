@@ -17,11 +17,11 @@ class TmuxSend:
 
     def roslaunch(self, wid, mdir, mlaunch, mparams=''):
         #os.system('tmux select-window -t %s:%d' %(self.sessionname,wid))
-        #os.system('tmux send-keys -t %s:%d "cd $MARRTINO_SOCIAL " C-m' \
+        #os.system('tmux send-keys -t %s:%d "cd $MARRTINO_SOCIAL2 " C-m' \
         #    %(self.sessionname,wid,mdir))
         os.system('tmux send-keys -t %s:%d "roslaunch %s.launch %s" C-m' \
             %(self.sessionname,wid,mlaunch, mparams))
-        #print('tmux send-keys -t %s:%d "cd $MARRTINO_SOCIAL " C-m' \
+        #print('tmux send-keys -t %s:%d "cd $MARRTINO_SOCIAL2 " C-m' \
         #   %(self.sessionname,wid,mdir))
         print('tmux send-keys -t %s:%d "roslaunch %s.launch %s" C-m' \
             %(self.sessionname,wid,mlaunch, mparams))

@@ -4,7 +4,7 @@
 
 date
 
-if [ "$MARRTINO_APPS_HOME" == "" ]; then
+if [ "$MARRTINO_APPS_HOME2" == "" ]; then
   export MARRTINO_APPS_HOME=$HOME/src/marrtino_apps
 fi
 
@@ -12,8 +12,8 @@ if [ "$MODIM_HOME" == "" ]; then
   export MODIM_HOME=$HOME/src/modim
 fi
 
-if [ "$MARRTINO_SOCIAL" == "" ]; then
-  export MARRTINO_SOCIAL=$HOME/src/marrtino_social
+if [ "$MARRTINO_SOCIAL2" == "" ]; then
+  export MARRTINO_SOCIAL2=$HOME/src/marrtino_social
 fi
 
 #source $HOME/.bashrc
@@ -37,11 +37,11 @@ fi
 
 
 
-tmux send-keys -t $SESSION:0 "cd \$MARRTINO_SOCIAL/bringup" C-m
+tmux send-keys -t $SESSION:0 "cd \$MARRTINO_SOCIAL2/bringup" C-m
 tmux send-keys -t $SESSION:0 "python social_bringup.py" C-m
 
 
-#tmux send-keys -t $SESSION:1 "cd \$MARRTINO_SOCIAL/docker/web/public/program/blockly" C-m
+#tmux send-keys -t $SESSION:1 "cd \$MARRTINO_SOCIAL2/docker/web/public/program/blockly" C-m
 #tmux send-keys -t $SESSION:1 "python websocket_robot.py" C-m
 
 

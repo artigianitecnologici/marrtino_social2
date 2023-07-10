@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGENAME=marrtino:noetic_oak-d
+IMAGENAME=marrtino:noetic_social
 
 # change setings here if needed
 if [ "$ROBOT_IP" == "" ]; then

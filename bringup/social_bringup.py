@@ -2,7 +2,7 @@
 
 from __future__ import print_function
 
-import thread
+import _thread
 import socket
 
 import argparse

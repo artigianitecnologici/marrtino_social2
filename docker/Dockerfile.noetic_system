@@ -65,6 +65,7 @@ RUN echo "set -g mouse on" > $HOME/.tmux.conf
 # Python packages
 
 RUN pip3 install --user tornado==5.0.2
+RUN pip install --user threaded
 
 # Init ROS workspace
 

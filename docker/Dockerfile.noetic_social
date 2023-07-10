@@ -34,10 +34,12 @@ USER robot
 RUN pip install --user requests
 
 
+
 RUN mkdir -p $HOME/src/dynamixel &&  cd $HOME/src/dynamixel && \
     git clone https://github.com/ROBOTIS-GIT/dynamixel-workbench.git && \
     git clone https://github.com/ROBOTIS-GIT/dynamixel-workbench-msgs.git && \
-    git clone https://github.com/ROBOTIS-GIT/DynamixelSDK.git
+    git clone https://github.com/ROBOTIS-GIT/DynamixelSDK.git && \
+    git clone --branch ros1 https://github.com/RobotWebTools/rosbridge_suite.git
  
 RUN mkdir -p $HOME/src &&  cd $HOME/src && \
     git clone https://github.com/arebgun/dynamixel_motor.git && \
@@ -53,7 +55,7 @@ RUN cd $HOME/ros/catkin_ws/src && \
     ln -s $HOME/src/face_tracker_pkg/ . && \
     ln -s $HOME/src/face_tracker_control/ . && \
     ln -s $HOME/src/dynamixel_motor/ . && \
-    ln -s $HOME/src/marrtino_social 
+    ln -s $HOME/src/rosbridge_suite/ .  
     
 # ln -s $HOME/src/chatbot_aiml/ . && \
 # corregge l'errore di compilazione

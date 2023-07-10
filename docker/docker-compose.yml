@@ -32,7 +32,7 @@ services:
     image: marrtino:social
     build:
       context: $MARRTINO_SOCIAL2/docker
-      dockerfile: Dockerfile.noetic_social
+      dockerfile: Dockerfile.social
     container_name: social
     dns: 8.8.8.8
     network_mode: "host"

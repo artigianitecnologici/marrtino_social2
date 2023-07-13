@@ -42,8 +42,26 @@ services:
     - ROS_IP=$ROS_IP
     volumes:
     - /dev:/dev
-    - $MARRTINO_APPS_HOME2:/home/robot/src/marrtino_apps2
+    - $MARRTINO_APPS_HOME:/home/robot/src/marrtino_apps
     - $MARRTINO_SOCIAL2:/home/robot/src/marrtino_social2
+
+  oak-d: 
+    image: marrtino:noetic_oak-d
+    build:
+      context: $MARRTINO_SOCIAL2/docker
+      dockerfile: Dockerfile.noetic_oak-d
+    container_name: noetic_oak-d
+    dns: 8.8.8.8
+    network_mode: "host"
+    tty: true
+    privileged: true
+    environment:
+    - ROS_IP=$ROS_IP
+    volumes:
+    - /dev:/dev
+    - $MARRTINO_APPS_HOME:/home/robot/src/marrtino_apps
+    - $MARRTINO_SOCIAL2:/home/robot/src/marrtino_social2
+
 
 
 networks:

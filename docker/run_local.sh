@@ -5,8 +5,8 @@ IMAGENAME=marrtino:noetic_social
 # change setings here if needed
 if [ "$ROBOT_IP" == "" ]; then
   echo "Set ROBOT_IP env var to IP of robot running roscore"
-  export ROBOT_IP=127.0.0.1
-  #export ROS_IP=10.3.1.1
+  #export ROBOT_IP=127.0.0.1
+  export ROS_IP=10.3.1.1
   #exit 1
 fi
 

@@ -57,8 +57,11 @@ services:
     privileged: true
     environment:
     - ROS_IP=$ROS_IP
+    - DISPLAY=${DISPLAY}
     volumes:
+    - /tmp/.X11-unix:/tmp/.X11-unix
     - /dev:/dev
+    - $MARRTINO_SOCIAL2/script:/home/robot/script 
     - $MARRTINO_APPS_HOME:/home/robot/src/marrtino_apps
     - $MARRTINO_SOCIAL2:/home/robot/src/marrtino_social2
 

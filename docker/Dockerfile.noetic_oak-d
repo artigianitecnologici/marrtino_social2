@@ -30,9 +30,9 @@ RUN python3 -m pip install depthai-sdk
 # marrtino_apps
 
 RUN cd $HOME/src && \
-    git clone --depth 1 https://github.com/artigianitecnologici/marrtino_apps.git 
+    git clone --depth 1 https://github.com/artigianitecnologici/marrtino_apps.git && \
+    git clone https://github.com/luxonis/depthai-experiments.git 
     #&& \
-    #git clone https://github.com/luxonis/depthai-experiments.git && \
     #git clone https://github.com/luxonis/depthai-python.git
 
 WORKDIR /home/robot

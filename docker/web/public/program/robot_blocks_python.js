@@ -175,7 +175,13 @@ Blockly.Python['tilt'] = function(block) {
 Blockly.Python['spalla_flessione_dx'] = function(block) {
   var value_sign = block.getFieldValue('Sign');
   var value_steps = Blockly.Python.valueToCode(block, 'steps', Blockly.Python.ORDER_ATOMIC);
+  if ( value_sign == '+') { 
+    // Up
+    if ( parseInt(value_steps) > 45 ) { value_steps = 45  } ; 
+  }
   if ( value_sign == '-') { 
+    // Down
+    if ( parseInt(value_steps) > 70 ) { value_steps = 70 } ;
     value_steps = -value_steps;
   }
   var value_pos = (((150 + parseInt(value_steps))* 3.14 )/ 180) ; 
@@ -187,7 +193,12 @@ Blockly.Python['spalla_flessione_sx'] = function(block) {
   var value_sign = block.getFieldValue('Sign');
   var value_steps = Blockly.Python.valueToCode(block, 'steps', Blockly.Python.ORDER_ATOMIC);
   if ( value_sign == '+') { 
+    // Up
+    if ( parseInt(value_steps) > 45 ) { value_steps = 45  } ; 
     value_steps = -value_steps;
+  }
+  if ( value_sign == '-') { 
+    if ( parseInt(value_steps) > 70 ) { value_steps = 70 } ;
   }
   var value_pos = (((150 + parseInt(value_steps))* 3.14 )/ 180) ;
   var code = 'spalla_flessione_sx('+value_pos+')\n';

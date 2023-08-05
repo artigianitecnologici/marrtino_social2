@@ -86,7 +86,7 @@ RUN cd $HOME/src && git clone --depth 1 https://github.com/artigianitecnologici/
 
 WORKDIR /home/robot
 
-CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_apps/bringup && python robot_bringup.py -server_port 9236" ]
+CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_apps/bringup && python3 robot_noetic_bringup.py -server_port 9236" ]
 
 #CMD [ "/usr/bin/tmux" ]
 

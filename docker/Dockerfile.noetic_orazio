@@ -1,0 +1,94 @@
+# Docker file for orazio ROS node (MARRtino robot)
+# Luca Iocchi, 10/2/2021
+
+# docker build -t marrtino:noetic_orazio -f Dockerfile.noetic_orazio .
+
+FROM marrtino:noetic_system
+
+### System libraries ###
+
+# Arduino development
+
+USER root
+
+RUN apt update && \
+    apt install -y \
+        tmux less sudo nano wget iputils-ping net-tools htop libyaml-cpp-dev \
+        arduino arduino-mk libreadline-dev libwebsockets-dev libeigen3-dev \
+        ros-noetic-control-msgs ros-noetic-tf ros-noetic-tf2 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# User: robot (password: robot) with sudo power
+
+#RUN useradd -ms /bin/bash robot && echo "robot:robot" | chpasswd && adduser robot sudo
+
+#RUN adduser robot dialout
+
+### User software ###
+
+
+USER robot
+
+# Init ROS workspace
+
+RUN mkdir -p $HOME/ros/catkin_ws/src
+
+RUN /bin/bash -c "source /opt/ros/noetic/setup.bash; cd $HOME/ros/catkin_ws/src; catkin_init_workspace; cd ..; catkin_make"
+
+RUN echo "source \$HOME/ros/catkin_ws/devel/setup.bash" >> $HOME/.bashrc
+
+RUN rosdep update
+
+RUN /bin/bash -ci "cd $HOME/ros/catkin_ws; catkin_make"
+
+# orazio ROS node
+
+RUN mkdir -p $HOME/src/srrg && cd $HOME/src/srrg && \
+    git clone https://gitlab.com/srrg-software/srrg_cmake_modules.git && \
+    git clone https://gitlab.com/srrg-software/srrg2_orazio.git
+
+# thin_state_publisher (with patch)
+
+RUN cd $HOME/src/ && \
+    git clone https://bitbucket.org/ggrisetti/thin_drivers.git 
+
+COPY thin_state_publisher.patch /home/robot/src/thin_drivers/thin_state_publisher.patch 
+
+RUN cd $HOME/src/thin_drivers && \
+    git apply thin_state_publisher.patch
+
+
+# Config
+
+RUN echo "export MARRTINO_APPS_HOME=$HOME/src/marrtino_apps" >> $HOME/.bashrc
+RUN echo "set -g mouse on" > $HOME/.tmux.conf
+
+RUN touch ~/.sudo_as_admin_successful
+
+
+# Set and compile ROS packages
+
+RUN cd $HOME/ros/catkin_ws/src && \
+    ln -s $HOME/src/srrg/srrg_cmake_modules . && \
+    ln -s $HOME/src/srrg/srrg2_orazio . && \
+    ln -s $HOME/src/thin_drivers/thin_state_publisher .
+
+
+RUN bash -ci "cd $HOME/ros/catkin_ws; catkin_make -j1"
+
+# marrtino_apps
+
+RUN cd $HOME/src && git clone --depth 1 https://github.com/artigianitecnologici/marrtino_apps.git
+
+
+# Set working dir and container command
+
+WORKDIR /home/robot
+
+CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_apps/bringup && python robot_bringup.py -server_port 9236" ]
+
+#CMD [ "/usr/bin/tmux" ]
+
+#CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_apps/robot && roslaunch robot.launch" ]
+

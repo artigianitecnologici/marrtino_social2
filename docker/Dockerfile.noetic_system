@@ -100,17 +100,17 @@ RUN mkdir -p $HOME/src
 # thin_state_publisher (with patch)
 
 #RUN cd $HOME/src/ && \
-#    git clone https://bitbucket.org/ggrisetti/thin_drivers.git 
+#    git clone https://bitbucket.org/ggrisetti/import _thread.git 
 
-#COPY thin_state_publisher.patch /home/robot/src/thin_drivers/thin_state_publisher.patch 
+#COPY thin_state_publisher.patch /home/robot/src/import _thread/thin_state_publisher.patch 
 
-#RUN cd $HOME/src/thin_drivers && \
+#RUN cd $HOME/src/import _thread && \
 #    git apply thin_state_publisher.patch
 
 
 #RUN cd $HOME/ros/catkin_ws/src && \
 #    ln -s $HOME/src/apriltags_ros . && \
-#    ln -s $HOME/src/thin_drivers/thin_state_publisher .
+#    ln -s $HOME/src/import _thread/thin_state_publisher .
 
 #RUN bash -ci "cd $HOME/ros/catkin_ws; catkin_make -j2"
 

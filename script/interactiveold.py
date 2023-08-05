@@ -2,23 +2,12 @@
 import requests
 import sys,os
 import time
-import socket               # Import socket module
 
-SERVER_ADDRESS = '10.3.1.1'             #           socket.gethostname() # Get local machine name
-SERVER_PORT = 9000                      # Reserve a port for your service.
+
 
 sys.path.append(os.getenv("MARRTINO_APPS_HOME")+"/program")
+
 from robot_cmd_ros import *
-
-serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-serverSocket.bind((SERVER_ADDRESS, SERVER_PORT))        # Bind to the port
-serverSocket.listen(1)
-
-print("Server waiting on (%s, %d)" % (SERVER_ADDRESS, SERVER_PORT))
-connectionSocket, clientAddress = serverSocket.accept() 
-
-
-
 
 myurl = 'http://10.3.1.1:5000/bot'
 IN_TOPIC = "/social/face_nroface"
@@ -84,8 +73,7 @@ def listener():
     # try:
     count = 0
     while myloop==True:
-
-        myrequest =  connectionSocket.recv(1024)
+        myrequest = wait_user_speaking(5)
         count += 1
         if myrequest=="stop":
             speech("ci vediamo alla prossima")
@@ -98,15 +86,15 @@ def listener():
             myloop=False
             
         if (myrequest != ""):
-            connectionSocket.send("STOP")
             answer=bot(myrequest)
             print(answer)
             speech(answer)
-            connectionSocket.send("SAY")
-
         
-    print("Close connection on %d" % SERVER_PORT)
-    connectionSocket.close()
+
+   
+
+ 
+        
     end()
      
 listener()

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash 
 
 IMAGENAME=marrtino:noetic_oak-d
 # change setings here if needed

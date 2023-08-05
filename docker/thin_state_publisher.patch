@@ -1,0 +1,237 @@
+diff --git a/thin_state_publisher/CMakeLists.txt b/thin_state_publisher/CMakeLists.txt
+index 3f654e5..ab97eca 100644
+--- a/thin_state_publisher/CMakeLists.txt
++++ b/thin_state_publisher/CMakeLists.txt
+@@ -10,10 +10,10 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+ ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
+ ## is used, also find other catkin packages
+ find_package(catkin REQUIRED COMPONENTS
+-  cv_bridge
+-  image_transport
++#  cv_bridge
++#  image_transport
+   sensor_msgs
+-  thin_msgs
++#  thin_msgs
+   roscpp
+   tf
+ )
+@@ -31,8 +31,8 @@ if (${CMAKE_HOST_SYSTEM_PROCESSOR} MATCHES armv7l)
+   message("ENABLING ARM NEON OPTIMIZATIONS")
+ endif ()
+ 
+-FIND_PACKAGE(OpenCV)
+-INCLUDE_DIRECTORIES(${OpenCV_INCLUDE_DIRS})
++#FIND_PACKAGE(OpenCV)
++#INCLUDE_DIRECTORIES(${OpenCV_INCLUDE_DIRS})
+ 
+ # # OpenGL is used for drawing the models. 
+ # # Could put some conditional compilation in future releases
+diff --git a/thin_state_publisher/src/globals/defs.h b/thin_state_publisher/src/globals/defs.h
+index c1696ee..d38705a 100644
+--- a/thin_state_publisher/src/globals/defs.h
++++ b/thin_state_publisher/src/globals/defs.h
+@@ -5,7 +5,7 @@
+ #include <Eigen/StdVector>
+ #include <iostream>
+ #include <unistd.h>
+-#include "opencv2/opencv.hpp"
++// #include "opencv2/opencv.hpp"
+ 
+ /**
+  * @file   defs.h
+@@ -57,7 +57,7 @@ typedef Eigen::Matrix<float, 9, 1> Vector9f;
+ typedef Eigen::Matrix<float, 6, 3> Matrix6_3f;
+ 
+ 
+-
++#if 0
+ //!check if an Eigen type contains a nan element
+ //!@returns true if at least one element of
+ //!the argument is null
+@@ -72,7 +72,7 @@ bool isNan(const T& m){
+   }
+   return false;
+ }
+-
++#endif
+ 
+ //!converts from 6 vector to isometry
+ //!@param t: a vector (tx, ty, tz, qx, qy, qz) reptesenting the transform.
+@@ -122,7 +122,7 @@ inline Eigen::Matrix3f skew(const Eigen::Vector3f& p){
+     -p.y(), p.x(), 0;
+   return s;
+ }
+-
++#if 0
+ 
+ /** \typedef UnsignedCharImage
+  * \brief An unsigned char cv::Mat.
+@@ -183,3 +183,5 @@ typedef cv::Mat_< cv::Vec3b > RGBImage;
+  */
+ typedef std::vector< cv::Vec3b > RGBVector;
+ 
++#endif
++
+diff --git a/thin_state_publisher/src/ros_utils/CMakeLists.txt b/thin_state_publisher/src/ros_utils/CMakeLists.txt
+index d215a18..c80205e 100644
+--- a/thin_state_publisher/src/ros_utils/CMakeLists.txt
++++ b/thin_state_publisher/src/ros_utils/CMakeLists.txt
+@@ -6,15 +6,15 @@ TARGET_LINK_LIBRARIES(thin_state_publisher_node
+   )
+ 
+ 
+-add_executable(thin_message_dumper_node 
+-  thin_message_dumper_node.cpp 
+-  )
+-TARGET_LINK_LIBRARIES(thin_message_dumper_node 
+-  thin_ros_wrappers_library
+-  thin_txt_io_library
+-  ${OpenCV_LIBS}
+-  ${ZLIB_LIBRARIES}   
+-  ${catkin_LIBRARIES}
+-  )
++#add_executable(thin_message_dumper_node 
++#  thin_message_dumper_node.cpp 
++#  )
++#TARGET_LINK_LIBRARIES(thin_message_dumper_node 
++#  thin_ros_wrappers_library
++#  thin_txt_io_library
++#  ${OpenCV_LIBS}
++#  ${ZLIB_LIBRARIES}   
++#  ${catkin_LIBRARIES}
++#  )
+ 
+ 
+diff --git a/thin_state_publisher/src/ros_wrappers/CMakeLists.txt b/thin_state_publisher/src/ros_wrappers/CMakeLists.txt
+index 41df031..d4b08cb 100644
+--- a/thin_state_publisher/src/ros_wrappers/CMakeLists.txt
++++ b/thin_state_publisher/src/ros_wrappers/CMakeLists.txt
+@@ -1,20 +1,20 @@
+ add_library(thin_ros_wrappers_library 
+-  spherical_image_message_listener.cpp
+-  image_message_listener.cpp 
+-  laser_message_listener.cpp 
+-  multiecholaser_message_listener.cpp
+-  imu_interpolator.cpp
+-  imu_message_listener.cpp
+-  joint_state_message_listener.cpp
++#  spherical_image_message_listener.cpp
++#  image_message_listener.cpp 
++#  laser_message_listener.cpp 
++#  multiecholaser_message_listener.cpp
++#  imu_interpolator.cpp
++#  imu_message_listener.cpp
++#  joint_state_message_listener.cpp
+   odom_tf_publisher.cpp
+   ros_utils.cpp
+ )
+ 
+ TARGET_LINK_LIBRARIES(thin_ros_wrappers_library
+   thin_txt_io_library
+-  ${OpenCV_LIBS}
+-  ${ZLIB_LIBRARIES}   
+-  ${FLANN_LIBRARIES}   
++#  ${OpenCV_LIBS}
++#  ${ZLIB_LIBRARIES}   
++#  ${FLANN_LIBRARIES}   
+   ${catkin_LIBRARIES}
+   )
+ 
+diff --git a/thin_state_publisher/src/txt_io/CMakeLists.txt b/thin_state_publisher/src/txt_io/CMakeLists.txt
+index 32f40c0..f4ccd58 100644
+--- a/thin_state_publisher/src/txt_io/CMakeLists.txt
++++ b/thin_state_publisher/src/txt_io/CMakeLists.txt
+@@ -1,25 +1,25 @@
+-SET(TXT_IO_LIBRARY_SRCS 
+-  property.h property.cpp
++SET(TXT_IO_LIBRARY_SRCS
++#  property.h property.cpp
+   base_message.h base_message.cpp
+-  static_transform_message.cpp 
+-  base_sensor_message.h base_sensor_message.cpp
+-  base_image_message.h base_image_message.cpp
+-  joint_state_message.cpp joint_state_message.h
+-  pinhole_image_message.h pinhole_image_message.cpp
+-  spherical_image_message.h spherical_image_message.cpp
+-  imu_message.h imu_message.cpp
+-  pose_message.h pose_message.cpp
+-  laser_message.cpp laser_message.h
++  static_transform_message.cpp
++#  base_sensor_message.h base_sensor_message.cpp
++#  base_image_message.h base_image_message.cpp
++#  joint_state_message.cpp joint_state_message.h
++#  pinhole_image_message.h pinhole_image_message.cpp
++#  spherical_image_message.h spherical_image_message.cpp
++#  imu_message.h imu_message.cpp
++#  pose_message.h pose_message.cpp
++#  laser_message.cpp laser_message.h
+   message_factory.cpp message_factory.h
+   message_reader.cpp message_reader.h
+-  message_writer.cpp message_writer.h
+-  sensor_message_sorter.h sensor_message_sorter.cpp
++#  message_writer.cpp message_writer.h
++#  sensor_message_sorter.h sensor_message_sorter.cpp
+   static_transform_tree.h static_transform_tree.cpp
+-  tf_overrider_trigger.h tf_overrider_trigger.cpp;
+-  message_dumper_trigger.h message_dumper_trigger.cpp
+-  message_enlister_trigger.h message_enlister_trigger.cpp
+-  message_seq_synchronizer.h message_seq_synchronizer.cpp
+-  message_timestamp_synchronizer.h message_timestamp_synchronizer.cpp
++#  tf_overrider_trigger.h tf_overrider_trigger.cpp;
++#  message_dumper_trigger.h message_dumper_trigger.cpp
++#  message_enlister_trigger.h message_enlister_trigger.cpp
++#  message_seq_synchronizer.h message_seq_synchronizer.cpp
++#  message_timestamp_synchronizer.h message_timestamp_synchronizer.cpp
+   #laser_viewer.h laser_viewer.cpp
+ )
+ 
+@@ -37,21 +37,21 @@ TARGET_LINK_LIBRARIES(thin_txt_io_library
+   # ${QT_QTOPENGL_LIBRARY} 
+   # ${QT_QTGUI_LIBRARY} 
+   # ${QT_QTCORE_LIBRARY} 
+-  ${OpenCV_LIBS} 
+-  ${OPENGL_glu_LIBRARY}
+-  ${OPENGL_gl_LIBRARY} 
++#  ${OpenCV_LIBS} 
++#  ${OPENGL_glu_LIBRARY}
++#  ${OPENGL_gl_LIBRARY} 
+   ${Boost_FILESYSTEM_LIBRARY} 
+   ${Boost_SYSTEM_LIBRARY}
+ )
+ 
+-ADD_EXECUTABLE(txt_io_generate_associations txt_io_generate_associations.cpp)
+-
+-TARGET_LINK_LIBRARIES(txt_io_generate_associations
+-   thin_globals_library
+-   thin_txt_io_library
+-   ${OpenCV_LIBS} 
+-   ${OPENGL_glu_LIBRARY}
+-   ${OPENGL_gl_LIBRARY} 
+-   ${Boost_FILESYSTEM_LIBRARY} 
+-   ${Boost_SYSTEM_LIBRARY}
+-)
++#ADD_EXECUTABLE(txt_io_generate_associations txt_io_generate_associations.cpp)
++#
++#TARGET_LINK_LIBRARIES(txt_io_generate_associations
++#   thin_globals_library
++#   thin_txt_io_library
++#   ${OpenCV_LIBS} 
++#   ${OPENGL_glu_LIBRARY}
++#   ${OPENGL_gl_LIBRARY} 
++#   ${Boost_FILESYSTEM_LIBRARY} 
++#   ${Boost_SYSTEM_LIBRARY}
++#)
+diff --git a/thin_state_publisher/src/txt_io/static_transform_message.cpp b/thin_state_publisher/src/txt_io/static_transform_message.cpp
+index 25639ac..9e507d5 100644
+--- a/thin_state_publisher/src/txt_io/static_transform_message.cpp
++++ b/thin_state_publisher/src/txt_io/static_transform_message.cpp
+@@ -2,7 +2,7 @@
+ #include "globals/defs.h"
+ #include <cstdio>
+ #include <cstring>
+-#include "opencv2/opencv.hpp"
++//#include "opencv2/opencv.hpp"
+ #include "message_factory.h"
+ #include <stdexcept>
+ 

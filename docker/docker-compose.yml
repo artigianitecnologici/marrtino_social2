@@ -27,7 +27,7 @@ services:
             - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
             - ./web:/var/www/html
 
-
+  
   social: 
     image: marrtino:social
     build:

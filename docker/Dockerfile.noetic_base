@@ -15,7 +15,7 @@ RUN echo "20210910" > /tmp/lastdockerbuild
 # marrtino_apps
 
 RUN cd $HOME/src && \
-    git clone --depth 1 https://github.com/artigianitecnologici/marrtino_apps2.git
+    git clone --depth 1 https://github.com/artigianitecnologici/marrtino_apps.git
 
 WORKDIR /home/robot
 

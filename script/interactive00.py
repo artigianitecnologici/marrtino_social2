@@ -33,8 +33,6 @@ def bot(msg):
     #print(content)
     return content
 
-def left(s, n):
-    return s[:n]
 
 
 def reset_face():    
@@ -82,23 +80,13 @@ def listener():
     speech("Ciao sono martina se vuoi puoi parlare con me")
     speech("dimmi")
     myrequest = ""
-    mycommand = ""
     myloop=True
     # try:
     count = 0
-
     while myloop==True:
 
         myrequest =  connectionSocket.recv(1024)
         count += 1
-        keyword = "comando : "
-        msglenght = len(myrequest)
-        keylenght = len(keyword)
-        mycommand = ""
-        if (left(myrequest,keylenght) == keyword):
-            mycommand =  myrequest[keylenght+1:msglenght]
-
-
         if myrequest=="stop":
             speech("ci vediamo alla prossima")
             myrequest=""
@@ -109,8 +97,7 @@ def listener():
             myrequest=""
             myloop=False
             
-            
-        if (myrequest != "" and mycommand == ""):
+        if (myrequest != ""):
             connectionSocket.send("STOP")
             answer=bot(myrequest)
             print(answer)

@@ -3,8 +3,9 @@ import requests
 import sys,os
 import time
 import socket               # Import socket module
+from threading import Thread
 
-SERVER_ADDRESS = '10.3.1.1'             #           socket.gethostname() # Get local machine name
+SERVER_ADDRESS = '10.3.1.1'             # Get local machine name
 SERVER_PORT = 9000                      # Reserve a port for your service.
 
 sys.path.append(os.getenv("MARRTINO_APPS_HOME")+"/program")
@@ -23,6 +24,8 @@ connectionSocket, clientAddress = serverSocket.accept()
 myurl = 'http://10.3.1.1:5000/bot'
 IN_TOPIC = "/social/face_nroface"
 tracking = False
+
+
 
 def bot(msg):
     payload = {'query': msg}
@@ -70,7 +73,12 @@ def wait_user_speaking(nsec):
         else :
             break
         return myasr
-    
+
+def command(msg):
+    print(msg)
+    t = Thread(target=run_code, args=(msg,))
+    t.start()
+    result = "ok"  
 
 def listener():
     begin()
@@ -90,14 +98,21 @@ def listener():
     while myloop==True:
 
         myrequest =  connectionSocket.recv(1024)
+        #print(myrequest)
         count += 1
-        keyword = "comando : "
+        keyword = "martina"
         msglenght = len(myrequest)
         keylenght = len(keyword)
         mycommand = ""
-        if (left(myrequest,keylenght) == keyword):
+        if (left(myrequest.lower(),keylenght) == keyword):
             mycommand =  myrequest[keylenght+1:msglenght]
-
+            mycommand = mycommand.lower()
+            if (mycommand == "alza le braccia"):
+                spalla_flessione_dx(2.6166666666666667)
+                spalla_flessione_sx(2.6166666666666667)
+            if (mycommand == "guarda avanti"):
+                pan(0)
+                tilt(0)
 
         if myrequest=="stop":
             speech("ci vediamo alla prossima")
@@ -120,6 +135,7 @@ def listener():
         
     print("Close connection on %d" % SERVER_PORT)
     connectionSocket.close()
+
     end()
      
 listener()

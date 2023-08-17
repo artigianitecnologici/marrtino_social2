@@ -2,12 +2,9 @@
 
 IMAGENAME=marrtino:noetic_oak-d
 # change setings here if needed
-if [ "$ROBOT_IP" == "" ]; then
   echo "Set ROBOT_IP env var to IP of robot running roscore"
-  #export ROBOT_IP=127.0.0.1
-  export ROS_IP=10.3.1.1
-  #exit 1
-fi
+  export ROBOT_IP=127.0.0.1
+  export ROS_IP=127.0.0.1
 
 echo "Running image $IMAGENAME ..."
 
@@ -23,7 +20,7 @@ docker run -it \
     --privileged \
     --net=host \
     -v $MARRTINO_PLAYGROUND:/home/robot/playground \
-    -v $MARRTINO_APPS_HOME2:/home/robot/src/marrtino_apps \
+    -v $MARRTINO_APPS_HOME:/home/robot/src/marrtino_apps \
     $IMAGENAME \
     tmux
 

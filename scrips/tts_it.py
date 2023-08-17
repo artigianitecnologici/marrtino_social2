@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
-
 import rospy 
 from std_msgs.msg import String
 from gtts import gTTS
@@ -8,21 +7,21 @@ import os
 from subprocess import Popen, PIPE
 import requests.packages.urllib3
 requests.packages.urllib3.disable_warnings()
-
 FilePath = os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + "/data" #../data
 
 def callback(data):
     rospy.loginfo('I heard %s', data.data)
     try:
-        tts = gTTS(text=data.data, lang='en-us')
-        tts.save(FilePath + "/demo.mp3")
-        p=Popen("play -q "+ FilePath + "/demo.mp3", stdout=PIPE, shell=True)
+        tts = gTTS(text=data.data, lang='it')s
+        tts.save(FilePath + "/demoit.mp3")
+        p=Popen("play  "+ FilePath + "/demoit.mp3 -q 1000", stdout=PIPE, shell=True)
+        #"play " +  filename + " -q" + pitch + bass + treble + volume; 
         p.wait()
-        os.remove(FilePath + '/demo.mp3')
+        os.remove(FilePath + '/demoit.mp3')
     except Exception as e:
         print("receive msg,but parse exception:", e)
 
 if __name__ == '__main__':
-    rospy.init_node('jetbot_tts_node', anonymous=True)
-    rospy.Subscriber('speak', String, callback, queue_size=1)
+    rospy.init_node('marrtino_speack_it_node', anonymous=True)
+    rospy.Subscriber('speak_it', String, callback, queue_size=1)
     rospy.spin()

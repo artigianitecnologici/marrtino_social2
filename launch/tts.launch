@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+
+    <node name="tts_en"  pkg="marrtino_social2"  type="tts_en.py" output="screen" />
+    <node name="tts_it"  pkg="marrtino_social2"  type="tts_it.py" output="screen" />
+  
+</launch>

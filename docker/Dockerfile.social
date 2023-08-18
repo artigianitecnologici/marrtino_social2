@@ -56,6 +56,7 @@ RUN cd $HOME/ros/catkin_ws/src && \
     ln -s $HOME/src/dynamixel . && \
     ln -s $HOME/src/face_tracker_pkg/ . && \
     ln -s $HOME/src/face_tracker_control/ . && \
+    ln -s $HOME/src/marrtino_social2/ . && \
     ln -s $HOME/src/dynamixel_motor/ .
 
 # ln -s $HOME/src/chatbot_aiml/ . && \

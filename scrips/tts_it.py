@@ -7,17 +7,20 @@ import os
 from subprocess import Popen, PIPE
 import requests.packages.urllib3
 requests.packages.urllib3.disable_warnings()
-FilePath = os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + "/data" #../data
+tmpfile = "/tmp/cacheita.mp3"
 
 def callback(data):
     rospy.loginfo('I heard %s', data.data)
     try:
-        tts = gTTS(text=data.data, lang='it')s
-        tts.save(FilePath + "/demoit.mp3")
-        p=Popen("play  "+ FilePath + "/demoit.mp3 -q 1000", stdout=PIPE, shell=True)
+        mytxt = data.data
+        mytxt.decode("utf-8")
+        tts = gTTS(mytxt, lang='it')
+        tts.save(tmpfile)
+        pitch = "600"
+        p=Popen("play " + tmpfile + " -q pitch 600" , stdout=PIPE, shell=True)
         #"play " +  filename + " -q" + pitch + bass + treble + volume; 
         p.wait()
-        os.remove(FilePath + '/demoit.mp3')
+        os.remove(tmpfile)
     except Exception as e:
         print("receive msg,but parse exception:", e)
 

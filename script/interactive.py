@@ -1,15 +1,19 @@
 #! /usr/bin/python
+import rospy
+from std_msgs.msg import String
+
 import requests
 import sys,os
 import time
 import socket               # Import socket module
 from threading import Thread
 
-SERVER_ADDRESS = '10.3.1.1'             # Get local machine name
+SERVER_ADDRESS = '192.168.1.8'             # Get local machine name
 SERVER_PORT = 9000                      # Reserve a port for your service.
 
 sys.path.append(os.getenv("MARRTINO_APPS_HOME")+"/program")
 from robot_cmd_ros import *
+
 
 serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 serverSocket.bind((SERVER_ADDRESS, SERVER_PORT))        # Bind to the port
@@ -20,12 +24,15 @@ connectionSocket, clientAddress = serverSocket.accept()
 
 
 
-
 myurl = 'http://10.3.1.1:5000/bot'
+myurl = 'http://192.168.1.8:5000/bot'
 IN_TOPIC = "/social/face_nroface"
+OUT_SPEAK_IT_TOPIC = "/speak_it"
+OUT_SPEAK_EN_TOPIC = "/speak_en"
 tracking = False
 
-
+speak_it_pub = rospy.Publisher(OUT_SPEAK_IT_TOPIC,String,queue_size=10)
+speak_en_pub = rospy.Publisher(OUT_SPEAK_EN_TOPIC,String,queue_size=10)
 
 def bot(msg):
     payload = {'query': msg}
@@ -48,7 +55,8 @@ def reset_face():
 def speech(msg):
     #rospy.loginfo('Speech : %s' %(msg))
     emotion("speak")
-    say(msg,'it')
+    #say(msg,'it')
+    speak_it_pub.publish(msg.decode("utf-8"))
     emotion("normal")
 
 def callback(data):

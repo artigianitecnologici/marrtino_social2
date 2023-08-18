@@ -23,6 +23,7 @@ RUN apt-get update && \
         ros-melodic-rgbd-launch ros-melodic-web-video-server \
         ros-melodic-camera-info-manager ros-melodic-libuvc \
         ros-melodic-image-view ros-melodic-rosbridge-server  && \
+        sox libsox-fmt-all && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -30,10 +31,12 @@ RUN apt-get update && \
 USER robot
 
 
+
 # Python packages
 
 RUN pip install --user telepot
 RUN pip install --user requests
+RUN pip install --user gtts
 
 RUN mkdir -p $HOME/src/dynamixel &&  cd $HOME/src/dynamixel && \
     git clone https://github.com/ROBOTIS-GIT/dynamixel-workbench.git && \

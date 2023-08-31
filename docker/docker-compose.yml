@@ -27,6 +27,19 @@ services:
             - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
             - ./web:/var/www/html
 
+  orazio:
+    image: marrtino:noetic_orazio
+    container_name: noetic_orazio
+    dns: 8.8.8.8
+    network_mode: "host"
+    tty: true
+    privileged: true
+    environment:
+    - ROS_IP=$ROS_IP
+    volumes:
+    - /dev:/dev
+    - $MARRTINO_APPS_HOME:/home/robot/src/marrtino_apps
+ 
   
   social: 
     image: marrtino:social

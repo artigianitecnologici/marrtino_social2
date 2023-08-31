@@ -1,7 +1,4 @@
 #! /usr/bin/python
-import rospy
-from std_msgs.msg import String
-
 import requests
 import sys,os
 import time
@@ -14,7 +11,6 @@ SERVER_PORT = 9000                      # Reserve a port for your service.
 sys.path.append(os.getenv("MARRTINO_APPS_HOME")+"/program")
 from robot_cmd_ros import *
 
-
 serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 serverSocket.bind((SERVER_ADDRESS, SERVER_PORT))        # Bind to the port
 serverSocket.listen(1)
@@ -24,14 +20,11 @@ connectionSocket, clientAddress = serverSocket.accept()
 
 
 
-myurl = 'http://10.3.1.1:5000/bot'
-#myurl = 'http://192.168.1.8:5000/bot'
-IN_TOPIC = "/social/face_nroface"
-OUT_GESTURE_TOPIC = "/social/gesture"
 
+myurl = 'http://10.3.1.1:5000/bot'
+IN_TOPIC = "/social/face_nroface"
 tracking = False
 
-gesture_pub = rospy.Publisher(OUT_GESTURE_TOPIC,String,queue_size=10)
 
 
 def bot(msg):
@@ -46,8 +39,6 @@ def bot(msg):
 def left(s, n):
     return s[:n]
 
-def gesture(msg):
-    gesture_pub.publish(msg)
 
 def reset_face():    
     rospy.loginfo("Time is up, resetting face")
@@ -58,9 +49,6 @@ def speech(msg):
     #rospy.loginfo('Speech : %s' %(msg))
     emotion("speak")
     say(msg,'it')
-    #
-    gesture('gesture')
-    #speak_it_pub.publish(msg.decode("utf-8"))
     emotion("normal")
 
 def callback(data):
@@ -110,7 +98,7 @@ def listener():
     while myloop==True:
 
         myrequest =  connectionSocket.recv(1024)
-        #print(myrequest)
+        print(myrequest)
         count += 1
         keyword = "martina"
         msglenght = len(myrequest)

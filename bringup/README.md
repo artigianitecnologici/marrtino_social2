@@ -46,6 +46,8 @@ Run the bringup servers
         python teleop_bringup.py -server_port 9240
          
         python social_bringup.py -server_port 9250
+        python oak-d_bringup.py -server_port 9251
+        
 
 
 Send commands to bringup servers

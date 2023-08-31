@@ -1,0 +1,1000 @@
+  218  cd security
+  219  ls
+  220  cd kali-linux-docker/
+  221  sudo ./build
+  222  ls
+  223  docker images
+  224  cd 
+  225  ls
+  226  cd security/
+  227  ls
+  228  cd kali-docker/
+  229  ls
+  230  ./kali.sh build
+  231  cd security
+  232  git clone https://github.com/onemarcfifty/kali-linux-docker.git
+  233  cd kali-linux-docker/
+  234  git pull
+  235  cp env_template env
+  236  ls
+  237  pico env
+  238  sudo ./build 
+  239  docker ps
+  240  pico env
+  241  sudo ./build 
+  242  docker images
+  243  cd
+  244  ls
+  245  ./prune.sh 
+  246  dcker images
+  247  docker images
+  248  docke rmi  [200~5c517294c5b4~
+  249  docke rmi 5c517294c5b4
+  250  docker rmi 5c517294c5b4
+  251  docker rmi 5c517294c5b4 -force
+  252  docker rmi 5c517294c5b4 --force
+  253  docker images
+  254  docker rmi 26c72ad70cd2
+  255  docker rmi 5c517294c5b4 
+  256  docker rmi 7d853b41653b
+  257  cd ..
+  258  cd
+  259  ./prune.sh 
+  260  ls
+  261  docker images
+  262  docker rmi 5c517294c5b4
+  263  docker ps
+  264  cd security/
+  265  ls
+  266  cd kali-linux-docker/
+  267  ls
+  268  sudo ./build 
+  269  docker ps
+  270  docker stop 5c517294c5b4
+  271  docker stop 7d853b41653b
+  272  docker rmi 5c517294c5b4
+  273  docker stop 7d853b41653b
+  274  docker ps
+  275  cd ..
+  276  cd
+  277  prune
+  278  ./prune.sh 
+  279  docker images
+  280  docker rmi 26c72ad70cd2
+  281  ./prune.sh 
+  282  cd security/
+  283  cd kali-
+  284  ls
+  285  cd kali-docker/
+  286  ls
+  287  ./kali.sh 
+  288  ./kali.sh build
+  289  git pull
+  290  .sudo /kali.sh build
+  291  sudo ./kali.sh build
+  292  docker images
+  293  cd ..
+  294  cd
+  295  prune
+  296  ./prune.sh 
+  297  cd security/
+  298  ls
+  299  cd kali-linux-docker/
+  300  ls
+  301  sudo ./build 
+  302  docker image
+  303  docker images
+  304  docker rmi 26c72ad70cd2
+  305  docker stop 4267cc9d21d4
+  306  docker rmi 4267cc9d21d4
+  307  docker rmi 26c72ad70cd2
+  308  docker images
+  309  docker rmi 26c72ad70cd2
+  310  docker rmi 4267cc9d21d4
+  311  cd
+  312  ./prune.sh 
+  313  docker rmi 26c72ad70cd2
+  314  ./prune.sh 
+  315  cd security/
+  316  cd kali-linux-docker/
+  317  sudo ./build 
+  318  docker ps
+  319  docker stop 007a4a781d61
+  320  docker rmi 007a4a781d61
+  321  docker images
+  322  docker rmi 26c72ad70cd2
+  323  docker rmi 007a4a781d61
+  324  docker images
+  325  cd 
+  326  ./prune.sh 
+  327  docker rmi 007a4a781d61
+  328  docker rmi 26c72ad70cd2
+  329  ./prune.sh 
+  330  docker ps
+  331  docker images
+  332  cd security/kali-linux-docker/
+  333  sudo ./build 
+  334  docker images
+  335  docker rmi 26c72ad70cd2
+  336  docker stop b2204df39101
+  337  docker rmi b2204df39101
+  338  cd
+  339  ./prune.sh 
+  340  docker images
+  341  docker rmi 26c72ad70cd2
+  342  docker images
+  343  docker builder prune
+  344  docker images
+  345  cd security/
+  346  cd kali-linux-docker/
+  347  sudo ./build 
+  348  docker builder prune
+  349  docker images
+  350  cd
+  351  ./prune.sh 
+  352  docker stop 3c6174e64db4
+  353  docker ps
+  354  docker stop a4d677688b51
+  355  docker rmi f7be01b08b4d
+  356  docker rmi a4d677688b51
+  357  docker stop a4d677688b51
+  358  docker rmi a4d677688b51
+  359  ./prune.sh 
+  360  docker builder prune
+  361  docker ps
+  362  docker images
+  363  docker rmi 3c6174e64db4
+  364  docker builder prune
+  365  pico prune.sh 
+  366  ./prune.sh 
+  367  pico prune.sh 
+  368  ./prune.sh 
+  369  pico prune.sh 
+  370  ./prune.sh 
+  371  pico prune.sh 
+  372  ./prune.sh 
+  373  cd security/
+  374  cd kali-linux-docker/
+  375  sudo ./build 
+  376  network ls
+  377  sudo ./build 
+  378  docker images
+  379  docker start 331a638bb757
+  380  docker start custom/kali-linux
+  381  docker start custom/kali-linux:latest
+  382  docker start kali-linux:latest
+  383  docker images
+  384  docker ps
+  385  ifconfig
+  386  docker images
+  387  docker stop 331a638bb757 
+  388  docker ps
+  389  docker stop c8038d9c55ce
+  390  cd
+  391  ./prune.sh 
+  392  docker images
+  393  dockwer rmi 331a638bb757
+  394  docker rmi 331a638bb757
+  395  ./prune.sh 
+  396  cd security/
+  397  cd kali-linux-docker/
+  398  ls
+  399  sudo ./build 
+  400  docker images
+  401  cd 
+  402  ./prune.sh 
+  403  docker ps
+  404  cd src
+  405  cd marrtino_apps
+  406  cd docker
+  407  ls
+  408  ./restart_docker.bash 
+  409  ssh marrtino@10.3.3.1
+  410  ping 10.3.1.1
+  411  ssh marrtino@10.3.1.1
+  412  source myenv/bin/activate
+  413  python app.py 
+  414  ls
+  415  cd security/
+  416  ls
+  417  cd kali-linux-docker/
+  418  ls
+  419  sudo ./build 
+  420  docker images
+  421  docker stop ffef9e0c74db
+  422  docker ps
+  423  docker stop fd7beeb5de5e
+  424  cd
+  425  ./prune.sh 
+  426  docker images
+  427  docker rmi ffef9e0c74db
+  428  ./prune.sh 
+  429  ls
+  430  cd security/
+  431  git clone https://github.com/immauss/openvas.git
+  432  ls
+  433  cd openvas/
+  434  ls
+  435  cd ..
+  436  git clone https://github.com/mikesplain/openvas-docker.git
+  437  cd openvas-docker/
+  438  ls
+  439  cd ..
+  440  rm openvas-docker/ -r
+  441  sudo rm openvas-docker/ -r
+  442  ls
+  443  cd openvas/
+  444  docker volume create openvas
+  445  ls
+  446  ls -la
+  447  docker volume delete openvas
+  448  docker volume prune openvas
+  449  docker volume prune 
+  450  ls
+  451  cd ..
+  452  rm openvas/
+  453  sudo rm openvas/ -r
+  454  ls
+  455  cd kali-docker/
+  456  ls
+  457  cd ..
+  458  ls
+  459  cd kali-linux-docker/
+  460  ls
+  461  pico Dockerfile 
+  462  ls
+  463  ls -l
+  464  pico env
+  465  ls
+  466  sudo ./build 
+  467  exit
+  468  git clone https://github.com/haritkumar/flask-chatterbot.git
+  469  ls
+  470  cd flask-chatterbot/
+  471  ks
+  472  ls
+  473  cd ..
+  474  git clone https://github.com/huzaifsayed/coronabot-chatterbot.git
+  475  cd coronabot-chatterbot/
+  476  python3 -m venv myenv
+  477  source myenv/bin/activate
+  478  pip install -r requirements.txt 
+  479  ls
+  480  python app.py 
+  481  pico app.py 
+  482  python app.py 
+  483  cd te
+  484  ls
+  485  cd Desktop/
+  486  cd temp
+  487  ls
+  488  cd Temp
+  489  ls
+  490  cd coronabot-chatterbot/
+  491  ls
+  492  source myenv/bin/activate
+  493  pip install flask
+  494  python app.py 
+  495  ls
+  496  pluma app.py 
+  497  cd
+  498  cd src
+  499  cd marrtino_chatbot/
+  500  ls
+  501  ls -la
+  502  ls template
+  503  cd template/
+  504  ls -la
+  505  source myenv/bin/activate
+  506  python app.py 
+  507  ls
+  508  cd Destop
+  509  cd Desltop
+  510  cd  Desktop/
+  511  ls
+  512  cd Temp/
+  513  git clone https://github.com/ProfAI/nlp00.git
+  514  cd
+  515  cd src
+  516  cd marrtino_apps
+  517  python3 -m venv myenv
+  518  source myenv/bin/activate
+  519  pip install json
+  520  python
+  521  pluma myapp.py
+  522  python my
+  523  python myapp.py 
+  524  source /home/security/src/chatbot_keras/myenv/bin/activate
+  525  source /home/security/src/chatbot_keras/myenv/bin/activate
+  526  python myapp.py 
+  527  source /home/security/src/chatbot_keras/myenv/bin/activate
+  528  import spacy
+  529  python myapp.py  -m spacy download it_core_news_sm
+  530  python  -m spacy download it_core_news_sm
+  531  pip install spacy
+  532  import spacy
+  533  python  -m spacy download it_core_news_sm -m spacy download it_core_news_sm
+  534  python
+  535  python -m spacy download it_core_news_sm
+  536  pip install sklearn
+  537  pip install scikit-learn
+  538  pip install keras
+  539  pip install tensorflow
+  540  source /home/security/src/chatbot_keras/myenv/bin/activate
+  541  ssh marrtino@10.3.1.1
+  542  ssh marrtino@10.3.1.1
+  543  marrtino@10.3.1.1
+  544  ssh marrtino@10.3.1.1
+  545  ssh marrtino@10.3.1.1
+  546  sudo pico .bashrc
+  547  cd src
+  548  cd marrtino_apps/
+  549  cd docker/
+  550  ls
+  551  ./docker_build.bash 
+  552  sudo ./docker_build.bash 
+  553  cd ..
+  554  ls
+  555  cd ..
+  556  ls
+  557  cd docker/
+  558  ls
+  559  ./clean.sh 
+  560  cd ..
+  561  cd marrtino_apps
+  562  cd docker
+  563  docker images
+  564  ls
+  565  ./docker_build.bash 
+  566  cd
+  567  sudo pico .bashrc
+  568  cd sc
+  569  cd src
+  570  cd marrtino_apps/docker
+  571  ls
+  572  ./docker_build
+  573  ./docker_build.bash 
+  574  ls
+  575  cd 
+  576  ls
+  577  pico system_config.yaml 
+  578  cd src
+  579  cd marrtino_apps/docker/
+  580  ls
+  581  ./system_update.bash 
+  582  docker ps
+  583  cd src 
+  584  cd marrtino_apps
+  585  ls
+  586  cd
+  587  ls
+  588  pico system_config.yaml 
+  589  cd src
+  590  cd marrtino_apps/
+  591  cd docker/
+  592  ./system_update.bash 
+  593  cd $MARRTINO_APPS_HOME/docker && docker-compose down
+  594  docker container prune -f
+  595  cd $MARRTINO_SOCIAL/docker && docker-compose down
+  596  sudo apt install python tmux python-yaml
+  597  cd ..
+  598  cd $MARRTINO_SOCIAL/docker
+  599  docker-compose up
+  600  cd $MARRTINO_SOCIAL/docker
+  601  docker-compose up
+  602  cd $MARRTINO_APPS_HOME/docker
+  603  python3 dockerconfig.py 
+  604  export ROBOT_TYPE=None 
+  605  export CAMRES='(640, 480)'
+  606  docker-compose up
+  607  cd $MARRTINO_APPS_HOME/docker
+  608  python3 dockerconfig.py 
+  609  export ROBOT_TYPE=None 
+  610  export CAMRES='(640, 480)'
+  611  docker-compose up
+  612  cd $MARRTINO_APPS_HOME/start
+  613  sleep 60 && python3 autostart.py 
+  614  cd $MARRTINO_APPS_HOME/start
+  615  python3 autostart.py --kill
+  616  cd $MARRTINO_APPS_HOME/start
+  617  sleep 60 && python3 autostart.py 
+  618  docker ps
+  619  cd src
+  620  cd marrtino_social
+  621  ls
+  622  cd docker/q
+  623  cd docker/
+  624  ls
+  625  docker-compose up
+  626  pico2wave -l "it-IT" -w start.wav "Bene! Si Parte!"
+  627  sudo apt install pico2wave
+  628  ssh marrtino@10.3.1.1
+  629  docker ps
+  630  cd src
+  631  cd marrtino_social/
+  632  cd docker/
+  633  docker-compose up
+  634  cd ..
+  635  cd marrtino_apps
+  636  ls
+  637  cd docker
+  638  ls
+  639  ./restart_docker.bash 
+  640  cd
+  641  ./debug.sh speech
+  642  ./debug.sh social
+  643  ssh marrtino@10.3.1.1
+  644  cd $MARRTINO_APPS_HOME/docker
+  645  python3 dockerconfig.py 
+  646  export ROBOT_TYPE=None 
+  647  export CAMRES='(640, 480)'
+  648  docker-compose up
+  649  cd $MARRTINO_SOCIAL/docker
+  650  docker-compose up
+  651  cd $MARRTINO_APPS_HOME/start
+  652  sleep 60 && python3 autostart.py 
+  653  git clone https://github.com/infobyte/faraday.git  
+  654  cd faraday/
+  655  ls
+  656  docker-compose up
+  657  ssh marrtino@10.3.1.1
+  658  ssh marrtino@10.3.1.1
+  659  source myenv/bin/activate
+  660  ls
+  661  python app.py 
+  662  source myenv/bin/activate
+  663  python app.py 
+  664  ls
+  665  ./debug.sh social
+  666  docker ps
+  667  cd src
+  668  cd docker
+  669  ls
+  670  ./clean.sh 
+  671  cd ..
+  672  cd marrtino_apps
+  673  ls
+  674  cd docker/
+  675  ls
+  676  ./docker_build
+  677  ./docker_build.bash 
+  678  ls
+  679  ./system_update.bash 
+  680  cd $MARRTINO_APPS_HOME/docker
+  681  python3 dockerconfig.py 
+  682  export ROBOT_TYPE=None 
+  683  export CAMRES='(640, 480)'
+  684  docker-compose up
+  685  cd $MARRTINO_SOCIAL/docker
+  686  docker-compose up
+  687  cd $MARRTINO_APPS_HOME/start
+  688  sleep 60 && python3 autostart.py 
+  689  cd src
+  690  mkdir vosk-server
+  691  docker run -d -p 2700:2700 alphacep/kaldi-it:latest
+  692  sudo docker run -d -p 2700:2700 alphacep/kaldi-it:latest
+  693  ssh marrtino@10.3.1.1
+  694  ssh marrtino@10.3.1.1
+  695  docker images
+  696  cd
+  697  cd /
+  698  ls
+  699  cd tmp
+  700  ls
+  701  cd ..
+  702  ls
+  703  ls dev
+  704  ls
+  705  ls var
+  706  cd var
+  707  sudo rm crash/ -r
+  708  ssh marrtino@10.3.1.1
+  709  ssh marrtino@10.3.1.1
+  710  ssh marrtino@10.3.1.1
+  711  docker ps
+  712  ./debug.sh speech
+  713  cd /var
+  714  ls
+  715  cd crash/
+  716  ls
+  717  rm _usr_bin_marco.1000.crash 
+  718  cd ..
+  719  ls
+  720  docker ps
+  721  cd 
+  722  cd src
+  723  cd marrtino_appa
+  724  cd marrtino_apps/docker
+  725  ls
+  726  ./start_docker.bash 
+  727  docker ps
+  728  ls
+  729  ./debug.sh social
+  730  cd $MARRTINO_SOCIAL/docker
+  731  docker-compose up
+  732  cd $MARRTINO_APPS_HOME/start
+  733  sleep 60 && python3 autostart.py 
+  734  cd $MARRTINO_APPS_HOME/docker
+  735  python3 dockerconfig.py 
+  736  export ROBOT_TYPE=None 
+  737  export CAMRES='(640, 480)'
+  738  docker-compose up
+  739  ls
+  740  sudo chmod +x *.sh
+  741  ls
+  742  ./start.sh 
+  743  cat start.sh 
+  744  source myenv/bin/activate
+  745  python app.py 
+  746  ls
+  747  python
+  748  python3 app.py
+  749  pip3 install -r requirements.txt
+  750  python3 app.py
+  751  ./debug.sh base
+  752  docker ps
+  753  cd src
+  754  cd marrtino_apps/
+  755  ls
+  756  cd ..
+  757  cd marrtino_social
+  758  ls
+  759  cd docker/
+  760  ls
+  761  pico docker-compose.yml 
+  762  cd
+  763  cd src
+  764  cd marrtino_apps/
+  765  cd docker
+  766  pico docker-compose.yml 
+  767  ls
+  768  cd ..
+  769  cd
+  770  ls
+  771  pico system_config.yaml 
+  772  cd src
+  773  cd marrtino_apps
+  774  ls
+  775  cd docker/
+  776  ls
+  777  ./system_update.bash 
+  778  docker ps
+  779  ls
+  780  ./start_docker.bash 
+  781  docker images
+  782  docker-compose up
+  783  cd
+  784  ls
+  785  pico system_config.yaml 
+  786  cd src
+  787  cd marrtino_apps/
+  788  cd docker/
+  789  ./system_update.bash 
+  790  sudo ./system_update.bash 
+  791  cd
+  792  sudo pico .bashrc
+  793  de
+  794  cd
+  795  pico system_config.yaml 
+  796  cd src
+  797  cd marrtino_apps/docker/
+  798  ls
+  799  ./system_update.bash 
+  800  cd
+  801  cd se
+  802  cd src
+  803  docker images
+  804  cd marrtino_apps
+  805  ls
+  806  cd docker
+  807  ls
+  808  ./restart_docker.bash 
+  809  ls
+  810  docker ps
+  811  docker-compose up
+  812  cd
+  813  pico system_config.yaml 
+  814  cd src
+  815  cd marrtino_apps/
+  816  cd docker/
+  817  ./system_update.bash 
+  818  docker images
+  819  docker ps
+  820  ls
+  821  cd
+  822  cd src/marrtino_apps/docker/
+  823  ./restart_docker.bash 
+  824  docker-compose up
+  825  cd ..
+  826  cd marrtino_apps
+  827  cd ..
+  828  mkdir stage_environments/docker -p
+  829  ls
+  830  cd marrtino_apps
+  831  cd docker/
+  832  docker-compose up
+  833  cd $MARRTINO_SOCIAL/docker
+  834  docker-compose up
+  835  cd $MARRTINO_SOCIAL/docker
+  836  docker-compose up
+  837  cd $MARRTINO_SOCIAL/docker
+  838  docker-compose up
+  839  cd $MARRTINO_SOCIAL/docker
+  840  docker-compose up
+  841  cd $MARRTINO_SOCIAL/docker
+  842  docker-compose up
+  843  cd $MARRTINO_SOCIAL/docker
+  844  docker-compose up
+  845  cd $MARRTINO_SOCIAL/docker
+  846  docker-compose up
+  847  cd $MARRTINO_APPS_HOME/start
+  848  sleep 60 && python3 autostart.py 
+  849  cd $MARRTINO_APPS_HOME/start
+  850  python3 autostart.py --kill
+  851  cd $MARRTINO_APPS_HOME/start
+  852  sleep 60 && python3 autostart.py 
+  853  cd $MARRTINO_APPS_HOME/start
+  854  python3 autostart.py --kill
+  855  cd $MARRTINO_APPS_HOME/start
+  856  python3 autostart.py --kill
+  857  cd $MARRTINO_APPS_HOME/start
+  858  sleep 60 && python3 autostart.py 
+  859  cd $MARRTINO_APPS_HOME/start
+  860  python3 autostart.py --kill
+  861  cd $MARRTINO_APPS_HOME/start
+  862  sleep 60 && python3 autostart.py 
+  863  cd $MARRTINO_APPS_HOME/start
+  864  python3 autostart.py --kill
+  865  cd $MARRTINO_APPS_HOME/start
+  866  sleep 60 && python3 autostart.py 
+  867  cd $MARRTINO_APPS_HOME/start
+  868  python3 autostart.py --kill
+  869  cd $MARRTINO_APPS_HOME/start
+  870  sleep 60 && python3 autostart.py 
+  871  cd $MARRTINO_APPS_HOME/docker
+  872  python3 dockerconfig.py 
+  873  export ROBOT_TYPE=stage 
+  874  export CAMRES='(640, 480)'
+  875  docker-compose up
+  876  cd $MARRTINO_APPS_HOME/docker
+  877  python3 dockerconfig.py 
+  878  export ROBOT_TYPE=stage 
+  879  export CAMRES='(640, 480)'
+  880  docker-compose up
+  881  cd $MARRTINO_APPS_HOME/docker
+  882  python3 dockerconfig.py 
+  883  export ROBOT_TYPE=stage 
+  884  export CAMRES='(640, 480)'
+  885  docker-compose up
+  886  cd $MARRTINO_APPS_HOME/docker
+  887  python3 dockerconfig.py 
+  888  export ROBOT_TYPE=None 
+  889  export CAMRES='(640, 480)'
+  890  docker-compose up
+  891  python3 dockerconfig.py 
+  892  export ROBOT_TYPE=None 
+  893  export CAMRES='(640, 480)'
+  894  docker-compose up
+  895  python3 dockerconfig.py 
+  896  export ROBOT_TYPE=stage 
+  897  export CAMRES='(640, 480)'
+  898  docker-compose up
+  899  cd $MARRTINO_APPS_HOME/docker
+  900  python3 dockerconfig.py 
+  901  export ROBOT_TYPE=stage 
+  902  export CAMRES='(640, 480)'
+  903  docker-compose up
+  904  cd $MARRTINO_APPS_HOME/docker && docker-compose down
+  905  docker container prune -f
+  906  cd $MARRTINO_APPS_HOME/docker && docker-compose down
+  907  docker container prune -f
+  908  cd $MARRTINO_APPS_HOME/docker && docker-compose down
+  909  docker container prune -f
+  910  cd $MARRTINO_APPS_HOME/docker && docker-compose down
+  911  docker container prune -f
+  912  cd $MARRTINO_APPS_HOME/docker && docker-compose down
+  913  docker container prune -f
+  914  cd $MARRTINO_SOCIAL/docker && docker-compose down
+  915  cd src
+  916  cd marrtino_apps
+  917  cd docker/
+  918  ls
+  919  ./start_docker.bash 
+  920  cd $MARRTINO_APPS_HOME/start
+  921  sleep 60 && python3 autostart.py 
+  922  cd $MARRTINO_APPS_HOME/docker
+  923  python3 dockerconfig.py 
+  924  export ROBOT_TYPE=stage 
+  925  export CAMRES='(640, 480)'
+  926  docker-compose up
+  927  cd $MARRTINO_SOCIAL/docker
+  928  docker-compose up
+  929  ssh poppy@192.168.1.12
+  930  cd poppy/
+  931  pico start.sh
+  932  sudo chmod +x *.sh
+  933  ls
+  934  ./start.sh 
+  935  cat start.sh 
+  936  source $HOME/poppy/pyenv/bin/activate
+  937  pico .poppy_logo
+  938  ls
+  939  cd dev
+  940  ls
+  941  deactivate
+  942  ssh poppy@192.168.1.12
+  943  cd src
+  944  ls
+  945  cd person_following_bot/
+  946  ls
+  947  docker ps
+  948  cd src
+  949  cd marrtino_social
+  950  cd docker
+  951  docker-compose up
+  952  cd ..
+  953  cd marrtino_apps/docker
+  954  ls
+  955  ./start_docker.bash 
+  956  python3 -m venv myenv
+  957  source myenv/bin/activate
+  958  ls
+  959  pip3 install -r requirements.txt
+  960  ls
+  961  python tracking_person.py 
+  962  python follow.py 
+  963  cd $MARRTINO_SOCIAL/docker
+  964  docker-compose up
+  965  cd $MARRTINO_APPS_HOME/start
+  966  sleep 60 && python3 autostart.py 
+  967  cd $MARRTINO_APPS_HOME/docker
+  968  python3 dockerconfig.py 
+  969  export ROBOT_TYPE=stage 
+  970  export CAMRES='(640, 480)'
+  971  docker-compose up
+  972  ssh marrtino@10.3.1.1
+  973  ssh marrtino@10.3.1.1
+  974  ssh marrtino@10.3.1.1
+  975  docker ps
+  976  docker images
+  977  ls
+  978  pico system_config.yaml 
+  979  cd sr
+  980  cd src
+  981  cd marrtino_apps
+  982  ls
+  983  cd docker/
+  984  ./system_update.bash 
+  985  ls
+  986  ./docker_build_objrec.bash 
+  987  docker images
+  988  sudo reboot
+  989  cd $MARRTINO_APPS_HOME/docker
+  990  python3 dockerconfig.py 
+  991  docker images
+  992  ls /dev
+  993  ls /dev
+  994  sudo apt install cheese
+  995  cheese
+  996  v4l2-ctl --list-devices
+  997  UVC Camera (046d:0990) (usb-0000:00:14.0-1):
+  998  ls -ltrh /dev/video*
+  999  dmesg | grep -i "Camera"
+ 1000  sudo dmesg | grep -i "Camera"
+ 1001  cheese
+ 1002  ./debug.sh social
+ 1003  ./debug.sh vision
+ 1004  docker ps
+ 1005  cd src
+ 1006  docker ps
+ 1007  cd marrtino_apps/
+ 1008  cd docker/
+ 1009  ls
+ 1010  ./start_docker.bash 
+ 1011  ssh marrtino@10.3.1.1
+ 1012  lsusb
+ 1013  ls /dev
+ 1014  cd ..
+ 1015  ls
+ 1016  cd
+ 1017  ./debug.sh social
+ 1018  cd $MARRTINO_APPS_HOME/start
+ 1019  sleep 60 && python3 autostart.py 
+ 1020  cd $MARRTINO_APPS_HOME/docker
+ 1021  python3 dockerconfig.py 
+ 1022  export ROBOT_TYPE=stage 
+ 1023  export CAMRES='(640, 480)'
+ 1024  docker-compose up
+ 1025  cd install
+ 1026  ls
+ 1027  ./install_rules.sh 
+ 1028  ls /dev
+ 1029  cd $MARRTINO_SOCIAL/docker
+ 1030  docker-compose up
+ 1031  ssh marrtino@10.3.1.1
+ 1032  ssh marrtino@10.3.1.1
+ 1033  ssh marrtino@10.3.1.1
+ 1034  ssh ubuntu@192.168.1.123
+ 1035  cat .Bashrc
+ 1036  cat .bashrc
+ 1037  ls
+ 1038  pico system_config.yaml 
+ 1039  ssh ubuntu@192.168.1.4
+ 1040  sudo reboot
+ 1041  pluma .bashrc
+ 1042  git clone https://github.com/husarion/ros2-desktop-vnc.git
+ 1043  ls
+ 1044  cd ros2-desktop-vnc/
+ 1045  docker buildx build --platform linux/amd64 --build-arg DOCKER_TAG=focal -t husarion/ros2-desktop-vnc:amd64 .
+ 1046  ls
+ 1047  cd src
+ 1048  cd marrtino_chatbot/
+ 1049  source myenv/bin/activate
+ 1050  ls
+ 1051  python3 app.py 
+ 1052  ssh marrtino@10.3.1.1
+ 1053  ssh marrtino@10.3.1.1
+ 1054  docker images
+ 1055  docker ps
+ 1056  cd src
+ 1057  cd marrtino_social
+ 1058  cd docker
+ 1059  docker-compose up
+ 1060  cd ..
+ 1061  cd marrtino_apps
+ 1062  cd docker/
+ 1063  ./start_docker.bash 
+ 1064  cd $MARRTINO_APPS_HOME/docker
+ 1065  python3 dockerconfig.py 
+ 1066  export ROBOT_TYPE=stage 
+ 1067  export CAMRES='(640, 480)'
+ 1068  docker-compose up
+ 1069  cd $MARRTINO_SOCIAL/docker
+ 1070  docker-compose up
+ 1071  cd $MARRTINO_APPS_HOME/start
+ 1072  sleep 60 && python3 autostart.py 
+ 1073  cd src
+ 1074  cd marrtino_apps/docker
+ 1075  docker build -t marrtino:noetic_vision -f Dockerfile.noetic_vision .
+ 1076  docker build -t marrtino:noetic_system -f Dockerfile.noetic_system .
+ 1077  ls
+ 1078  cd oak-d
+ 1079  mkdir oak-d
+ 1080  cd oak-d/
+ 1081  git clone https://github.com/luxonis/tools.git
+ 1082  ls
+ 1083  cd tools
+ 1084  sudo docker-compose build
+ 1085  cd src
+ 1086  cd marrtino_apps/
+ 1087  cd docker
+ 1088  ls
+ 1089  cd oak-d/
+ 1090  pico oak-d-rules.sh
+ 1091  sudo chmod +x *.sh
+ 1092  ls
+ 1093  ./oak-d-rules.sh 
+ 1094  ls /dev/
+ 1095  ls
+ 1096  cat oak-d-rules.sh 
+ 1097  ls /etc/udev/rules.d/
+ 1098  cat /etc/udev/rules.d/80-movidius.rules 
+ 1099  lsusb 
+ 1100  cd oak-d/
+ 1101  git clone --branches noetic https://github.com/luxonis/depthai-ros.git
+ 1102  git clone --branch noetic https://github.com/luxonis/depthai-ros.git
+ 1103  cd 
+ 1104  cd src
+ 1105  cd marrtino_apps
+ 1106  cd docker/
+ 1107  ls
+ 1108  sudo chmod +x *.bash
+ 1109  ls
+ 1110  ./docker_build_noetic.bash 
+ 1111  docker images
+ 1112  ls
+ 1113  pico run2.sh
+ 1114  ./run2.sh 
+ 1115  ./debug.sh noetic-vision
+ 1116  ./debug.sh noetic_vision
+ 1117  docker images
+ 1118  cd se
+ 1119  cd src
+ 1120  cd marrtino_apps
+ 1121  ls
+ 1122  python3 -m pip install -U pip
+ 1123  curl -sL https://deb.nodesource.com/setup_14.x | bash -
+ 1124  sudo curl -sL https://deb.nodesource.com/setup_14.x | bash -
+ 1125  cd 
+ 1126  ./debug.sh 
+ 1127  cd src
+ 1128  cd marrtino_apps/docker/
+ 1129  ls
+ 1130  ./run2.sh 
+ 1131  pico run2.sh 
+ 1132  ./run2.sh 
+ 1133  cd oak-d
+ 1134  ls
+ 1135  cd tools
+ 1136  docker -compose up
+ 1137  docker-compose up
+ 1138  docker images
+ 1139  docker ps
+ 1140  cd ..
+ 1141  cd 
+ 1142  cd src
+ 1143  cd marrtino_social/docker
+ 1144  docker-compose down
+ 1145  docker ps
+ 1146  cd 
+ 1147  cd src
+ 1148  cd ..
+ 1149  cd oak-d/
+ 1150  cd tools/
+ 1151  ls
+ 1152  docker-compose up
+ 1153  sudo docker-compose up
+ 1154  sudo docker-compose build
+ 1155  sudo docker-compose up
+ 1156  sudo docker-compose build
+ 1157  sudo docker-compose up
+ 1158  cd ..
+ 1159  sudo rm tools/ -r
+ 1160  git clone https://github.com/luxonis/tools.git
+ 1161  cd tools
+ 1162  sudo docker-compose build
+ 1163  sudo docker-compose up
+ 1164  docker-compose down
+ 1165  dicker ps
+ 1166  docker ps
+ 1167  cd ..
+ 1168  docker images
+ 1169  docker container prune -f
+ 1170  docker image prune -f
+ 1171  docker images
+ 1172  docker rmi tools_*
+ 1173  docker rmi tools_api:latest 
+ 1174  docker rmi tools_nginx:latest 
+ 1175  docker rmi tools_yolov
+ 1176  docker rmi tools_yolov6r1:latest 
+ 1177  docker rmi tools_yolov6r3:latest 
+ 1178  docker rmi tools_yolov7:latest 
+ 1179  docker images
+ 1180  cd src
+ 1181  cd
+ 1182  cd src
+ 1183  cd marrtino_apps/docker/
+ 1184  ls
+ 1185  ./run2.sh 
+ 1186  docker images
+ 1187  cd src
+ 1188  cd marrtino_apps
+ 1189  cd docker/
+ 1190  ls
+ 1191  ./run2.sh 
+ 1192  ./start_docker.bash 
+ 1193  docker ps
+ 1194  ./run2.sh 
+ 1195  docker ps
+ 1196  pico run2.sh 
+ 1197  ./run2.sh 
+ 1198  lsusb
+ 1199  ls /dev
+ 1200  ./debug.sh base
+ 1201  cd oak-d/
+ 1202  ls
+ 1203  cd depthai-ros/
+ 1204  docker build --build-arg USE_RVIZ=1 -t depthai-ros .
+ 1205  docker run -it -v /dev/:/dev/ --privileged -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix depthai-ros
+ 1206  docker run -it -v /dev/:/dev/ --privileged -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix depthai-ros roslaunch depthai_examples stereo_inertial_node.launch.py
+ 1207  docker run -it -v /dev/:/dev/ --privileged -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix depthai-ros roslaunch  stereo_inertial_node.launch.py
+ 1208  docker run -it -v /dev/:/dev/ --privileged -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix depthai-ros
+ 1209  docker run -it -v /dev/:/dev/ --privileged -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix depthai-ros roslaunch depthai_examples stereo_inertial_node.launch
+ 1210  docker run -it -v /dev/:/dev/ --privileged -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix depthai-ros
+ 1211  docker run -it -v /dev/:/dev/ --privileged -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix depthai-ros roslaunch depthai_examples stereo_inertial_node.launch
+ 1212  lsusb
+ 1213  cd oak-d/
+ 1214  mkdir test
+ 1215  cd test
+ 1216  hystory
+ 1217  history > test

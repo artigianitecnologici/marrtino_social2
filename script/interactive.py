@@ -1,52 +1,37 @@
 #! /usr/bin/python
+import rospy
+from std_msgs.msg import String
+
 import requests
 import sys,os
 import time
 import socket               # Import socket module
+from threading import Thread
 
-SERVER_ADDRESS = '10.3.1.1'             #           socket.gethostname() # Get local machine name
+SERVER_ADDRESS = '10.3.1.1'             # Get local machine name
 SERVER_PORT = 9000                      # Reserve a port for your service.
 
 sys.path.append(os.getenv("MARRTINO_APPS_HOME")+"/program")
 from robot_cmd_ros import *
 
+
 serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 serverSocket.bind((SERVER_ADDRESS, SERVER_PORT))        # Bind to the port
-serverSocket.listen(5)
+serverSocket.listen(1)
 
 print("Server waiting on (%s, %d)" % (SERVER_ADDRESS, SERVER_PORT))
 connectionSocket, clientAddress = serverSocket.accept() 
 
 
 
-
 myurl = 'http://10.3.1.1:5000/bot'
+#myurl = 'http://192.168.1.8:5000/bot'
 IN_TOPIC = "/social/face_nroface"
+OUT_GESTURE_TOPIC = "/social/gesture"
+
 tracking = False
 
-#
-#  Gesture 
-#
-
-def gesture(mycmd):
-    flagok = 0
-    if (mycmd == 'posizione iniziale'):
-        begin()
-        spalla_flessione_dx(1.57)
-        spalla_flessione_sx(3.663333333333333)
-        spalla_rotazione_dx(2.965555555555556)
-        spalla_rotazione_sx(2.267777777777778)
-        gomito_dx(3.14)
-        gomito_sx(2.0933333333333333)
-        hand_right(2.6166666666666667)
-        hand_left(2.6166666666666667)
-        end()
-        flagok = 1
-
-    return flagok
-
-
-
+gesture_pub = rospy.Publisher(OUT_GESTURE_TOPIC,String,queue_size=10)
 
 
 def bot(msg):
@@ -61,6 +46,8 @@ def bot(msg):
 def left(s, n):
     return s[:n]
 
+def gesture(msg):
+    gesture_pub.publish(msg)
 
 def reset_face():    
     rospy.loginfo("Time is up, resetting face")
@@ -71,6 +58,9 @@ def speech(msg):
     #rospy.loginfo('Speech : %s' %(msg))
     emotion("speak")
     say(msg,'it')
+    #
+    gesture('gesture')
+    #speak_it_pub.publish(msg.decode("utf-8"))
     emotion("normal")
 
 def callback(data):
@@ -86,12 +76,21 @@ def callback(data):
         speech("ciao")
         #stop_timer()
 
-def wait_sec(nsec):
-    t_end = time.time() + nsec
+def wait_user_speaking(nsec):
+    t_end = time.time()+nsec
     myasr = ''
     while time.time() < t_end:
-        myasr = ''
-    
+        if myasr == '' :
+            myasr = asr()    
+        else :
+            break
+        return myasr
+
+def command(msg):
+    print(msg)
+    t = Thread(target=run_code, args=(msg,))
+    t.start()
+    result = "ok"  
 
 def listener():
     begin()
@@ -100,6 +99,7 @@ def listener():
     #rospy.Subscriber(IN_TOPIC,IN_MSG,callback)
     reset_face()
     emotion("startblinking")
+    gesture("gesture")
     speech("Ciao sono martina se vuoi puoi parlare con me")
     speech("dimmi")
     myrequest = ""
@@ -111,28 +111,21 @@ def listener():
     while myloop==True:
 
         myrequest =  connectionSocket.recv(1024)
+        #print(myrequest)
         count += 1
-        keyword = "comando:"
+        keyword = "martina"
         msglenght = len(myrequest)
         keylenght = len(keyword)
         mycommand = ""
-        if (left(myrequest,keylenght) == keyword):
+        if (left(myrequest.lower(),keylenght) == keyword):
             mycommand =  myrequest[keylenght+1:msglenght]
-            #
-            gesture("posizione iniziale")
-            wait_sec(2)
-
-            if (mycommand == 'alza le braccia'):
-                spalla_flessione_dx(3.4016)
-                spalla_flessione_sx(1.8316)
-                gomito_dx(2.61)
-                gomito_sx(2.61)
-
+            mycommand = mycommand.lower()
+            if (mycommand == "alza le braccia"):
+                spalla_flessione_dx(2.6166666666666667)
+                spalla_flessione_sx(2.6166666666666667)
             if (mycommand == "guarda avanti"):
                 pan(0)
                 tilt(0)
-
-
 
         if myrequest=="stop":
             speech("ci vediamo alla prossima")
@@ -149,12 +142,14 @@ def listener():
             connectionSocket.send("STOP")
             answer=bot(myrequest)
             print(answer)
+            gesture("gesture")
             speech(answer)
             connectionSocket.send("SAY")
 
         
     print("Close connection on %d" % SERVER_PORT)
     connectionSocket.close()
+
     end()
      
 listener()

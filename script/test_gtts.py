@@ -4,7 +4,7 @@ import tempfile
 import os
 
 # Text to convert to speech
-text = "Ciao , sono marrtina e sono un robot sociale"
+text = "Ciao , sono martina e sono un robot social"
 
 # Create gTTS object
 tts = gTTS(text,lang='it')

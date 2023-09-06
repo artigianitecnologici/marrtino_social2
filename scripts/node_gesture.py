@@ -51,6 +51,29 @@ def gesture_zero():
     hand_right(0)
     hand_left(0)
 
+def gesture_down():
+    head_position("front")
+    emotion("blinking")
+    emotion("normal")
+    spalla_flessione_dx(1.3955555555555557)
+    spalla_flessione_sx(3.837777777777778)
+    spalla_rotazione_dx(2.6166666666666667)
+    spalla_rotazione_sx(2.6166666666666667)
+    gomito_dx(2.6166666666666667)
+    gomito_sx(2.6166666666666667)
+    hand_right(1.0466666666666666)
+    hand_left(4.1866666666666665)
+
+def gesture_up():
+    spalla_flessione_dx(2.6166666666666667)
+    spalla_flessione_sx(2.6166666666666667)
+    spalla_rotazione_dx(2.6166666666666667)
+    spalla_rotazione_sx(2.6166666666666667)
+    gomito_dx(2.6166666666666667)
+    gomito_sx(2.6166666666666667)
+    hand_right(1.0466666666666666)
+    hand_left(4.1866666666666665)
+
 def gesture_pos1():
     spalla_flessione_dx(1.3955555555555557)
     spalla_flessione_sx(3.663333333333333)
@@ -82,7 +105,7 @@ def gesture_poszero():
     hand_right(1.7444444444444445)
     hand_left(3.663333333333333)
 
-def gesture_start():
+def gesture_anim():
     head_position("front")
     emotion("blinking")
     emotion("normal")
@@ -93,6 +116,12 @@ def gesture_start():
         time.sleep(1) # Sleep for 3 seconds
         gesture_pos2()
         time.sleep(1) # Sleep for 3 seconds
+
+def reset_gesture():
+    gesture_anim()
+
+
+
 #### SOCIAL ####
 ################
 
@@ -187,8 +216,10 @@ TIME_DELAY = 5
 rospy.set_param("face_reset_timer",TIME_DELAY)
 
 def reset_gesture():    
-    gesture_start()
+    gesture_anim()
+    rospy.loginfo("Gesture: reset anim")
     t = Timer(TIME_DELAY,reset_gesture)
+
 
 
 def restart_timer():
@@ -197,6 +228,7 @@ def restart_timer():
         
 def start_timer():
     restart_timer()
+    rospy.loginfo("Gesture: start timer")
     t.start()
 
 def stop_timer():
@@ -205,9 +237,13 @@ def stop_timer():
 def callback_gesture(data):
     gesture = data.data
     if (gesture == 'gesture'):
-        gesture_start()
+        gesture_anim()
     if (gesture == 'zero'):
         gesture_zero()
+    if (gesture == 'down'):
+        gesture_down()
+    if (gesture == 'up'):
+        gesture_up()
     if (gesture == 'start'):
         start_timer()
     if (gesture == 'stop'):

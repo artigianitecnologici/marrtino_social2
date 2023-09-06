@@ -5,6 +5,7 @@ SUBSYSTEMS=="usb", KERNEL=="ttyACM[0-9]*", ATTRS{idVendor}=="2341", ATTRS{idProd
 SUBSYSTEMS=="usb", KERNEL=="ttyACM[0-9]*", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="0010", SYMLINK+="orazio arduino_mega_$attr{serial}", MODE="0666", SYMLINK+="orazio" 
 SUBSYSTEMS=="usb", KERNEL=="ttyACM[0-9]*", ATTRS{idVendor}=="2a03", ATTRS{idProduct}=="0042", SYMLINK+="orazio arduino_mega_$attr{serial}", MODE="0666", SYMLINK+="orazio" 
 
+
 # hokuyo
 
 SUBSYSTEMS=="usb", KERNEL=="ttyACM[0-9]*", ACTION=="add", ATTRS{idVendor}=="15d1", ATTRS{idProduct}=="0000", MODE="666", SYMLINK+="hokuyo", GROUP="dialout"

@@ -121,8 +121,11 @@ def listener():
             mycommand =  myrequest[keylenght+1:msglenght]
             mycommand = mycommand.lower()
             if (mycommand == "alza le braccia"):
-                spalla_flessione_dx(2.6166666666666667)
-                spalla_flessione_sx(2.6166666666666667)
+                gesture("up")
+
+            if (mycommand == "abbassa le braccia"):
+                gesture("down")
+                
             if (mycommand == "guarda avanti"):
                 pan(0)
                 tilt(0)

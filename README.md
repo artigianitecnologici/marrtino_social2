@@ -126,3 +126,4 @@ Remove screen saver
     sudo gsettings set org.gnome.desktop.screensaver idle-activation-enabled false
 
 
+sudo chown -R www-data:www-data tmp

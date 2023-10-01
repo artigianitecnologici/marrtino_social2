@@ -206,16 +206,16 @@ function Presentazione(){
 	
 		<div class="col-md-3"><button  class="btn btn-outline-danger btn-lg" onclick="Presentazione()">Presentation</button></div>
  	  <div class="col-md-3">
-			<button  class="btn btn-outline-danger btn-lg" onclick="LeggiMurphy()">
-  					<img src="image/quiz.jpeg" class="img-rounded" alt="Murpy" width="60%">
+     <a href="../quiz/index.html"  class="btn btn-outline-danger btn-lg" role="button">
+        <img src="image/quiz.jpeg" class="img-rounded" alt="laggi di murphy" width="60%">
+  			</a>
+			
+		</div>
+    <div class="col-md-3"> 
+      <button  class="btn btn-outline-danger btn-lg" onclick="LeggiMurphy()">
+  		<img src="image/murphy.jpeg" class="img-rounded" alt="Murpy" width="60%">
 
 			</button>
-		</div>
-    <div class="col-md-3"> <a href="../quiz/index.html"  class="btn btn-outline-danger btn-lg" role="button">
-                        <img src="image/murphy.jpeg" class="img-rounded" alt="laggi di murphy" width="60%">
-
-
-			</a>
 		</div>
     <div class="col-md-3">
                

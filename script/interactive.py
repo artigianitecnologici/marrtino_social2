@@ -6,6 +6,8 @@ import requests
 import sys,os
 import time
 import socket               # Import socket module
+import os
+
 from threading import Thread
 
 SERVER_ADDRESS = '10.3.1.1'             # Get local machine name
@@ -54,10 +56,11 @@ def reset_face():
     #tilt_pub.publish(Float64(0))
     #pan_pub.publish(Float64(0))
 
-def speech(msg):
+def speech(msg,language):
     #rospy.loginfo('Speech : %s' %(msg))
     emotion("speak")
-    say(msg,'it')
+    
+    say(msg,language)
     #
     gesture('gesture')
     #speak_it_pub.publish(msg.decode("utf-8"))
@@ -93,6 +96,7 @@ def command(msg):
     result = "ok"  
 
 def listener():
+    mylanguage = "it"
     begin()
     #rospy.init_node("interactive")
     print("Interactive Mode Start")
@@ -100,11 +104,12 @@ def listener():
     reset_face()
     emotion("startblinking")
     gesture("gesture")
-    speech("Ciao sono martina se vuoi puoi parlare con me")
-    speech("dimmi")
+    speech("Ciao sono martina se vuoi puoi parlare con me",mylanguage)
+    speech("dimmi",mylanguage)
     myrequest = ""
     mycommand = ""
     myloop=True
+    
     # try:
     count = 0
 
@@ -120,23 +125,32 @@ def listener():
         if (left(myrequest.lower(),keylenght) == keyword):
             mycommand =  myrequest[keylenght+1:msglenght]
             mycommand = mycommand.lower()
-            if (mycommand == "alza le braccia"):
+            if ((mycommand == "parla inglese") or (mycommand == "speak english") or (mycommand == "you speak english")):
+                mylanguage = "en"
+
+            if ((mycommand == "parla italiano") or (mycommand == "speak italian") or (mycommand == "you speak italian")):
+                mylanguage = "it"
+
+            if ((mycommand == "alza le braccia") or (mycommand == "raise your arms")):
                 gesture("up")
 
-            if (mycommand == "abbassa le braccia"):
+            if ((mycommand == "abbassa le braccia") or (mycommand == "lower your arms")):
                 gesture("down")
                 
+            if ((mycommand=="spengiti") or (mycommand == "spegniti")):
+                os.system("sudo halt")
+
             if (mycommand == "guarda avanti"):
                 pan(0)
                 tilt(0)
 
         if myrequest=="stop":
-            speech("ci vediamo alla prossima")
+            speech("ci vediamo alla prossima",mylanguage)
             myrequest=""
             myloop=False
 
         if myrequest=="fine":
-            speech("ci vediamo alla prossima")
+            speech("ci vediamo alla prossima",mylanguage)
             myrequest=""
             myloop=False
             
@@ -146,7 +160,7 @@ def listener():
             answer=bot(myrequest)
             print(answer)
             gesture("gesture")
-            speech(answer)
+            speech(answer,mylanguage)
             connectionSocket.send("SAY")
 
         

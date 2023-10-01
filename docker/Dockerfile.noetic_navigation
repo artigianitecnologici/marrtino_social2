@@ -1,0 +1,76 @@
+# Docker file for MARRtino navigation & laser packages
+# Luca Iocchi, 10/2/2021
+
+# docker build -t marrtino:noetic_navigation -f Dockerfile.noetic_navigation .
+
+FROM marrtino:noetic_system
+
+ARG MACHTYPE=default
+
+# System libs
+
+USER root
+
+#RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+
+RUN apt-get update && \
+    apt-get install -y \
+        ros-noetic-navigation && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+
+# ROS packages
+
+USER robot
+
+RUN mkdir -p $HOME/src &&  cd $HOME/src && \
+    git clone https://github.com/ros-drivers/urg_c.git && \
+    git clone -b melodic-devel https://github.com/ros-drivers/urg_node.git  && \
+    git clone https://github.com/Slamtec/rplidar_ros.git && \
+    git clone -b melodic-devel https://github.com/ros-perception/laser_proc.git
+    # && \
+    #git clone https://github.com/AlessioMorale/ld06_lidar.git
+
+# git clone https://github.com/ldrobotSensorTeam/ldlidar_stl_ros.git && \
+RUN cd $HOME/src && \
+    git clone https://github.com/Imperoli/gradient_based_navigation.git
+
+# Set and compile ROS packages
+
+RUN cd $HOME/ros/catkin_ws/src && \
+    ln -s $HOME/src/urg_c . && \
+    ln -s $HOME/src/urg_node . && \
+    ln -s $HOME/src/rplidar_ros . && \
+    ln -s $HOME/src/laser_proc .  && \
+    ln -s $HOME/src/gradient_based_navigation .
+#ln -s $HOME/src/ld06_lidar . && \
+#ln -s $HOME/src/ldlidar_stl_ros . && \
+
+# Trick to force build from here
+
+RUN echo "20220531" > /tmp/lastdockerbuild
+
+# marrtino_apps
+
+RUN cd $HOME/src && \
+    git clone --depth 1 https://github.com/artigianitecnologici/marrtino_apps.git
+
+# gradient_based_navigation
+
+RUN cd $HOME/src/gradient_based_navigation && \
+    git pull
+
+RUN if [ "$MACHTYPE" = "aarch64" ]; then \
+       /bin/bash -ci "cd $HOME/ros/catkin_ws; catkin_make -j2" ; \
+    elif [ "$MACHTYPE" = "armv7l" ]; then \
+       /bin/bash -ci "cd $HOME/ros/catkin_ws; catkin_make -j1" ; \
+    else \
+       /bin/bash -ci "cd $HOME/ros/catkin_ws; catkin_make" ; \
+    fi
+
+WORKDIR /home/robot
+
+CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_apps/bringup && python nav_bringup.py" ]
+
+

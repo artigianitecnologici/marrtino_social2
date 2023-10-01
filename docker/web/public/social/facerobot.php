@@ -1,3 +1,67 @@
+<?php 
+if ( !empty($_POST)) {
+  #print_r($_POST);
+   $flda= $_POST['idtesto'] . "\n";
+   $fld0= $_POST['idtesto0'] . "\n";
+   $fld1= $_POST['idtesto1'] . "\n";
+   $fld2= $_POST['idtesto2'] . "\n";
+   $fld3= $_POST['idtesto3'] . "\n";
+   $fld4= $_POST['idtesto4'] . "\n";
+   $fld5= $_POST['idtesto5'] . "\n";
+   $fld6= $_POST['idtesto6'] . "\n";
+   $fld7= $_POST['idtesto7'] . "\n";
+   $fld8= $_POST['idtesto8'] . "\n";
+   $fld9= $_POST['idtesto9'] . "\n";
+   $fld10= $_POST['idtesto10'] . "\n";
+   $fld11= $_POST['idtesto11'] . "\n";
+   $fld12= $_POST['idtesto12'] . "\n";
+   $fld13= $_POST['idtesto13'] . "\n";
+   $fld14= $_POST['idtesto14'] . "\n";
+   $myfile = fopen('tmp/facerobot.txt', 'w')  or die("Unable to open file!");
+   fwrite($myfile,  $flda);
+   fwrite($myfile,  $fld0); 
+   fwrite($myfile,  $fld1);
+   fwrite($myfile,  $fld2);  
+   fwrite($myfile,  $fld3);  
+   fwrite($myfile,  $fld4);
+   fwrite($myfile,  $fld5);  
+   fwrite($myfile,  $fld6);
+   fwrite($myfile,  $fld7);
+   fwrite($myfile,  $fld8);
+   fwrite($myfile,  $fld9);  
+   fwrite($myfile,  $fld10);
+   fwrite($myfile,  $fld11);  
+   fwrite($myfile,  $fld12);
+   fwrite($myfile,  $fld13);
+   fwrite($myfile,  $fld14);
+   fclose($myfile);
+
+  } else {
+    $myfile = fopen('tmp/facerobot.txt', 'r');
+    $flda = fgets($myfile);
+    $fld0= fgets($myfile);
+    $fld1= fgets($myfile);
+    $fld2= fgets($myfile);
+    $fld3= fgets($myfile);
+    $fld4= fgets($myfile);
+    $fld5= fgets($myfile);
+    $fld6= fgets($myfile);
+    $fld7= fgets($myfile);
+    $fld8= fgets($myfile);
+    $fld9= fgets($myfile);
+    $fld10= fgets($myfile);
+    $fld11= fgets($myfile);
+    $fld12= fgets($myfile);
+    $fld13= fgets($myfile);
+    $fld14= fgets($myfile);
+    fclose($myfile);
+
+  } 
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -65,6 +129,13 @@ var tiltTopic = new ROSLIB.Topic({
   name : '/tilt_controller/command',
   messageType: 'std_msgs/Float64'
 });  
+
+var gestureTopic = new ROSLIB.Topic({
+  ros: ros,
+  name : '/social/gesture',
+  messageType: 'std_msgs/String'
+});  
+
 function pan( value ){
 var msg_pan = new ROSLIB.Message({
       data: value     
@@ -105,6 +176,7 @@ var msg_speak = new ROSLIB.Message({
       data: testo
  });
  FaceExpression('speak')
+ startgesture()
  speechTopic.publish(msg_speak); // error here als
  console.log(msg_speak);
  
@@ -137,7 +209,13 @@ function FaceExpression( face){
   console.log(face);   
 }
 
-
+function startgesture(){
+  var mymsg = new ROSLIB.Message({
+       data :  'gesture'   
+  });
+  gestureTopic.publish(mymsg); // error here als
+  console.log("gesture");   
+}
 
 
 function normal(){
@@ -145,7 +223,6 @@ function normal(){
        data :  'normal'   
   });
   emotionTopic.publish(mymsg); // error here als
-
   console.log("normal");   
 }
 
@@ -155,7 +232,6 @@ function startBlinking(){
        data :   'startblinking'   
   });
   emotionTopic.publish(mymsg); // error here als
-
   console.log("startblinking");   
 }
 
@@ -170,7 +246,7 @@ initPanTilt= function() {
 		
 		
     } 
-	headTiltRange = document.getElementById("robot-tilt");
+	  headTiltRange = document.getElementById("robot-tilt");
     headTiltRange.oninput = function() {
         value = ((headTiltRange.value /100) -0.5) * -1;
 		console.log(value);
@@ -194,9 +270,12 @@ initPanTilt= function() {
 </head>
 
 <body>
-  
+
+
 <?php include "../social/nav.php" ?>
 
+
+<form action="facerobot.php" method="post">
 
 <div class="container-fluid">
   <div class="row">
@@ -245,13 +324,13 @@ initPanTilt= function() {
   <div class="row">
     <div class="col-md-6">
        <div class="input-group mb-3">
-        <input type="text" class="form-control" id="idtesto" placeholder="Text" aria-label="Testo" aria-describedby="button-addon2">
+        <input type="text" class="form-control" name="idtesto" id="idtesto" placeholder="Text" value="<?php echo $flda; ?>" aria-label="Testo" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto').value)" type="button" id="button-addon2">Speak</button>
       </div>
     </div>
     <div class="col-md-6">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" id="idtesto0" placeholder="Text" aria-label="Testo" aria-describedby="button-addon2">
+        <input type="text" class="form-control"  name="idtesto0" id="idtesto0" placeholder="Text"  value="<?php echo $fld0; ?>" aria-label="Testo" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto0').value)" type="button" id="button-addon2">Speak</button>
       </div>
    </div>
@@ -259,13 +338,13 @@ initPanTilt= function() {
    <div class="row">
     <div class="col-md-6">
        <div class="input-group mb-3">
-        <input type="text" class="form-control" id="idtesto1" placeholder="Text" aria-label="Testo" aria-describedby="button-addon2">
+        <input type="text" class="form-control"  name="idtesto1"  id="idtesto1" placeholder="Text"  value="<?php echo $fld1; ?>" aria-label="Testo" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto1').value)" type="button" id="button-addon2">Speak</button>
       </div>
     </div>
     <div class="col-md-6">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" id="idtesto2" placeholder="Text" aria-label="Testo" aria-describedby="button-addon2">
+        <input type="text" class="form-control"  name="idtesto2" id="idtesto2" placeholder="Text"  value="<?php echo $fld2; ?>" aria-label="Testo" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto2').value)" type="button" id="button-addon2">Speak</button>
       </div>
    </div>
@@ -273,13 +352,13 @@ initPanTilt= function() {
    <div class="row">
     <div class="col-md-6">
        <div class="input-group mb-3">
-        <input type="text" class="form-control" id="idtesto3" placeholder="Text" aria-label="Testo" aria-describedby="button-addon2">
+        <input type="text" class="form-control"  name="idtesto3"  id="idtesto3" placeholder="Text"  value="<?php echo $fld3; ?>" aria-label="Testo" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto3').value)" type="button" id="button-addon2">Speak</button>
       </div>
     </div>
     <div class="col-md-6">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" id="idtesto4" placeholder="Text" aria-label="Testo" aria-describedby="button-addon2">
+        <input type="text" class="form-control"  name="idtesto4" id="idtesto4" placeholder="Text"  value="<?php echo $fld4; ?>" aria-label="Testo" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto4').value)" type="button" id="button-addon2">Speak</button>
       </div>
    </div>
@@ -287,13 +366,13 @@ initPanTilt= function() {
    <div class="row">
     <div class="col-md-6">
        <div class="input-group mb-3">
-        <input type="text" class="form-control" id="idtesto5" placeholder="Text" aria-label="Testo" aria-describedby="button-addon2">
+        <input type="text" class="form-control"  name="idtesto5" id="idtesto5" placeholder="Text"  value="<?php echo $fld5; ?>" aria-label="Testo" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto5').value)" type="button" id="button-addon2">Speak</button>
       </div>
     </div>
     <div class="col-md-6">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" id="idtesto6" placeholder="Text" aria-label="Testo" aria-describedby="button-addon2">
+        <input type="text" class="form-control"  name="idtesto6"  id="idtesto6" placeholder="Text"  value="<?php echo $fld6; ?>" aria-label="Testo" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto6').value)" type="button" id="button-addon2">Speak</button>
       </div>
    </div>
@@ -301,13 +380,13 @@ initPanTilt= function() {
    <div class="row">
     <div class="col-md-6">
        <div class="input-group mb-3">
-        <input type="text" class="form-control" id="idtesto7" placeholder="Text" aria-label="Testo" aria-describedby="button-addon2">
+        <input type="text" class="form-control"  name="idtesto7" id="idtesto7" placeholder="Text"  value="<?php echo $fld7; ?>" aria-label="Testo" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto7').value)" type="button" id="button-addon2">Speak</button>
       </div>
     </div>
     <div class="col-md-6">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" id="idtesto8" placeholder="Text" aria-label="Testo" aria-describedby="button-addon2">
+        <input type="text" class="form-control"  name="idtesto8" id="idtesto8" placeholder="Text"  value="<?php echo $fld8; ?>" aria-label="Testo" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto8').value)" type="button" id="button-addon2">Speak</button>
       </div>
    </div>
@@ -315,13 +394,13 @@ initPanTilt= function() {
  <div class="row">
     <div class="col-md-6">
        <div class="input-group mb-3">
-        <input type="text" class="form-control" id="idtesto9" placeholder="Text" aria-label="Testo" aria-describedby="button-addon2">
+        <input type="text" class="form-control"  name="idtesto9"  id="idtesto9" placeholder="Text"  value="<?php echo $fld9; ?>" aria-label="Testo" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto9').value)" type="button" id="button-addon2">Speak</button>
       </div>
     </div>
     <div class="col-md-6">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" id="idtesto10" placeholder="Text" aria-label="Testo" aria-describedby="button-addon2">
+        <input type="text" class="form-control"  name="idtesto10" id="idtesto10" placeholder="Text"  value="<?php echo $fld10; ?>" aria-label="Testo" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto10').value)" type="button" id="button-addon2">Speak</button>
       </div>
    </div>
@@ -329,13 +408,13 @@ initPanTilt= function() {
  <div class="row">
     <div class="col-md-6">
        <div class="input-group mb-3">
-        <input type="text" class="form-control" id="idtesto11" placeholder="Text" aria-label="Testo" aria-describedby="button-addon2">
+        <input type="text" class="form-control"  name="idtesto11" id="idtesto11" placeholder="Text"  value="<?php echo $fld11; ?>" aria-label="Testo" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto11').value)" type="button" id="button-addon2">Speak</button>
       </div>
     </div>
     <div class="col-md-6">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" id="idtesto12" placeholder="Text" aria-label="Testo" aria-describedby="button-addon2">
+        <input type="text" class="form-control"  name="idtesto12" id="idtesto12" placeholder="Text" value="<?php echo $fld12; ?>"  aria-label="Testo" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto12').value)" type="button" id="button-addon2">Speak</button>
       </div>
    </div>
@@ -344,18 +423,19 @@ initPanTilt= function() {
  <div class="row">
     <div class="col-md-6">
        <div class="input-group mb-3">
-        <input type="text" class="form-control" id="idtesto13" placeholder="Text" aria-label="Testo" aria-describedby="button-addon2">
+        <input type="text" class="form-control"  name="idtesto13"  id="idtesto13" placeholder="Text" value="<?php echo $fld13; ?>"  aria-label="Testo" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto13').value)" type="button" id="button-addon2">Speak</button>
       </div>
     </div>
     <div class="col-md-6">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" id="idtesto14" placeholder="Text" aria-label="Testo" aria-describedby="button-addon2">
+        <input type="text" class="form-control"  name="idtesto14"  id="idtesto14" placeholder="Text" value="<?php echo $fld14; ?>"  aria-label="Testo" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto14').value)" type="button" id="button-addon2">Speak</button>
       </div>
    </div>
  </div>
-
+ <input type="submit" name="submit" value="Salva">
+  </form>
     
 </body>
 

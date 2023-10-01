@@ -24,7 +24,7 @@ def run_server(port):
     sock.listen(1)
     print("ROS social server started on port %d ..." %port)
 
-    tmux = TmuxSend('bringup', ['netcat','oak-d','interactive','autostart','cmd'])
+    tmux = TmuxSend('bringup', ['netcat','oak-d','emotion','followme','cmd'])
 
     connected = False
     dorun = True
@@ -74,12 +74,12 @@ def run_server(port):
                 homefolder = "~/src/marrtino_social"
              
                 # social normale con pan e tilt
-                if data=='@robotsocial':
+                if data=='@oak-dstart':
                     tmux.cmd(1,'cd %s' %rfolder)
                     tmux.cmd(1,'roslaunch social.launch')   
                     tmux.cmd(3,'cd %s' %sfolder)
                     tmux.cmd(3,'python autostart.py')
-                elif data=='@robotsocialkill':
+                elif data=='@oak-dkill':
                     tmux.Cc(1)
 
                 # start social no servo demo

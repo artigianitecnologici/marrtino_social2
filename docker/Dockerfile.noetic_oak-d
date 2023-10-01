@@ -38,6 +38,6 @@ RUN cd $HOME/src && \
 
 WORKDIR /home/robot
 
-#CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_apps/bringup && python noetic_vision_bringup.py" ]
 
+CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_social2/bringup && python oak-d_bringup.py -server_port 9251" ]
 

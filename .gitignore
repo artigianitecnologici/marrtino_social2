@@ -1,3 +1,4 @@
 
 bringup/__pycache__/tmuxsend.cpython-38.pyc
 *.pyc
+docker/web/public/social/tmp/facerobot.txt

@@ -1,4 +1,6 @@
-
-bringup/__pycache__/tmuxsend.cpython-38.pyc
+*~
+*.bak
 *.pyc
+*.bag
+cache*
 docker/web/public/social/tmp/facerobot.txt

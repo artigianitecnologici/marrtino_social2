@@ -2,6 +2,7 @@
 import rospy
 from std_msgs.msg import String
 
+import threading
 import requests
 import sys,os
 import time
@@ -32,7 +33,6 @@ def bot(msg):
     # Making a get request
     response =  requests.get(url = myurl, params=payload)
     content = response.content
-
     #print(content)
     return content
 
@@ -50,12 +50,20 @@ def reset_face():
 def speech(msg,language):
     #rospy.loginfo('Speech : %s' %(msg))
     emotion("speak")
-    
     say(msg,language)
     #
     gesture('gesture')
-    #speak_it_pub.publish(msg.decode("utf-8"))
+    #
     emotion("normal")
+
+
+
+ 
+def timerping():
+  threading.Timer(10.0, timerping).start()
+  print("Ciao mondo!")
+ 
+
 
 def callback(data):
     global tracking
@@ -70,15 +78,6 @@ def callback(data):
         speech("ciao")
         #stop_timer()
 
-def wait_user_speaking(nsec):
-    t_end = time.time()+nsec
-    myasr = ''
-    while time.time() < t_end:
-        if myasr == '' :
-            myasr = asr()    
-        else :
-            break
-        return myasr
 
 def command(msg):
     print(msg)
@@ -96,7 +95,7 @@ def listener():
     emotion("startblinking")
     gesture("gesture")
     speech("Ciao sono martina se vuoi puoi parlare con me",mylanguage)
-    speech("dimmi",mylanguage)
+    speech("Apri la applicazione e parla con me",mylanguage)
     connectionSocket, clientAddress = serverSocket.accept()
     myrequest = ""
     mycommand = ""
@@ -104,56 +103,71 @@ def listener():
     
     # try:
     count = 0
-
+    timerping()
     while myloop==True:
+        # recv can throw socket.timeout
+        connectionSocket.settimeout(5.0)
+        myrequest=""
+        try:
+            myrequest =  connectionSocket.recv(1024)
+        except socket.timeout: # fail after 1 second of no activity
+            myrequest=""
+            print("Didn't receive data! [Timeout]")
+        #finally:
+            #s.close()
+        print(myrequest)
+        if (myrequest != ""):
+            count += 1
+            keyword = "martina"
+            msglenght = len(myrequest)
+            keylenght = len(keyword)
+            mycommand = ""
+            if (left(myrequest.lower(),keylenght) == keyword):
+                mycommand =  myrequest[keylenght+1:msglenght]
+                mycommand = mycommand.lower()
+                if ((mycommand == "parla inglese") or (mycommand == "speak english") or (mycommand == "you speak english")):
+                    mylanguage = "en"
+                    speech("i speak english now",mylanguage)
 
-        myrequest =  connectionSocket.recv(1024)
-        #print(myrequest)
-        count += 1
-        keyword = "martina"
-        msglenght = len(myrequest)
-        keylenght = len(keyword)
-        mycommand = ""
-        if (left(myrequest.lower(),keylenght) == keyword):
-            mycommand =  myrequest[keylenght+1:msglenght]
-            mycommand = mycommand.lower()
-            if ((mycommand == "parla inglese") or (mycommand == "speak english") or (mycommand == "you speak english")):
-                mylanguage = "en"
+                if ((mycommand == "parla italiano") or (mycommand == "speak italian") or (mycommand == "you speak italian")):
+                    mylanguage = "it"
+                    speech("adesso parlo italiano",mylanguage)
 
-            if ((mycommand == "parla italiano") or (mycommand == "speak italian") or (mycommand == "you speak italian")):
-                mylanguage = "it"
+                if ((mycommand == "alza le braccia") or (mycommand == "alza le mani") or  (mycommand == "raise your arms")):
+                    gesture("up")
 
-            if ((mycommand == "alza le braccia") or (mycommand == "raise your arms")):
-                gesture("up")
-
-            if ((mycommand == "abbassa le braccia") or (mycommand == "lower your arms")):
-                gesture("down")
+                if ((mycommand == "abbassa le braccia") or (mycommand == "abassa le mani")  or (mycommand == "lower your arms")):
+                    gesture("down")
                 
-            if ((mycommand=="spengiti") or (mycommand == "spegniti")):
-                os.system("sudo halt")
+                if ((mycommand=="spengiti") or (mycommand == "spegniti" ) or (mycommand == "arresta il sistema")):
+                    os.system("sudo halt")
 
-            if (mycommand == "guarda avanti"):
-                pan(0)
-                tilt(0)
+                if (mycommand == "guarda avanti"):
+                    pan(0)
+                    tilt(0)
+            
+                if (mycommand == "voglio cercare un hotel"):
+                    connectionSocket.send("https://www.booking.com")
+           
 
-        if myrequest=="stop":
-            speech("ci vediamo alla prossima",mylanguage)
-            myrequest=""
-            myloop=False
+            if myrequest=="stop":
+                speech("ci vediamo alla prossima",mylanguage)
+                myrequest=""
+                myloop=False
 
-        if myrequest=="fine":
-            speech("ci vediamo alla prossima",mylanguage)
-            myrequest=""
-            myloop=False
+            if myrequest=="fine":
+                speech("ci vediamo alla prossima",mylanguage)
+                myrequest=""
+                myloop=False
             
             
-        if (myrequest != "" and mycommand == ""):
-            connectionSocket.send("STOP")
-            answer=bot(myrequest)
-            print(answer)
-            gesture("gesture")
-            speech(answer,mylanguage)
-            connectionSocket.send("SAY")
+            if (myrequest != "" and mycommand == ""):
+                connectionSocket.send("STOP")
+                answer=bot(myrequest)
+                print(answer)
+                gesture("gesture")
+                speech(answer,mylanguage)
+                connectionSocket.send("SAY")
 
         
     print("Close connection on %d" % SERVER_PORT)
@@ -167,11 +181,6 @@ serverSocket.bind((SERVER_ADDRESS, SERVER_PORT))        # Bind to the port
 serverSocket.listen(1)
 
 print("Server waiting on (%s, %d)" % (SERVER_ADDRESS, SERVER_PORT))
-
-
-
-
-
 
 listener()
 

@@ -48,8 +48,8 @@ services:
     image: marrtino:oak-d
     build:
       context: $MARRTINO_SOCIAL2/docker
-      dockerfile: Dockerfile.noetic_oak-d
-    container_name: noetic_oak-d
+      dockerfile: Dockerfile.oak-d
+    container_name: oak-d
     dns: 8.8.8.8
     network_mode: "host"
     tty: true

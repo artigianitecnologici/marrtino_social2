@@ -45,7 +45,7 @@ with OakCamera() as oak:
         for det, rec in zip(packet.detections, packet.nnData):
             reid_result = rec.getFirstLayerFp16()
             id = reid.new_result(reid_result)
-
+            print(*det.top_left)
             visualizer.add_text(f"ID: {id}",
                                 bbox=(*det.top_left, *det.bottom_right),
                                 position=TextPosition.MID)

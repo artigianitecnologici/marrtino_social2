@@ -24,7 +24,7 @@ def run_server(port):
     sock.listen(1)
     print("ROS social server started on port %d ..." %port)
 
-    tmux = TmuxSend('bringup', ['netcat','social','interactive','autostart','cmd'])
+    tmux = TmuxSend('bringup', ['netcat','social','interactive','autostart','vnc','cmd'])
 
     connected = False
     dorun = True
@@ -71,7 +71,7 @@ def run_server(port):
                 rfolder = "~/src/marrtino_social2/launch"
                 cfolder = "~/src/marrtino_social2/config"
                 sfolder = "~/src/marrtino_social2/script"
-                homefolder = "~/src/marrtino_social"
+                homefolder = "~/src/marrtino_social2"
              
                 # social normale con pan e tilt
                 if data=='@robotsocial':
@@ -116,6 +116,15 @@ def run_server(port):
                     tmux.cmd(2,'python interactive.py')
                 elif data=='@interactivekill':
                     tmux.Cc(2)
+
+                
+                # start speech_start ( 2 speech)
+                elif data=='@vnc': 
+                    tmux.cmd(4,'cd %s' %homefolder)
+                    tmux.cmd(4,'./startvnc.sh')
+                elif data=='@vnckill':
+                    tmux.Cc(4)
+                               
                                 
                 else:
                     print('Unknown command %s' %data)

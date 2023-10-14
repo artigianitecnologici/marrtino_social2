@@ -138,6 +138,9 @@ def listener():
                 if ((mycommand == "alza le braccia") or (mycommand == "alza le mani") or  (mycommand == "raise your arms")):
                     gesture("up")
 
+                if ((mycommand == "saluta") or (mycommand == "hello") or  (mycommand == "say hello")):
+                    gesture("hello")
+
                 if ((mycommand == "abbassa le braccia") or (mycommand == "abassa le mani")  or (mycommand == "lower your arms")):
                     gesture("down")
                 
@@ -151,6 +154,10 @@ def listener():
                 if (mycommand == "voglio cercare un hotel"):
                     connectionSocket.send("https://www.booking.com")
                     speech("ti apro il sito di booking.com",mylanguage)
+
+                if (mycommand == "aiuto"):
+                    connectionSocket.send("https://social.marrtino.org/setup-robot/interactive-mode")
+                    speech("ti apro il sito di marrtino",mylanguage)
            
 
             if myrequest=="stop":

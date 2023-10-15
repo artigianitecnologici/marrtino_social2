@@ -7,7 +7,7 @@ import os
 text = "Ciao , sono martina e sono un robot social"
 
 # Create gTTS object
-tts = gTTS(text,lang='it')
+tts = gTTS(text=text, lang='it', tld='com', slow=False, gender='female')
 
 # Save gTTS output to a temporary file
 temp_file =  "/tmp/cache.mp3"

@@ -11,7 +11,7 @@ rospy.init_node("my_node")
 # Publisher
 pubFaceEmotion = rospy.Publisher("FaceEmotion", String, queue_size=10)
 
-with OakCamera() as oak:
+with OakCamera() as oak: 
     color = oak.create_camera('color')
     det_nn = oak.create_nn('face-detection-retail-0004', color)
     # Passthrough is enabled for debugging purposes

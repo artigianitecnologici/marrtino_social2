@@ -31,14 +31,14 @@ def image_callback(data):
         results = hands.process(img_rgb)
         if results.multi_hand_landmarks:
             if len(results.multi_handedness) == 2:
-                #print('Both Hands')
+                print('Both Hands')
                 pubHands.publish('Both')
             else:
                 for i in results.multi_handedness:
                     label = MessageToDict(i)['classification'][0]['label']
                     #print(label)
                     if (label != ''):
-                        #print(label)
+                        print(label)
                         pubHands.publish(label)
         #cv2.imshow('Image', img_rgb)
         #cv2.waitKey(1)

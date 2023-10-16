@@ -2,7 +2,7 @@
 # ROS Noetic , navigation, perception & additional packages
 # Version base
 
-# docker build -t marrtino:noetic_oak-d -f Dockerfile.noetic_oak-d .
+# docker build -t marrtino:oak-d -f Dockerfile.oak-d .
 
 FROM marrtino:noetic_system
 
@@ -11,6 +11,7 @@ USER root
 RUN apt-get update && \
     apt-get install -y \
     ros-$ROS_DISTRO-depthai-ros && \
+    python3-tk && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -25,7 +26,9 @@ RUN mkdir -p $HOME/scripts
 
 RUN echo "20230706" > /tmp/lastdockerbuild
 
-RUN python3 -m pip install depthai-sdk
+RUN python3 -m pip install depthai-sdk 
+RUN python3 -m pip install mediapipe 
+
 
 # marrtino_apps
 
@@ -35,6 +38,8 @@ RUN cd $HOME/src && \
     #git clone https://github.com/luxonis/depthai-experiments.git 
     #&& \
     #git clone https://github.com/luxonis/depthai-python.git
+
+
 
 WORKDIR /home/robot
 

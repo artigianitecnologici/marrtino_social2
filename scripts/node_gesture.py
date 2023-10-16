@@ -61,8 +61,8 @@ def gesture_down():
     spalla_rotazione_sx(2.6166666666666667)
     gomito_dx(2.6166666666666667)
     gomito_sx(2.6166666666666667)
-    hand_right(1.0466666666666666)
-    hand_left(4.1866666666666665)
+    hand_left(1.0466666666666666)
+    hand_right(4.1866666666666665)
 
 def gesture_up():
     spalla_flessione_dx(2.6166666666666667)
@@ -71,8 +71,8 @@ def gesture_up():
     spalla_rotazione_sx(2.6166666666666667)
     gomito_dx(2.6166666666666667)
     gomito_sx(2.6166666666666667)
-    hand_right(1.0466666666666666)
-    hand_left(4.1866666666666665)
+    hand_left(1.0466666666666666)
+    hand_right(4.1866666666666665)
 
 def gesture_pos1():
     spalla_flessione_dx(1.3955555555555557)
@@ -81,8 +81,8 @@ def gesture_pos1():
     spalla_rotazione_sx(2.0933333333333333)
     gomito_dx(3.14)
     gomito_sx(2.0933333333333333)
-    hand_right(1.3955555555555557)
-    hand_left(3.3144444444444447)
+    hand_left(1.3955555555555557)
+    hand_right(3.3144444444444447)
 
 
 def gesture_pos2():
@@ -92,8 +92,8 @@ def gesture_pos2():
     spalla_rotazione_sx(1.7444444444444445)
     gomito_dx(2.6166666666666667)
     gomito_sx(2.09)
-    hand_right(1.918888888888889)
-    hand_left(3.837777777777778)
+    hand_left(1.918888888888889)
+    hand_right(3.837777777777778)
 
 def gesture_poszero():
     spalla_flessione_dx(1.57)
@@ -102,8 +102,8 @@ def gesture_poszero():
     spalla_rotazione_sx(2.0933333333333333)
     gomito_dx(2.965555555555556)
     gomito_sx(1.7444444444444445)
-    hand_right(1.7444444444444445)
-    hand_left(3.663333333333333)
+    hand_left(1.7444444444444445)
+    hand_right(3.663333333333333)
 
 def gesture_anim():
     head_position("front")

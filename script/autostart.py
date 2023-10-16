@@ -5,6 +5,7 @@ import time
 
 sys.path.append(os.getenv("MARRTINO_APPS_HOME")+"/program")
 
+
 from robot_cmd_ros import *
 
 def speech(msg):
@@ -26,6 +27,17 @@ def listener():
    
     pan(0)
     tilt(0)
+    
+    spalla_flessione_dx(2.6166666666666667)
+    spalla_flessione_sx(2.6166666666666667)
+    spalla_rotazione_dx(2.6166666666666667)
+    spalla_rotazione_sx(2.6166666666666667)
+    gomito_dx(2.6166666666666667)
+    gomito_sx(2.6166666666666667)
+    hand_right(0)
+    hand_left(0)
+
+
 
     # end command
 

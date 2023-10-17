@@ -42,14 +42,16 @@ hand_left_pub = rospy.Publisher(TOPIC_hand_left, Float64, queue_size=1,   latch=
 
 def gesture_zero():
     head_position("front")
-    spalla_flessione_dx(2.6166666666666667)
-    spalla_flessione_sx(2.6166666666666667)
     spalla_rotazione_dx(2.6166666666666667)
+    spalla_flessione_dx(1.57)
+    gomito_dx(3.14)
+    hand_right(2.4422222222222225)
+    hand_left(2.7911111111111113)
     spalla_rotazione_sx(2.6166666666666667)
-    gomito_dx(2.6166666666666667)
-    gomito_sx(2.6166666666666667)
-    hand_right(0)
-    hand_left(0)
+    spalla_flessione_sx(3.663333333333333)
+    gomito_sx(2.0933333333333333)
+
+
 
 def gesture_down():
     head_position("front")
@@ -79,10 +81,10 @@ def gesture_pos1():
     spalla_flessione_sx(3.663333333333333)
     spalla_rotazione_dx(3.488888888888889)
     spalla_rotazione_sx(2.0933333333333333)
-    gomito_dx(3.14)
-    gomito_sx(2.0933333333333333)
-    hand_left(1.3955555555555557)
-    hand_right(3.3144444444444447)
+    gomito_dx(3.3144444444444447)
+    gomito_sx(1.918888888888889)
+    hand_right(1.918888888888889)
+    hand_left(3.837777777777778)
 
 
 def gesture_pos2():
@@ -90,20 +92,20 @@ def gesture_pos2():
     spalla_flessione_sx(3.837777777777778)
     spalla_rotazione_dx(3.14)
     spalla_rotazione_sx(1.7444444444444445)
-    gomito_dx(2.6166666666666667)
-    gomito_sx(2.09)
-    hand_left(1.918888888888889)
-    hand_right(3.837777777777778)
+    gomito_dx(2.965555555555556)
+    gomito_sx(2.267777777777778)
+    hand_right(1.3955555555555557)
+    hand_left(3.3144444444444447)
 
 def gesture_poszero():
     spalla_flessione_dx(1.57)
     spalla_flessione_sx(3.663333333333333)
     spalla_rotazione_dx(3.14)
     spalla_rotazione_sx(2.0933333333333333)
-    gomito_dx(2.965555555555556)
-    gomito_sx(1.7444444444444445)
-    hand_left(1.7444444444444445)
-    hand_right(3.663333333333333)
+    gomito_dx(3.14)
+    gomito_sx(2.0933333333333333)
+    hand_right(1.57)
+    hand_left(3.663333333333333)
 
 def gesture_anim():
     head_position("front")
@@ -115,6 +117,8 @@ def gesture_anim():
         gesture_pos1()
         time.sleep(1) # Sleep for 3 seconds
         gesture_pos2()
+        time.sleep(1) # Sleep for 3 seconds
+        gesture_zero()
         time.sleep(1) # Sleep for 3 seconds
 
 def reset_gesture():

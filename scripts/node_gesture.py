@@ -12,6 +12,7 @@ import time
 # SOCIAL
 # 
 TOPIC_emotion = "social/emotion"
+TOPIC_speech = "/speech/to_speak"
 TOPIC_pan = "pan_controller/command"
 TOPIC_tilt = "tilt_controller/command"
 TOPIC_spalla_dx_rot = "/spalladx_controller/command"
@@ -30,6 +31,7 @@ TOPIC_gesture = "/social/gesture"
 emotion_pub = rospy.Publisher(TOPIC_emotion, String, queue_size=1,   latch=True)
 pan_pub = rospy.Publisher(TOPIC_pan, Float64, queue_size=1,   latch=True)
 tilt_pub = rospy.Publisher(TOPIC_tilt, Float64, queue_size=1,   latch=True)
+speech_pub =rospy.Publisher(TOPIC_speech, String, queue_size=1,   latch=True)
 # 
 spalla_dx_rot_pub = rospy.Publisher(TOPIC_spalla_dx_rot, Float64, queue_size=1,   latch=True)
 spalla_dx_fle_pub = rospy.Publisher(TOPIC_spalla_dx_fle, Float64, queue_size=1,   latch=True)
@@ -41,18 +43,41 @@ hand_right_pub = rospy.Publisher(TOPIC_hand_right, Float64, queue_size=1,   latc
 hand_left_pub = rospy.Publisher(TOPIC_hand_left, Float64, queue_size=1,   latch=True)
 
 def gesture_zero():
+    emotion("startblinking")
+    head_position("front")
+    emotion("normal")
+    spalla_rotazione_dx(2.6166666666666667)
+    spalla_flessione_dx(1.57)
+    gomito_dx(2.8783333333333334)
+    hand_right(2.6166666666666667)
+    spalla_rotazione_sx(2.6166666666666667)
+    spalla_flessione_sx(3.663333333333333)
+    gomito_sx(2.355)
+    hand_left(2.6166666666666667)
+
+def gesture_hello():
+    emotion("startblinking")
     head_position("front")
     spalla_rotazione_dx(2.6166666666666667)
     spalla_flessione_dx(1.57)
-    gomito_dx(3.14)
-    hand_right(2.4422222222222225)
-    hand_left(2.7911111111111113)
-    spalla_rotazione_sx(2.6166666666666667)
-    spalla_flessione_sx(3.663333333333333)
-    gomito_sx(2.0933333333333333)
-
-
-
+    gomito_dx(2.8783333333333334)
+    hand_right(2.6166666666666667)
+    say('hello','en')
+    emotion("speak")
+    spalla_rotazione_sx(0.17444444444444446)
+    wait(1)
+    emotion("happy")
+    for count in range(3):
+        spalla_flessione_sx(3.14)
+        hand_left(3.663333333333333)
+        gomito_sx(2.0933333333333333)
+        wait(2)
+        spalla_flessione_sx(3.837777777777778)
+        hand_left(3.488888888888889)
+        gomito_sx(2.7911111111111113)
+        wait(2)
+    emotion("normal")
+    
 def gesture_down():
     head_position("front")
     emotion("blinking")
@@ -129,8 +154,36 @@ def reset_gesture():
 #### SOCIAL ####
 ################
 
+# Wait
 
+def dsleep(d):
+    try:
+        rospy.sleep(d)
+    except KeyboardInterrupt:
+        return False
+    return True
 
+def wait(r=1):
+    global stop_request
+    #print('wait %.1f' %r)
+
+    if (r<=0):
+        return dsleep(0.1)
+    elif (r<1):
+        return dsleep(r)
+    else:
+        t = 0
+        e = True
+        while t<r and not stop_request and e:
+            d = min(1,r-t)
+            e = dsleep(d)
+            t += d
+            #print("wait ... %f < %f  %r  %r " %(t,r, stop_request, e))
+        return e
+
+def say(msg):
+    print('speech %s' %(msg))
+    speech_pub.publish(msg)
 
 def head_status(msg):
     print('social/emotion %s' %(msg))
@@ -250,6 +303,8 @@ def callback_gesture(data):
         gesture_up()
     if (gesture == 'start'):
         start_timer()
+    if (gesture == 'hello'):
+        gesture_hello()
     if (gesture == 'stop'):
         start_timer()
 

@@ -138,7 +138,7 @@ def listener():
                 if ((mycommand == "alza le braccia") or (mycommand == "alza le mani") or  (mycommand == "raise your arms")):
                     gesture("up")
 
-                if ((mycommand == "saluta") or (mycommand == "hello") or  (mycommand == "say hello")):
+                if ((mycommand == "saluta") or (mycommand == "saluto") or  (mycommand == "say hello")):
                     gesture("hello")
 
                 if ((mycommand == "abbassa le braccia") or (mycommand == "abassa le mani")  or (mycommand == "lower your arms")):

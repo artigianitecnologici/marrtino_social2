@@ -62,21 +62,22 @@ def gesture_hello():
     spalla_flessione_dx(1.57)
     gomito_dx(2.8783333333333334)
     hand_right(2.6166666666666667)
-    say('hello','en')
+    say('hello')
     emotion("speak")
     spalla_rotazione_sx(0.17444444444444446)
-    wait(1)
+    time.sleep(1)
     emotion("happy")
     for count in range(3):
         spalla_flessione_sx(3.14)
         hand_left(3.663333333333333)
         gomito_sx(2.0933333333333333)
-        wait(2)
+        time.sleep(2)
         spalla_flessione_sx(3.837777777777778)
         hand_left(3.488888888888889)
         gomito_sx(2.7911111111111113)
-        wait(2)
+        time.sleep(2)
     emotion("normal")
+    gesture_zero()
     
 def gesture_down():
     head_position("front")
@@ -154,32 +155,7 @@ def reset_gesture():
 #### SOCIAL ####
 ################
 
-# Wait
 
-def dsleep(d):
-    try:
-        rospy.sleep(d)
-    except KeyboardInterrupt:
-        return False
-    return True
-
-def wait(r=1):
-    global stop_request
-    #print('wait %.1f' %r)
-
-    if (r<=0):
-        return dsleep(0.1)
-    elif (r<1):
-        return dsleep(r)
-    else:
-        t = 0
-        e = True
-        while t<r and not stop_request and e:
-            d = min(1,r-t)
-            e = dsleep(d)
-            t += d
-            #print("wait ... %f < %f  %r  %r " %(t,r, stop_request, e))
-        return e
 
 def say(msg):
     print('speech %s' %(msg))

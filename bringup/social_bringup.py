@@ -24,7 +24,7 @@ def run_server(port):
     sock.listen(1)
     print("ROS social server started on port %d ..." %port)
 
-    tmux = TmuxSend('bringup', ['netcat','social','interactive','autostart','vnc','cmd'])
+    tmux = TmuxSend('bringup', ['netcat','social','interactive','autostart','offline','cmd'])
 
     connected = False
     dorun = True
@@ -110,7 +110,7 @@ def run_server(port):
 
 
                
-                # start speech_start ( 2 speech)
+                # start interactive
                 elif data=='@interactive': 
                     tmux.cmd(2,'cd %s' %sfolder)
                     tmux.cmd(2,'python interactive.py')
@@ -118,11 +118,11 @@ def run_server(port):
                     tmux.Cc(2)
 
                 
-                # start speech_start ( 2 speech)
-                elif data=='@vnc': 
-                    tmux.cmd(4,'cd %s' %homefolder)
-                    tmux.cmd(4,'./startvnc.sh')
-                elif data=='@vnckill':
+                # start offline
+                elif data=='@offline': 
+                    tmux.cmd(4,'cd %s' %sfolder)
+                    tmux.cmd(4,'python offline.py')
+                elif data=='@offlinekill':
                     tmux.Cc(4)
                                
                                 

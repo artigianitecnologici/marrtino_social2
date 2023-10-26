@@ -67,7 +67,7 @@ def gesture_hello():
     spalla_rotazione_sx(0.17444444444444446)
     time.sleep(1)
     emotion("happy")
-    for count in range(3):
+    for count in range(2):
         spalla_flessione_sx(3.14)
         hand_left(3.663333333333333)
         gomito_sx(2.0933333333333333)

@@ -1,6 +1,6 @@
 <!-- Nav Bar -->
 <nav class="navbar navbar-expand-md navbar-dark navbar-light" style="background-color:rgba(211,65,63,1);">
-  <a class="navbar-brand" href="#">MARRtino Social v2.0</a>
+  <a class="navbar-brand" href="#">MARRtino Social v2.002</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -13,7 +13,10 @@
 	   <li class="nav-item">
         <a class="nav-link" href="../bringup/index.php" aria-haspopup="true"  >Bringup</a>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item">
+        <a class="nav-link" href="../social/facerobot.php" aria-haspopup="true"  >Facerobot</a>
+      </li>
+       <!--<li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Facerobot
         </a>
@@ -22,7 +25,7 @@
           <a class="dropdown-item" href="../social/faceroboten.php">facerobot EN</a>
         
       </li>
-      <!--
+     
       <li class="nav-item">
         <a class="nav-link" href="../social/facerobot.php" aria-haspopup="true"  >Social Interface</a>
       </li>

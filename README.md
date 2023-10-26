@@ -9,10 +9,29 @@
 
 # config env
 
+    
+    export MARRTINO_APPS_HOME=$HOME/src/marrtino_apps
     export MARRTINO_APPS_HOME2=$HOME/src/marrtino_apps2
+    export MARRTINO_SOCIAL=$HOME/src/marrtino_social2
     export MARRTINO_SOCIAL2=$HOME/src/marrtino_social2
+
     export ROS_IP=127.0.0.1
+    #export ROS_IP=192.168.1.86
     export ROBOT_TYPE=marrtino
+
+    # check if session already exists
+    tmux has-session -t compose 2>/dev/null
+    export UID=$(id -u)
+    export GID=$(id -g)
+    # check if session already exists
+    tmux has-session -t compose 2>/dev/null
+    #Alias
+    alias cw='cd ~/ros/catkin_ws'
+    alias cds='cd ~/src/marrtino_social2'
+    alias cda='cd ~/src/marrtino_apps' 
+    alias cdsd='cd ~/src/marrtino_social2/docker'
+    alias cdad='cd ~/src/marrtino_apps/docker'
+    alias cm='cd ~/src/catkin_ws && catkin_make'
 
 # Docker images
 

@@ -8,6 +8,7 @@ import sys,os
 import time
 import socket               # Import socket module
 import os
+import random
 
 from threading import Thread
 
@@ -125,6 +126,22 @@ def listener():
                 mycommand =  myrequest[keylenght+1:msglenght]
                 mycommand = mycommand.lower()
 
+                value = random.randint(0, 13)
+                if (value==0):
+                    if (mylanguage == "it"):
+                        speech("oggi non mi va proprio di fare niente",mylanguage)
+                if (value==1):
+                    if (mylanguage == "it"):
+                        speech("ma perche non lo chiedi ad alexa o a googol",mylanguage)
+                if (value==2):
+                    if (mylanguage == "it"):
+                        speech("basta co sta storia che i robot devono fare tutto quello che chiedi",mylanguage)
+                    
+                if (value==3):
+                    if (mylanguage == "it"):
+                        speech("oggi ho le cose mie quindi lasciami stare",mylanguage)
+                        
+               
                 print ("Comando " )
                 print(mycommand)
                 if ((mycommand == "parla inglese") or (mycommand == "speak english") or (mycommand == "you speak english")):

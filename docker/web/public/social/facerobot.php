@@ -1,6 +1,7 @@
 <?php 
+
 if ( !empty($_POST)) {
-  #print_r($_POST);
+   print_r($_POST);
    $flda= $_POST['idtesto'] . "\n";
    $fld0= $_POST['idtesto0'] . "\n";
    $fld1= $_POST['idtesto1'] . "\n";
@@ -183,6 +184,19 @@ var msg_speak = new ROSLIB.Message({
  console.log("speech");   
 }
 
+
+function speaken( testo){
+testo=testo+'###en';  
+var msg_speak = new ROSLIB.Message({
+      data: testo
+ });
+ FaceExpression('speak')
+ speechTopic.publish(msg_speak); // error here als
+ console.log(msg_speak);
+ 
+ console.log("speech");   
+}
+
 function normal(){
 var msg_happy = new ROSLIB.Message({
       data :  'happy'   
@@ -258,9 +272,9 @@ initPanTilt= function() {
 
      
     window.onload = function () {
-	  
-      
-	  initPanTilt();
+	    initPanTilt();
+      video = document.getElementById('video');
+      video.src = 'http://' + window.location.hostname +':29090/stream?topic=/rgb/image_raw&type=mjpeg&quality=100&width=256&height=192';
     }
 
   </script>
@@ -293,12 +307,14 @@ initPanTilt= function() {
     <div class="col-md-1"><button class="btn btn-outline-danger btn-lg" onclick="FaceExpression('surprise')">Surprise</button><br><button class="btn btn-outline-danger btn-lg" onclick="FaceExpression('sings')">sings</button></div>
     <div class="col-md-2"><button class="btn btn-outline-danger btn-lg" onclick="FaceExpression('startblinking')">Start Blinking</button><br><button class="btn btn-outline-danger btn-lg" onclick="FaceExpression('stopblinking')">Stop Blinking</button></div>
     <div class="col-md-1"><button class="btn btn-outline-danger btn-lg" onclick="FaceExpression('speak')">Speak</button><br><button class="btn btn-outline-danger btn-lg" onclick="FaceExpression('normal')">stop </button></div>
-    <div class="col-md-1"></div>
+    <div class="col-md-1"> <input class="btn btn-outline-success btn-lg" type="submit" name="submit" value="Salva"></div>
     <div class="col-md-1"></div>
     <div class="col-md-1" align="right"> <input type="range" orient="vertical"id="robot-tilt" /> </div>
-	<div class="col- md-2">
+	<div class="col-md-2">
 	 
-	  <div class="iframe-container"><iframe loading="lazy" src="/social/marrtina02.html"></iframe></div>
+
+    <img  src=""  alt="" id="video" />
+   <!--   <iframe loading="lazy" src="/social/marrtina02.html"></iframe>-->
 	   <input  type="range" min="0" max="100" style="width:100%;" id="robot-pan" >
    </div>
    
@@ -325,13 +341,15 @@ initPanTilt= function() {
     <div class="col-md-6">
        <div class="input-group mb-3">
         <input type="text" class="form-control" name="idtesto" id="idtesto" placeholder="Text" value="<?php echo $flda; ?>" aria-label="Testo" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto').value)" type="button" id="button-addon2">Speak</button>
+        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto').value)" type="button" id="button-addon2">IT</button>
+        <button class="btn btn-outline-secondary" onclick="speaken(document.getElementById('idtesto').value)" type="button" id="button-addon2">EN</button>
       </div>
     </div>
     <div class="col-md-6">
       <div class="input-group mb-3">
         <input type="text" class="form-control"  name="idtesto0" id="idtesto0" placeholder="Text"  value="<?php echo $fld0; ?>" aria-label="Testo" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto0').value)" type="button" id="button-addon2">Speak</button>
+        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto0').value)" type="button" id="button-addon2">IT</button>
+        <button class="btn btn-outline-secondary" onclick="speaken(document.getElementById('idtesto0').value)" type="button" id="button-addon2">EN</button>
       </div>
    </div>
    </div>
@@ -339,13 +357,15 @@ initPanTilt= function() {
     <div class="col-md-6">
        <div class="input-group mb-3">
         <input type="text" class="form-control"  name="idtesto1"  id="idtesto1" placeholder="Text"  value="<?php echo $fld1; ?>" aria-label="Testo" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto1').value)" type="button" id="button-addon2">Speak</button>
+        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto1').value)" type="button" id="button-addon2">IT</button>
+        <button class="btn btn-outline-secondary" onclick="speaken(document.getElementById('idtesto1').value)" type="button" id="button-addon2">EN</button>
       </div>
     </div>
     <div class="col-md-6">
       <div class="input-group mb-3">
         <input type="text" class="form-control"  name="idtesto2" id="idtesto2" placeholder="Text"  value="<?php echo $fld2; ?>" aria-label="Testo" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto2').value)" type="button" id="button-addon2">Speak</button>
+        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto2').value)" type="button" id="button-addon2">IT</button>
+        <button class="btn btn-outline-secondary" onclick="speaken(document.getElementById('idtesto2').value)" type="button" id="button-addon2">EN</button>
       </div>
    </div>
    </div>
@@ -353,27 +373,31 @@ initPanTilt= function() {
     <div class="col-md-6">
        <div class="input-group mb-3">
         <input type="text" class="form-control"  name="idtesto3"  id="idtesto3" placeholder="Text"  value="<?php echo $fld3; ?>" aria-label="Testo" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto3').value)" type="button" id="button-addon2">Speak</button>
+        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto3').value)" type="button" id="button-addon2">IT</button>
+        <button class="btn btn-outline-secondary" onclick="speaken(document.getElementById('idtesto3').value)" type="button" id="button-addon2">EN</button>
       </div>
     </div>
     <div class="col-md-6">
       <div class="input-group mb-3">
         <input type="text" class="form-control"  name="idtesto4" id="idtesto4" placeholder="Text"  value="<?php echo $fld4; ?>" aria-label="Testo" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto4').value)" type="button" id="button-addon2">Speak</button>
-      </div>
+        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto4').value)" type="button" id="button-addon2">IT</button>
+        <button class="btn btn-outline-secondary" onclick="speaken(document.getElementById('idtesto4').value)" type="button" id="button-addon2">EN</button>
+      </div> 
    </div>
    </div>
    <div class="row">
     <div class="col-md-6">
        <div class="input-group mb-3">
         <input type="text" class="form-control"  name="idtesto5" id="idtesto5" placeholder="Text"  value="<?php echo $fld5; ?>" aria-label="Testo" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto5').value)" type="button" id="button-addon2">Speak</button>
+        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto5').value)" type="button" id="button-addon2">IT</button>
+        <button class="btn btn-outline-secondary" onclick="speaken(document.getElementById('idtesto5').value)" type="button" id="button-addon2">EN</button>
       </div>
     </div>
     <div class="col-md-6">
       <div class="input-group mb-3">
         <input type="text" class="form-control"  name="idtesto6"  id="idtesto6" placeholder="Text"  value="<?php echo $fld6; ?>" aria-label="Testo" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto6').value)" type="button" id="button-addon2">Speak</button>
+        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto6').value)" type="button" id="button-addon2">IT</button>
+        <button class="btn btn-outline-secondary" onclick="speaken(document.getElementById('idtesto6').value)" type="button" id="button-addon2">EN</button>
       </div>
    </div>
    </div>
@@ -381,13 +405,15 @@ initPanTilt= function() {
     <div class="col-md-6">
        <div class="input-group mb-3">
         <input type="text" class="form-control"  name="idtesto7" id="idtesto7" placeholder="Text"  value="<?php echo $fld7; ?>" aria-label="Testo" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto7').value)" type="button" id="button-addon2">Speak</button>
+        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto7').value)" type="button" id="button-addon2">IT</button>
+        <button class="btn btn-outline-secondary" onclick="speaken(document.getElementById('idtesto7').value)" type="button" id="button-addon2">EN</button>
       </div>
     </div>
     <div class="col-md-6">
       <div class="input-group mb-3">
         <input type="text" class="form-control"  name="idtesto8" id="idtesto8" placeholder="Text"  value="<?php echo $fld8; ?>" aria-label="Testo" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto8').value)" type="button" id="button-addon2">Speak</button>
+        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto8').value)" type="button" id="button-addon2">IT</button>
+        <button class="btn btn-outline-secondary" onclick="speaken(document.getElementById('idtesto8').value)" type="button" id="button-addon2">EN</button>
       </div>
    </div>
 </div>
@@ -395,13 +421,15 @@ initPanTilt= function() {
     <div class="col-md-6">
        <div class="input-group mb-3">
         <input type="text" class="form-control"  name="idtesto9"  id="idtesto9" placeholder="Text"  value="<?php echo $fld9; ?>" aria-label="Testo" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto9').value)" type="button" id="button-addon2">Speak</button>
+        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto9').value)" type="button" id="button-addon2">IT</button>
+        <button class="btn btn-outline-secondary" onclick="speaken(document.getElementById('idtesto9').value)" type="button" id="button-addon2">EN</button>
       </div>
     </div>
     <div class="col-md-6">
       <div class="input-group mb-3">
         <input type="text" class="form-control"  name="idtesto10" id="idtesto10" placeholder="Text"  value="<?php echo $fld10; ?>" aria-label="Testo" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto10').value)" type="button" id="button-addon2">Speak</button>
+        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto10').value)" type="button" id="button-addon2">IT</button>
+        <button class="btn btn-outline-secondary" onclick="speaken(document.getElementById('idtesto10').value)" type="button" id="button-addon2">EN</button>
       </div>
    </div>
  </div>
@@ -409,13 +437,15 @@ initPanTilt= function() {
     <div class="col-md-6">
        <div class="input-group mb-3">
         <input type="text" class="form-control"  name="idtesto11" id="idtesto11" placeholder="Text"  value="<?php echo $fld11; ?>" aria-label="Testo" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto11').value)" type="button" id="button-addon2">Speak</button>
+        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto11').value)" type="button" id="button-addon2">IT</button>
+        <button class="btn btn-outline-secondary" onclick="speaken(document.getElementById('idtesto11').value)" type="button" id="button-addon2">EN</button>
       </div>
     </div>
     <div class="col-md-6">
       <div class="input-group mb-3">
         <input type="text" class="form-control"  name="idtesto12" id="idtesto12" placeholder="Text" value="<?php echo $fld12; ?>"  aria-label="Testo" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto12').value)" type="button" id="button-addon2">Speak</button>
+        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto12').value)" type="button" id="button-addon2">IT</button>
+        <button class="btn btn-outline-secondary" onclick="speaken(document.getElementById('idtesto12').value)" type="button" id="button-addon2">EN</button>
       </div>
    </div>
  </div>
@@ -424,17 +454,19 @@ initPanTilt= function() {
     <div class="col-md-6">
        <div class="input-group mb-3">
         <input type="text" class="form-control"  name="idtesto13"  id="idtesto13" placeholder="Text" value="<?php echo $fld13; ?>"  aria-label="Testo" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto13').value)" type="button" id="button-addon2">Speak</button>
+        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto13').value)" type="button" id="button-addon2">IT</button>
+        <button class="btn btn-outline-secondary" onclick="speaken(document.getElementById('idtesto13').value)" type="button" id="button-addon2">EN</button>
       </div>
     </div>
     <div class="col-md-6">
       <div class="input-group mb-3">
         <input type="text" class="form-control"  name="idtesto14"  id="idtesto14" placeholder="Text" value="<?php echo $fld14; ?>"  aria-label="Testo" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto14').value)" type="button" id="button-addon2">Speak</button>
+        <button class="btn btn-outline-secondary" onclick="speak(document.getElementById('idtesto14').value)" type="button" id="button-addon2">IT</button>
+        <button class="btn btn-outline-secondary" onclick="speaken(document.getElementById('idtesto14').value)" type="button" id="button-addon2">EN</button>
       </div>
    </div>
  </div>
- <input type="submit" name="submit" value="Salva">
+
   </form>
     
 </body>

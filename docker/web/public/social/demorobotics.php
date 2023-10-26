@@ -146,7 +146,7 @@ if (num == 1) {
 
 function Presentazione(){
  
-   speak(" ciao ragazzi, io sono Martina e sono un robot sociale, sono nata dalla collaborazione tra robotics 3d e l'università la sapienza di Roma. dopo anni di programmazione e miglioramenti estetici, eccomi qua! Posso parlare, cantare, ballare.  posso rispondere alle domande ed interagire con gli essere umani. Vi aspetto piu tardi per divertirci insieme! mi raccomando tenete la mascherina alta  e rispettate il distanziamento sociale.");
+   speak(" ciao ragazzi, io sono Martina e sono un robot sociale, sono nata dalla collaborazione tra robotics 3d e l'università la sapienza di Roma. dopo anni di programmazione e miglioramenti estetici, eccomi qua! Posso parlare, cantare, ballare.  posso rispondere alle domande ed interagire con gli essere umani. Vi aspetto piu tardi per divertirci insieme!.");
 
 }
      

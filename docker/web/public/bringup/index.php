@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>SOCIAL BRINGUP v.2.0</title>
+  <title>SOCIAL BRINGUP v.2.001</title>
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -114,8 +114,8 @@
 <td width=80 align='center'><span id="robot_status" style="color: red;">OFF</span></td>
 <td><button id="robot_start_btn" onclick="send_cmd('robot_start')" class="btn waves-effect waves-light blue">Robot start</button></td>
 <td><button id="robot_quit_btn" onclick="send_cmd('robot_kill')" class="btn waves-effect waves-light blue">Robot quit</button></td>
-</tr> -->
-<!--
+</tr> 
+-->
 <tr height=40>
 <td width=280>Bringup social with face recognition</td> 
 <td width=80 align='center'>  </td>
@@ -134,7 +134,7 @@
 <td><button id="social_start_btn" onclick="send_cmd('socialns_start')" class="btn btn-primary btn-lg">Social Start</button></td>
 <td><button id="social_quit_btn" onclick="send_cmd('socialns_kill')" class="btn btn-light btn-lg">Social quit</button></td>
 </tr>
--->
+
 
 <tr height=40>
 <td width=80>Interactive Mode </td> 
@@ -146,9 +146,10 @@
 <tr height=40>
 <td width=80>Vnc</td> 
 <td width=80 align='center'></td>
-<td><button id="vnc_start_btn" onclick="send_cmd('vnc_start')" class="btn btn-primary btn-lg">Start Vnc</button></td>
-<td><button id="vnc_quit_btn" onclick="send_cmd('vnc_kill')" class="btn btn-primary btn-lg">Stop Vnc</button></td>
+<td><button id="vnc_start_btn" onclick="send_cmd('offline_start')" class="btn btn-primary btn-lg">Start Interactive Off line</button></td>
+<td><button id="vnc_quit_btn" onclick="send_cmd('offline_kill')" class="btn btn-primary btn-lg">Stop Interactive Off line</button></td>
 </tr>
+
 </table>
 
 
@@ -171,7 +172,7 @@
     </div>
  </div>
 
-
+-->
 
   <div class="row">
     <div class="col">
@@ -182,7 +183,7 @@
    </div>
   
   </div>
---> 
+ 
  
    
   

@@ -1,3 +1,66 @@
+<?php 
+
+if ( !empty($_POST)) {
+  #print_r($_POST);
+   $flda= $_POST['idtesto'] . "\n";
+   $fld0= $_POST['idtesto0'] . "\n";
+   $fld1= $_POST['idtesto1'] . "\n";
+   $fld2= $_POST['idtesto2'] . "\n";
+   $fld3= $_POST['idtesto3'] . "\n";
+   $fld4= $_POST['idtesto4'] . "\n";
+   $fld5= $_POST['idtesto5'] . "\n";
+   $fld6= $_POST['idtesto6'] . "\n";
+   $fld7= $_POST['idtesto7'] . "\n";
+   $fld8= $_POST['idtesto8'] . "\n";
+   $fld9= $_POST['idtesto9'] . "\n";
+   $fld10= $_POST['idtesto10'] . "\n";
+   $fld11= $_POST['idtesto11'] . "\n";
+   $fld12= $_POST['idtesto12'] . "\n";
+   $fld13= $_POST['idtesto13'] . "\n";
+   $fld14= $_POST['idtesto14'] . "\n";
+   $myfile = fopen('tmp/faceroboten.txt', 'w')  or die("Unable to open file!");
+   fwrite($myfile,  $flda);
+   fwrite($myfile,  $fld0); 
+   fwrite($myfile,  $fld1);
+   fwrite($myfile,  $fld2);  
+   fwrite($myfile,  $fld3);  
+   fwrite($myfile,  $fld4);
+   fwrite($myfile,  $fld5);  
+   fwrite($myfile,  $fld6);
+   fwrite($myfile,  $fld7);
+   fwrite($myfile,  $fld8);
+   fwrite($myfile,  $fld9);  
+   fwrite($myfile,  $fld10);
+   fwrite($myfile,  $fld11);  
+   fwrite($myfile,  $fld12);
+   fwrite($myfile,  $fld13);
+   fwrite($myfile,  $fld14);
+   fclose($myfile);
+
+  } else {
+    $myfile = fopen('tmp/faceroboten.txt', 'r');
+    $flda = fgets($myfile);
+    $fld0= fgets($myfile);
+    $fld1= fgets($myfile);
+    $fld2= fgets($myfile);
+    $fld3= fgets($myfile);
+    $fld4= fgets($myfile);
+    $fld5= fgets($myfile);
+    $fld6= fgets($myfile);
+    $fld7= fgets($myfile);
+    $fld8= fgets($myfile);
+    $fld9= fgets($myfile);
+    $fld10= fgets($myfile);
+    $fld11= fgets($myfile);
+    $fld12= fgets($myfile);
+    $fld13= fgets($myfile);
+    $fld14= fgets($myfile);
+    fclose($myfile);
+
+  } 
+
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -197,7 +260,7 @@ initPanTilt= function() {
 <body>
   
 <?php include "../social/nav.php" ?>
-
+<form action="facerobot.php" method="post">
 
 <div class="container-fluid">
   <div class="row">
@@ -357,8 +420,8 @@ initPanTilt= function() {
       </div>
    </div>
  </div>
-
-    
+ <input type="submit" name="submit" value="Salva">
+ </form>
 </body>
 
 </html>

@@ -179,14 +179,13 @@ h6 {text-align: center;}
 
 
 </div>
- <!--
+
   <div class="row">
    <div class="col-md-3"></div>
-    <div class="col-md-6" style="text-align: center;"><a class="btn btn-success btn-lg" href="https://robotics.surfweb.eu/docs/" role="button" target="_blank" >MANUALE MARRtino SOCIAL ROBOT</a></div>
+    <div class="col-md-6" style="text-align: center;"><a class="btn btn-success btn-lg" href="https://social.marrtino.org" role="button" target="_blank" >MANUALE MARRtino SOCIAL ROBOT</a></div>
     <div class="col-md-3"></div>
 
-  </div>
--->
+>
   <div class="row">
            
             <div class="col-md-3">

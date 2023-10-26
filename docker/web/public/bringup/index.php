@@ -144,7 +144,7 @@
 </tr>
 
 <tr height=40>
-<td width=80>Vnc</td> 
+<td width=80>Interactive OFF line</td> 
 <td width=80 align='center'></td>
 <td><button id="vnc_start_btn" onclick="send_cmd('offline_start')" class="btn btn-primary btn-lg">Start Interactive Off line</button></td>
 <td><button id="vnc_quit_btn" onclick="send_cmd('offline_kill')" class="btn btn-primary btn-lg">Stop Interactive Off line</button></td>

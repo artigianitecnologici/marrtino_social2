@@ -1,7 +1,7 @@
 <?php 
 
 if ( !empty($_POST)) {
-   print_r($_POST);
+   // print_r($_POST);
    $flda= $_POST['idtesto'] . "\n";
    $fld0= $_POST['idtesto0'] . "\n";
    $fld1= $_POST['idtesto1'] . "\n";

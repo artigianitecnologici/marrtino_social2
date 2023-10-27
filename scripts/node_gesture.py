@@ -62,7 +62,7 @@ def gesture_hello():
     spalla_flessione_dx(1.57)
     gomito_dx(2.8783333333333334)
     hand_right(2.6166666666666667)
-    say('hello')
+    say('ciao')
     emotion("speak")
     spalla_rotazione_sx(0.17444444444444446)
     time.sleep(1)

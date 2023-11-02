@@ -65,7 +65,7 @@ services:
     - $MARRTINO_SOCIAL2:/home/robot/src/marrtino_social2
 
   vosk-server: 
-    image: marrtino:vosk-servr
+    image: marrtino:vosk-server
     build:
       context: $MARRTINO_SOCIAL2/docker
       dockerfile: Dockerfile.vosk-server
@@ -76,10 +76,10 @@ services:
     privileged: true
     environment:
     - ROS_IP=$ROS_IP
-    - DISPLAY=${DISPLAY}
+    - PULSE_SERVER=unix:/run/user/1000/pulse/native
     volumes:
-    - /tmp/.X11-unix:/tmp/.X11-unix
     - /dev:/dev
+    - /run/user/1000/pulse/native:/run/user/1000/pulse/native
     - $MARRTINO_SOCIAL2/script:/home/robot/script 
     - $MARRTINO_APPS_HOME:/home/robot/src/marrtino_apps
     - $MARRTINO_SOCIAL2:/home/robot/src/marrtino_social2

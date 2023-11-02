@@ -4,3 +4,4 @@
 *.bag
 cache*
 docker/web/public/social/tmp/facerobot.txt
+vosk-model

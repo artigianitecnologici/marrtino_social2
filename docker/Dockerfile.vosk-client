@@ -1,0 +1,51 @@
+# Docker file for vosk server 
+# Fabio Ferrarini 
+
+# docker build -t marrtino:vosk-client -f Dockerfile.vosk-client .
+
+
+FROM marrtino:noetic_system
+#FROM alphacep/kaldi-vosk-server:latest
+ARG MACHTYPE=default
+
+# System libs 
+
+USER root
+
+RUN apt-get update && \
+    apt-get install -y \
+         unzip libportaudio2   && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+USER robot
+
+# Python libs
+
+#RUN pip install --user sox==1.3.7 pyalsaaudio==0.8.4
+RUN pip install vosk sounddevice
+
+ENV MODEL_VERSION 0.22
+
+#RUN mkdir -p $HOME/vosk-model-it
+#RUN cd $HOME/vosk-model-it \
+#   && wget -q https://alphacephei.com/vosk/models/vosk-model-small-it-${MODEL_VERSION}.zip \
+#   && unzip vosk-model-it-${MODEL_VERSION}.zip \
+#   && mv vosk-model-it-${MODEL_VERSION} model \
+#   && rm vosk-model-it-${MODEL_VERSION}.zip
+
+# Trick to force build from here
+
+RUN echo "20210426" > /tmp/lastdockerbuild
+
+# marrtino_apps
+
+#RUN cd $HOME/src && \
+#    git clone --branch noetic  https://github.com/artigianitecnologici/marrtino_apps.git && \
+#     git clone   https://github.com/artigianitecnologici/marrtino_social2.git
+
+WORKDIR /home/robot
+
+#CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_social2/script && python3 test_asr.py" ]
+CMD [ "/usr/bin/tmux" ]
+

@@ -71,7 +71,7 @@ async def main():
     parser.add_argument('-u', '--uri', type=str, metavar='URL',
                         help='Server URL', default='ws://localhost:2700')
     parser.add_argument('-d', '--device', type=int_or_str,
-                        help='input device (numeric ID or substring)')
+                        help='input device (numeric ID or substring)', default='6')
     parser.add_argument('-r', '--samplerate', type=int, help='sampling rate', default=16000)
     args = parser.parse_args(remaining)
     loop = asyncio.get_running_loop()

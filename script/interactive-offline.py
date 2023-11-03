@@ -15,19 +15,35 @@ from threading import Thread
 SERVER_ADDRESS = '10.3.1.1'             # Get local machine name
 SERVER_PORT = 9000                      # Reserve a port for your service.
 
-sys.path.append(os.getenv("MARRTINO_APPS_HOME")+"/program")
-from robot_cmd_ros import *
+#sys.path.append(os.getenv("MARRTINO_APPS_HOME")+"/program")
+#from robot_cmd_ros import *
 
 
 myurl = 'http://10.3.1.1:5000/bot'
 #myurl = 'http://192.168.1.8:5000/bot'
 IN_TOPIC = "/social/face_nroface"
-OUT_GESTURE_TOPIC = "/social/gesture"
-
+TOPIC_asr = "/social/asr"
+TOPIC_gesture = "/social/gesture"
+TOPIC_emotion = "social/emotion"
+TOPIC_speech = "/speech/to_speak"
 tracking = False
 
-gesture_pub = rospy.Publisher(OUT_GESTURE_TOPIC,String,queue_size=10)
+gesture_pub = rospy.Publisher(TOPIC_gesture,String,queue_size=10)
+emotion_pub = rospy.Publisher(TOPIC_emotion, String, queue_size=1,   latch=True)
+speech_pub =rospy.Publisher(TOPIC_speech, String, queue_size=1,   latch=True)
 
+global asr_request
+asr_request = ""
+
+
+def say(msg,language):
+    print('speech %s' %(msg))
+    speech_pub.publish(msg)
+
+def emotion(msg):
+    #
+    print('social/emotion %s' %(msg))
+    emotion_pub.publish(msg)
 
 def bot(msg):
     payload = {'query': msg}
@@ -59,10 +75,14 @@ def speech(msg,language):
 
  
 def timerping():
-  threading.Timer(10.0, timerping).start()
-  print("Ciao mondo!")
+    threading.Timer(10.0, timerping).start()
+    print("Ciao mondo!")
  
-
+def callback_asr(data):
+    global asr_request
+    asr_request = data.data
+    rospy.loginfo(asr_request)
+    
 
 def callback(data):
     global tracking
@@ -86,16 +106,18 @@ def command(msg):
 
 def listener():
     mylanguage = "it"
-    begin()
-    #rospy.init_node("interactive")
+    #begin()
+    rospy.init_node("interactive")
     print("Interactive Mode Start")
-    #rospy.Subscriber(IN_TOPIC,IN_MSG,callback)
+  
+
+    rospy.Subscriber(TOPIC_asr,String,callback_asr)
     reset_face()
     emotion("startblinking")
     gesture("gesture")
     speech("Ciao sono martina ",mylanguage)
-    speech("Apri la applicazione e parla con me",mylanguage)
-    connectionSocket, clientAddress = serverSocket.accept()
+    speech("Se vuoi parla con me",mylanguage)
+    #connectionSocket, clientAddress = serverSocket.accept()
     myrequest = ""
     mycommand = ""
     myloop=True
@@ -103,17 +125,12 @@ def listener():
     # try:
     count = 0
     #timerping()
+    global asr_rquest
     while myloop==True:
-        # recv can throw socket.timeout
-        #connectionSocket.settimeout(5.0)
-       
-        try:
-            myrequest =  connectionSocket.recv(1024)
+               
+        myrequest =  asr_request
             
-        except socket.timeout: # fail after 1 second of no activity
-            print("Didn't receive data! [Timeout]")
-        #finally:
-            #s.close()
+       
         
         print(myrequest)
         if (myrequest != ""):
@@ -211,7 +228,7 @@ def listener():
                 
             
             if (myrequest != "" and mycommand == ""):
-                connectionSocket.send("STOP")
+                #connectionSocket.send("STOP")
                 answer=bot(myrequest)
                 print(answer)
                 gesture("gesture")
@@ -219,17 +236,12 @@ def listener():
                 connectionSocket.send("SAY")
 
         
-    print("Close connection on %d" % SERVER_PORT)
-    connectionSocket.close()
+    #print("Close connection on %d" % SERVER_PORT)
+    #1connectionSocket.close()
 
-    end()
+    #end()
 
-
-serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-serverSocket.bind((SERVER_ADDRESS, SERVER_PORT))        # Bind to the port
-serverSocket.listen(1)
-
-print("Server waiting on (%s, %d)" % (SERVER_ADDRESS, SERVER_PORT))
+#print("Server waiting on (%s, %d)" % (SERVER_ADDRESS, SERVER_PORT))
 
 listener()
 

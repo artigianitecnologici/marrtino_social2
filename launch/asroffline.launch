@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="asr_node"  pkg="marrtino_social2"  type="node_asr.py" output="screen" />
+</launch>

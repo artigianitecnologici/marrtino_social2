@@ -9,9 +9,6 @@ RUN mkdir /opt/vosk-model-it \
    && rm -rf vosk-model-it-${MODEL_VERSION}.zip
 
 EXPOSE 2700
-
-#WORKDIR /opt/vosk-server/websocket-microphone
 WORKDIR /opt/vosk-server/websocket
-CMD [ "python3", "./asr_server.py ", "/opt/vosk-model-it/model" ]
-#CMD [ "python3", "./asr_server_microphone.py ", "/opt/vosk-model-it/model" ]
+CMD [ "python3", "./asr_server.py", "/opt/vosk-model-it/model" ]
 #CMD [ "/usr/bin/tmux" ]

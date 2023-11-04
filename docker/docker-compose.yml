@@ -64,7 +64,23 @@ services:
     - $MARRTINO_APPS_HOME:/home/robot/src/marrtino_apps
     - $MARRTINO_SOCIAL2:/home/robot/src/marrtino_social2
 
-    
+  vosk-client: 
+    image: marrtino:vosk-client
+    build:
+      context: $MARRTINO_SOCIAL2/docker
+      dockerfile: Dockerfile.vosk-client
+    container_name: vosk-client
+    dns: 8.8.8.8
+    network_mode: "host"
+    tty: true
+    privileged: true
+    environment:
+    - ROS_IP=$ROS_IP
+    volumes:
+    - /dev:/dev
+    - $MARRTINO_SOCIAL2/script:/home/robot/script 
+    - $MARRTINO_APPS_HOME:/home/robot/src/marrtino_apps
+    - $MARRTINO_SOCIAL2:/home/robot/src/marrtino_social2    
   
 networks:
   default:

@@ -9,6 +9,9 @@ import time
 import socket               # Import socket module
 import os
 import random
+import asyncio
+import websockets
+
 
 from threading import Thread
 
@@ -26,14 +29,17 @@ TOPIC_asr = "/social/asr"
 TOPIC_gesture = "/social/gesture"
 TOPIC_emotion = "social/emotion"
 TOPIC_speech = "/speech/to_speak"
+IN_TOPIC_speechstatus = "/speech/status"
+
 tracking = False
 
 gesture_pub = rospy.Publisher(TOPIC_gesture,String,queue_size=10)
 emotion_pub = rospy.Publisher(TOPIC_emotion, String, queue_size=1,   latch=True)
 speech_pub =rospy.Publisher(TOPIC_speech, String, queue_size=1,   latch=True)
 
-global asr_request
+global asr_request,stspeech
 asr_request = ""
+stspeech = ""
 
 
 def say(msg,language):
@@ -59,11 +65,6 @@ def left(s, n):
 def gesture(msg):
     gesture_pub.publish(msg)
 
-def reset_face():    
-    rospy.loginfo("resetting face")
-    #tilt_pub.publish(Float64(0))
-    #pan_pub.publish(Float64(0))
-
 def speech(msg,language):
     #rospy.loginfo('Speech : %s' %(msg))
     emotion("speak")
@@ -71,40 +72,21 @@ def speech(msg,language):
     gesture('gesture')
     emotion("normal")
 
-
-
- 
-def timerping():
-    threading.Timer(10.0, timerping).start()
-    print("Ciao mondo!")
  
 def callback_asr(data):
-    global asr_request
-    asr_request = data.data
-    
+    global asr_request, stspeech
+    myasr = data.data
+    if stspeech == "STOP":
+       asr_request =  myasr
     rospy.loginfo(asr_request)
-    # call 
+ 
     
+def callback_speechstatus(data):
+    global stspeech
+    stspeech = data.data
+    rospy.loginfo(stspeech)
+    # call 
 
-def callback(data):
-    global tracking
-    if data.data == 0 and tracking:
-        tracking = False
-        #rospy.loginfo("No faces detected, resetting face in {} seconds".format(TIME_DELAY))
-        #start_timer()
-
-    elif data.data != 0 and not tracking:
-        tracking = True
-        #rospy.loginfo("Detected faces, stopping timer if started")
-        speech("ciao")
-        #stop_timer()
-
-
-def command(msg):
-    print(msg)
-    t = Thread(target=run_code, args=(msg,))
-    t.start()
-    result = "ok"  
 
 def request(myrequest):
     
@@ -210,6 +192,13 @@ def request(myrequest):
             speech(answer,mylanguage)
             #connectionSocket.send("SAY")
     
+async def listen(uri):
+    async with websockets.connect(uri) as websocket:
+        while True:
+            myrequest = await websocket.recv()
+            print (myrequest)
+
+
 
 def listener():
 
@@ -217,14 +206,20 @@ def listener():
     #begin()
     rospy.init_node("interactive")
     print("Interactive Mode Start")
-
-
     rospy.Subscriber(TOPIC_asr,String,callback_asr)
-    reset_face()
+    rospy.Subscriber(IN_TOPIC_speechstatus,String,callback_speechstatus)
     emotion("startblinking")
     gesture("gesture")
     speech("Ciao sono martina ",mylanguage)
     speech("Se vuoi parla con me",mylanguage)
+
+    
+    
+   
+    asyncio.run(listen('ws://localhost:2700'))
+
+
+
     rospy.spin()
 
 

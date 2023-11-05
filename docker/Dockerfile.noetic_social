@@ -16,36 +16,38 @@ USER root
 
 RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
-#RUN apt-get update && \
-#    apt-get install -y && \
-#        cmake g++ git && \
-#    apt-get clean && \
-#    rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y \
+        v4l-utils python3-pip \
+        cmake g++ git \
+        ros-$ROS_DISTRO-rgbd-launch ros-$ROS_DISTRO-web-video-server \
+        ros-$ROS_DISTRO-camera-info-manager  \
+        ros-$ROS_DISTRO-image-view ros-$ROS_DISTRO-rosbridge-server  && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-#  ros-noetic-rgbd-launch ros-noetic-web-video-server && \
-#        ros-noetic-camera-info-manager ros-noetic-libuvc && \
-#        ros-noetic-image-view ros-noetic-rosbridge-server  && \
+RUN apt-get update && apt-get install -y sox libsox-fmt-all
 USER robot
+
 
 
 # Python packages
 
-#RUN pip install --user telepot
+RUN pip install --user telepot
 RUN pip install --user requests
-
-
+RUN pip install --user gtts
 
 RUN mkdir -p $HOME/src/dynamixel &&  cd $HOME/src/dynamixel && \
     git clone https://github.com/ROBOTIS-GIT/dynamixel-workbench.git && \
     git clone https://github.com/ROBOTIS-GIT/dynamixel-workbench-msgs.git && \
-    git clone https://github.com/ROBOTIS-GIT/DynamixelSDK.git && \
-    git clone --branch ros1 https://github.com/RobotWebTools/rosbridge_suite.git
+    git clone https://github.com/ROBOTIS-GIT/DynamixelSDK.git
  
 RUN mkdir -p $HOME/src &&  cd $HOME/src && \
     git clone https://github.com/arebgun/dynamixel_motor.git && \
     git clone https://github.com/artigianitecnologici/face_tracker_pkg.git && \
     git clone https://github.com/artigianitecnologici/face_tracker_control.git  && \
     git clone https://github.com/artigianitecnologici/marrtino_social2.git 
+   
    
     
        
@@ -54,9 +56,10 @@ RUN cd $HOME/ros/catkin_ws/src && \
     ln -s $HOME/src/dynamixel . && \
     ln -s $HOME/src/face_tracker_pkg/ . && \
     ln -s $HOME/src/face_tracker_control/ . && \
-    ln -s $HOME/src/dynamixel_motor/ . && \
-    ln -s $HOME/src/rosbridge_suite/ .  
-    
+    ln -s $HOME/src/marrtino_social2/ . && \
+    ln -s $HOME/src/dynamixel_motor/ . 
+
+
 # ln -s $HOME/src/chatbot_aiml/ . && \
 # corregge l'errore di compilazione
 
@@ -72,11 +75,11 @@ RUN bash -ci "cd $HOME/ros/catkin_ws; catkin_make -j1"
 RUN echo "20220608" > /tmp/lastdockerbuild
 
 # marrtino_apps
-
+ 
 WORKDIR /home/robot
 
 #CMD [ "/usr/bin/tmux" ]
-#CMD [ "/bin/bash", "-ci", "/home/robot/src/marrtino_social2/bringup/1-bringup.bash", "-docker" ]
+#CMD [ "/bin/bash", "-ci", "/home/robot/src/marrtino_social/bringup/1-bringup.bash", "-docker" ]
 
 CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_social2/bringup && python3 social_bringup.py -server_port 9250" ]
 

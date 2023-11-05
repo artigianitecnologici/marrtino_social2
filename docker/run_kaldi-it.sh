@@ -1,1 +1,0 @@
-docker run -p 2700:2700 alphacep/kaldi-it:latest

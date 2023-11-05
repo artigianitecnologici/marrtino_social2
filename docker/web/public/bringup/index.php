@@ -104,52 +104,52 @@
 
 <div class="row">
 <div class="col-md-1"></div>
-<div class="col-md-5">
+<div class="col-md-11">
 
  
 <table>
-<!--
-<tr height=40>
-<td width=80>MARRtino</td> 
-<td width=80 align='center'><span id="robot_status" style="color: red;">OFF</span></td>
-<td><button id="robot_start_btn" onclick="send_cmd('robot_start')" class="btn waves-effect waves-light blue">Robot start</button></td>
-<td><button id="robot_quit_btn" onclick="send_cmd('robot_kill')" class="btn waves-effect waves-light blue">Robot quit</button></td>
-</tr> 
--->
+
 <tr height=40>
 <td width=280>Bringup social with face recognition</td> 
-<td width=80 align='center'>  </td>
+<td width=80 align='center'>  
 <td><button id="robot_start_btn" onclick="send_cmd('social_robot_start')" class="btn btn-primary btn-lg">Social Start</button></td>
 <td><button id="robot_quit_btn" onclick="send_cmd('social_robot_kill')" class="btn btn-light btn-lg">Social quit</button></td>
+</td>
 </tr>
 <tr height=40>
 <td width=280>Bringup Social without Face recognition</td> 
-<td width=80 align='center'></td>
+<td width=80 align='center'>
 <td><button id="social_start_btn" onclick="send_cmd('socialnt_start')" class="btn btn-primary btn-lg">Social Start</button></td>
-<td><button id="social_quit_btn" onclick="send_cmd('socialnt_kill')" class="btn btn-light btn-lg">Social quit</button></td>
+<td><button id="social_quit_btn" onclick="send_cmd('socialnt_kill')" class="btn btn-light btn-lg">Social quit</button></td></td>
 </tr>
 <tr height=40>
 <td width=280>Bringup Social without any servo movement</td> 
-<td width=80 align='center'></td>
+<td width=80 align='center'>
 <td><button id="social_start_btn" onclick="send_cmd('socialns_start')" class="btn btn-primary btn-lg">Social Start</button></td>
-<td><button id="social_quit_btn" onclick="send_cmd('socialns_kill')" class="btn btn-light btn-lg">Social quit</button></td>
+<td><button id="social_quit_btn" onclick="send_cmd('socialns_kill')" class="btn btn-light btn-lg">Social quit</button></td></td>
 </tr>
 
 
 <tr height=40>
-<td width=80>Interactive Mode </td> 
-<td width=80 align='center'></td>
+<td width=280>Interactive Mode </td> 
+<td width=80 align='center'>
 <td><button id="speech_start_btn" onclick="send_cmd('interactive_start')" class="btn btn-primary btn-lg">Start interactive mode</button></td>
-<td><button id="speech_quit_btn" onclick="send_cmd('interactive_kill')" class="btn btn-primary btn-lg">Stop interactive mode</button></td>
+<td><button id="speech_quit_btn" onclick="send_cmd('interactive_kill')" class="btn btn-primary btn-lg">Stop interactive mode</button></td></td>
 </tr>
 
 <tr height=40>
-<td width=80>Interactive OFF line</td> 
-<td width=80 align='center'></td>
+<td width=280>Interactive OFF line</td> 
+<td width=80 align='center'>
 <td><button id="vnc_start_btn" onclick="send_cmd('offline_start')" class="btn btn-primary btn-lg">Start Interactive Off line</button></td>
-<td><button id="vnc_quit_btn" onclick="send_cmd('offline_kill')" class="btn btn-primary btn-lg">Stop Interactive Off line</button></td>
+<td><button id="vnc_quit_btn" onclick="send_cmd('offline_kill')" class="btn btn-primary btn-lg">Stop Interactive Off line</button></td></td>
 </tr>
 
+<tr height=40>
+<td width=280>ASR OFF line</td> 
+<td width=80 align='center'>
+<td><button id="asr_start_btn" onclick="send_cmd('asroffline_start')" class="btn btn-primary btn-lg">Start ASR Off line</button></td>
+<td><button id="asr_quit_btn" onclick="send_cmd('asroffline_kill')" class="btn btn-primary btn-lg">Stop  Off line</button></td></td>
+</tr>
 </table>
 
 
@@ -172,7 +172,7 @@
     </div>
  </div>
 
--->
+
 
   <div class="row">
     <div class="col">
@@ -183,7 +183,7 @@
    </div>
   
   </div>
- 
+ -->
  
    
   

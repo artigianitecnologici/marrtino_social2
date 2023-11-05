@@ -22,7 +22,7 @@ def run_server(port):
     server_address = ('', port)
     sock.bind(server_address)
     sock.listen(1)
-    print("ROS social server started on port %d ..." %port)
+    print("ROS asr server started on port %d ..." %port)
 
     tmux = TmuxSend('bringup', ['netcat','voksnode','interactive','followme','cmd'])
 
@@ -74,49 +74,15 @@ def run_server(port):
                 homefolder = "~/src/marrtino_social"
              
                 # social normale con pan e tilt
-                if data=='@oak-dstart':
+                if data=='@asroffline_start':
                     tmux.cmd(1,'cd %s' %rfolder)
-                    tmux.cmd(1,'roslaunch social.launch')   
-                    tmux.cmd(3,'cd %s' %sfolder)
-                    tmux.cmd(3,'python autostart.py')
-                elif data=='@oak-dkill':
-                    tmux.Cc(1)
-
-                # start social no servo demo
-                elif data=='@socialnoservo': 
-                    tmux.cmd(1,'cd %s' %rfolder)
-                    tmux.cmd(1,'roslaunch socialnoservo.launch')
-                elif data=='@socialnoservokill':
-                    tmux.Cc(1)
-
-                # social no tracker face
-                elif data=='@socialnotracker': 
-                    tmux.cmd(1,'cd %s' %rfolder)
-                    tmux.cmd(1,'roslaunch socialnotracker.launch')
-                    tmux.cmd(3,'cd %s' %sfolder)
-                    tmux.cmd(3,'python autostart.py')
-                elif data=='@socialnotrackerkill': 
+                    tmux.cmd(1,'roslaunch asroffline.launch')   
+                    
+                elif data=='@asroffline_kill':
                     tmux.Cc(1)
 
                 
-
-                elif (data=='@updatesocialapps'):
-                    print('marrtino_apps update')
-                    #self.setStatus('Updating...')
-                    tmux.cmd(3,'cd %s' %homefolder)
-                    tmux.cmd(3,'git pull', blocking=True)
-                    time.sleep(1)
-                    #self.checkStatus()
-
-
-               
-                # start speech_start ( 2 speech)
-                elif data=='@interactive': 
-                    tmux.cmd(2,'cd %s' %sfolder)
-                    tmux.cmd(2,'python interactive.py')
-                elif data=='@interactivekill':
-                    tmux.Cc(2)
-                                
+                                            
                 else:
                     print('Unknown command %s' %data)
 

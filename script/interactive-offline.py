@@ -11,6 +11,7 @@ import os
 import random
 import asyncio
 import websockets
+import json
 
 
 from threading import Thread
@@ -89,7 +90,7 @@ def callback_speechstatus(data):
 
 
 def request(myrequest):
-    
+    count = 0
     if (myrequest != ""):
         count += 1
         keyword = "martina"
@@ -142,31 +143,31 @@ def request(myrequest):
                 pan(0)
                 tilt(0)
             if (mycommand == "voglio cercare un hotel"):
-                connectionSocket.send("https://www.booking.com")
+                #connectionSocket.send("https://www.booking.com")
                 speech("ti apro il sito di booking.com",mylanguage)
                 
             if ((mycommand.count("aiuto")> 0) or (mycommand.count("help")> 0)):
-                connectionSocket.send("https://social.marrtino.org/setup-robot/interactive-mode")
+                #connectionSocket.send("https://social.marrtino.org/setup-robot/interactive-mode")
                 speech("ti apro il sito di marrtino",mylanguage)
 
             if (mycommand.count("robotica") > 0):
-                connectionSocket.send("https://www.robotics-3d.com")
+                #connectionSocket.send("https://www.robotics-3d.com")
                 speech("ti apro il sito di Robotics 3d che sono i migliori sul mercato",mylanguage)
 
             if ((mycommand == "hotel a firenze") or (mycommand == "hotel at florence")):
-                connectionSocket.send("https://www.booking.com/searchresults.it.html?ss=firenze&label=it-it-booking-desktop-VRZD0IC5lt9Ulq*ajTZ_bgS652829000338%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-65526620%3Alp9181218%3Ali%3Adec%3Adm&aid=2311236&lang=it&sb=1&src_elem=sb&src=index&dest_id=-126693&dest_type=city&group_adults=2&no_rooms=1&group_children=0&sb_travel_purpose=leisure")
+                #connectionSocket.send("https://www.booking.com/searchresults.it.html?ss=firenze&label=it-it-booking-desktop-VRZD0IC5lt9Ulq*ajTZ_bgS652829000338%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-65526620%3Alp9181218%3Ali%3Adec%3Adm&aid=2311236&lang=it&sb=1&src_elem=sb&src=index&dest_id=-126693&dest_type=city&group_adults=2&no_rooms=1&group_children=0&sb_travel_purpose=leisure")
                 speech("ti apro il sito di Booking per fare la prenotazione",mylanguage)
 
             if ((mycommand == "quiz") or (mycommand == "apri il quiz")):
-                connectionSocket.send("http://10.3.1.1:8080/quiz/index.html")
+                #connectionSocket.send("http://10.3.1.1:8080/quiz/index.html")
                 speech("Adesso proviamo a fare il quizz insieme",mylanguage)
 
             if ((mycommand == "telepresenza") or (mycommand == "apri la telepresenza")):
-                connectionSocket.send("http://10.3.1.1:8080/social/navigation.php")
+                #connectionSocket.send("http://10.3.1.1:8080/social/navigation.php")
                 speech("Adesso puoi farmi camminare e vedere da remoto quello che vedo io",mylanguage)
 
             if ((mycommand == "Blocky") or (mycommand == "mi fai programmare")):
-                connectionSocket.send("http://10.3.1.1:8080/program/blockly_robot.php")
+                #connectionSocket.send("http://10.3.1.1:8080/program/blockly_robot.php")
                 speech("Adesso facciamo programmazione estrema insieme",mylanguage)
 
         if myrequest=="stop":
@@ -195,8 +196,12 @@ def request(myrequest):
 async def listen(uri):
     async with websockets.connect(uri) as websocket:
         while True:
-            myrequest = await websocket.recv()
-            print (myrequest)
+            resultDict = json.loads(await websocket.recv())
+            if not resultDict.get("text", "") == "":
+                # the result is a Python dictionary:
+                myrequest = resultDict["text"]
+                print (myrequest)
+                request(myrequest)
 
 
 

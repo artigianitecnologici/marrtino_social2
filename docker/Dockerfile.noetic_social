@@ -27,6 +27,9 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && apt-get install -y sox libsox-fmt-all
+
+RUN pip3 install websockets
+
 USER robot
 
 
@@ -36,6 +39,7 @@ USER robot
 RUN pip install --user telepot
 RUN pip install --user requests
 RUN pip install --user gtts
+RUN pip install --user websocket
 
 RUN mkdir -p $HOME/src/dynamixel &&  cd $HOME/src/dynamixel && \
     git clone https://github.com/ROBOTIS-GIT/dynamixel-workbench.git && \

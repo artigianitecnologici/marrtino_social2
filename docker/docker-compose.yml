@@ -28,11 +28,11 @@ services:
             - ./web:/var/www/html
  
   social: 
-    image: marrtino:noetic_social
+    image: marrtino:social
     build:
       context: $MARRTINO_SOCIAL2/docker
-      dockerfile: Dockerfile.noetic_social
-    container_name: noetic_social
+      dockerfile: Dockerfile.social
+    container_name: social
     dns: 8.8.8.8
     network_mode: "host"
     tty: true

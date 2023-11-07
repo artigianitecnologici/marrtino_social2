@@ -42,14 +42,14 @@ RUN echo "20210426" > /tmp/lastdockerbuild
 # marrtino_apps
 EXPOSE 2700
 
-RUN cd $HOME/src && \
-    git clone   https://github.com/artigianitecnologici/speech.git
+#RUN cd $HOME/src && \
+#    git clone   https://github.com/artigianitecnologici/speech.git
 
 
-RUN cd $HOME/ros/catkin_ws/src && \
-    ln -s $HOME/src/speech/ .
+#RUN cd $HOME/ros/catkin_ws/src && \
+#    ln -s $HOME/src/speech/ .
 
-RUN bash -ci "cd $HOME/ros/catkin_ws; catkin_make -j1"
+#RUN bash -ci "cd $HOME/ros/catkin_ws; catkin_make -j1"
 
 
 WORKDIR /home/robot

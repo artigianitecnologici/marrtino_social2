@@ -12,7 +12,7 @@ import time
 # SOCIAL
 # 
 TOPIC_emotion = "social/emotion"
-TOPIC_speech = "/speech/to_speak"
+TOPIC_speech = "/speech/say"
 TOPIC_pan = "pan_controller/command"
 TOPIC_tilt = "tilt_controller/command"
 TOPIC_spalla_dx_rot = "/spalladx_controller/command"

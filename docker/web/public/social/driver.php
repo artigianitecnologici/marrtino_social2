@@ -53,7 +53,7 @@
    
 var speechTopic = new ROSLIB.Topic({
   ros: ros,
-  name : '/speech/to_speak',
+  name : '/speech/say',
   messageType: 'std_msgs/String'
 });
 

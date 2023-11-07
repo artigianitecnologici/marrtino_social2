@@ -29,11 +29,11 @@ RUN echo "20210426" > /tmp/lastdockerbuild
 # marrtino_apps
 EXPOSE 2700
 
-RUN cd $HOME/src && \
-     git clone   https://github.com/artigianitecnologici/marrtino_social2.git
+#RUN cd $HOME/src && \
+#     git clone   https://github.com/artigianitecnologici/marrtino_social2.git
 
 WORKDIR /home/robot
 
 #CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_social2/script && python3 test_asr.py" ]
 #CMD [ "/usr/bin/tmux" ]
-CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_social2/bringup && python3 voks_bringup.py -server_port 9252" ]
+CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_social2/bringup && python3 vosk_bringup.py -server_port 9252" ]

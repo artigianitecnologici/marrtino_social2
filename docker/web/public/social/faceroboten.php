@@ -158,7 +158,7 @@ var emotionTopic = new ROSLIB.Topic({
    
 var speechTopic = new ROSLIB.Topic({
   ros: ros,
-  name : '/speech/say',
+  name : '/speech/to_speak',
   messageType: 'std_msgs/String'
 });
 

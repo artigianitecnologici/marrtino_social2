@@ -20,7 +20,7 @@ IN_MSG   = Int32
 # SOCIAL
 # 
 TOPIC_emotion = "social/emotion"
-TOPIC_speech = "/speech/say"
+TOPIC_speech = "/speech/to_speak"
 TOPIC_gesture = "/social/gesture"
 OUT_GESTURE_TOPIC = "/social/gesture"
 

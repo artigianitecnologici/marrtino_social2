@@ -29,7 +29,7 @@ IN_TOPIC = "/social/face_nroface"
 TOPIC_asr = "/social/asr"
 TOPIC_gesture = "/social/gesture"
 TOPIC_emotion = "social/emotion"
-TOPIC_speech = "/speech/say"
+TOPIC_speech = "/speech/to_speak"
 IN_TOPIC_speechstatus = "/speech/status"
 
 tracking = False

@@ -54,8 +54,8 @@ var emotionTopic = new ROSLIB.Topic({
    
 var speechTopic = new ROSLIB.Topic({
   ros: ros,
-  name : '/speech/say',
-  messageType: 'std_msgs/String'
+  name : '/speech/to_speak',
+  messageType: voice.msg
 });
 
 function speak( testo){
@@ -63,7 +63,7 @@ var msg_speak = new ROSLIB.Message({
       data: testo
  });
  start_speak();
- speechTopic.publish(msg_speak); // error here als
+ speechTopic.publish(msg_speak,''); // error here als
  console.log(msg_speak);
  normal();
  console.log("speech");   

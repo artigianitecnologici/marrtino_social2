@@ -4,6 +4,6 @@
 *.bag
 cache*
 docker/web/public/social/tmp/facerobot.txt
-vosk-model
+vosk-server/vosk-model-it-0.22
 backup
 

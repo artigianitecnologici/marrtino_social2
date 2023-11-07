@@ -37,7 +37,7 @@ recognizer.SetWords(False)
 
 print("===> Begin recording. Press Ctrl+C to stop the recording ")
 try:
-    with sd.RawInputStream( device=6,
+    with sd.RawInputStream( device=5,
             dtype="int16", channels=1, callback=recordCallback):
         while True:
             data = q.get()        

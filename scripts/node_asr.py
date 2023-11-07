@@ -2,14 +2,13 @@
 import rospy
 from std_msgs.msg import String
 
-import json
-import os
-import sys
-import asyncio
-import websockets
-import logging
+import queue
 import sounddevice as sd
-import argparse
+from vosk import Model, KaldiRecognizer
+import sys
+import json
+
+'''This script processes audio input from the microphone and displays the transcribed text.'''
 
 TOPIC_asr = "/social/asr"
 rospy.init_node("node_asr")
@@ -22,63 +21,52 @@ def int_or_str(text):
         return int(text)
     except ValueError:
         return text
+    
+# list all audio devices known to your system
+print("Display input/output devices")
+print(sd.query_devices())
 
-def callback(indata, frames, time, status):
-    """This is called (from a separate thread) for each audio block."""
-    loop.call_soon_threadsafe(audio_queue.put_nowait, bytes(indata))
 
-async def run_test():
+# get the samplerate - this is needed by the Kaldi recognizer
+device_info = sd.query_devices(sd.default.device[0], 'input')
+samplerate = int(device_info['default_samplerate'])
 
-    with sd.RawInputStream(samplerate=args.samplerate, blocksize = 4000, device=args.device, dtype='int16',
-                           channels=1, callback=callback) as device:
+# display the default input device
+print("===> Initial Default Device Number:{} Description: {}".format(sd.default.device[0], device_info))
 
-        async with websockets.connect(args.uri) as websocket:
-            await websocket.send('{ "config" : { "sample_rate" : %d } }' % (device.samplerate))
+# setup queue and callback function
+q = queue.Queue()
 
-            while True:
-                data = await audio_queue.get()
-                await websocket.send(data)
-                
-                resultDict = json.loads(await websocket.recv())
+def recordCallback(indata, frames, time, status):
+    if status:
+        print(status, file=sys.stderr)
+    q.put(bytes(indata))
+    
+# build the model and recognizer objects.
+print("===> Build the model and recognizer objects.  This will take a few minutes.")
+
+model = Model(model_name="vosk-model-it-0.22")
+recognizer = KaldiRecognizer(model, samplerate)
+recognizer.SetWords(False)
+
+print("===> Begin recording. Press Ctrl+C to stop the recording ")
+try:
+    with sd.RawInputStream( device=1,
+            dtype="int16", channels=1, callback=recordCallback):
+        while True:
+            data = q.get()        
+            if recognizer.AcceptWaveform(data):
+                recognizerResult = recognizer.Result()
+                # convert the recognizerResult string into a dictionary  
+                resultDict = json.loads(recognizerResult)
                 if not resultDict.get("text", "") == "":
-                    # the result is a Python dictionary:
                     myasr = resultDict["text"]
                     rospy.loginfo(myasr)
                     pubAsr.publish(myasr)
                 #else:
                     #print("no input sound")
 
-
-            await websocket.send('{"eof" : 1}')
-            print (await websocket.recv())
-
-async def main():
-
-    global args
-    global loop
-    global audio_queue
-
-    parser = argparse.ArgumentParser(add_help=False)
-    parser.add_argument('-l', '--list-devices', action='store_true',
-                        help='show list of audio devices and exit')
-    args, remaining = parser.parse_known_args()
-    if args.list_devices:
-        print(sd.query_devices())
-        parser.exit(0)
-    parser = argparse.ArgumentParser(description="ASR Server",
-                                     formatter_class=argparse.RawDescriptionHelpFormatter,
-                                     parents=[parser])
-    parser.add_argument('-u', '--uri', type=str, metavar='URL',
-                        help='Server URL', default='ws://localhost:2700')
-    parser.add_argument('-d', '--device', type=int_or_str,
-                        help='input device (numeric ID or substring)', default='6')
-    parser.add_argument('-r', '--samplerate', type=int, help='sampling rate', default=16000)
-    args = parser.parse_args(remaining)
-    loop = asyncio.get_running_loop()
-    audio_queue = asyncio.Queue()
-
-    logging.basicConfig(level=logging.INFO)
-    await run_test()
-
-if __name__ == '__main__':
-    asyncio.run(main())
+except KeyboardInterrupt:
+    print('===> Finished Recording')
+except Exception as e:
+    print(str(e))

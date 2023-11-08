@@ -9,10 +9,7 @@ import time
 import socket               # Import socket module
 import os
 import random
-import asyncio
-import websockets
 import json
-
 
 from threading import Thread
 
@@ -41,7 +38,7 @@ speech_pub =rospy.Publisher(TOPIC_speech, String, queue_size=1,   latch=True)
 global asr_request,stspeech
 asr_request = ""
 stspeech = ""
-
+mylanguage = "it"
 
 def say(msg,language):
     print('speech %s' %(msg))
@@ -54,10 +51,12 @@ def emotion(msg):
 
 def bot(msg):
     payload = {'query': msg}
+    rospy.loginfo('query %s' %(msg))
     # Making a get request
     response =  requests.get(url = myurl, params=payload)
     content = response.content
     #print(content)
+
     return content
 
 def left(s, n):
@@ -78,8 +77,9 @@ def callback_asr(data):
     global asr_request, stspeech
     myasr = data.data
     if stspeech == "STOP":
-       asr_request =  myasr
-    rospy.loginfo(asr_request)
+        asr_request =  myasr
+        request(asr_request)
+        rospy.loginfo(asr_request)
  
     
 def callback_speechstatus(data):
@@ -91,6 +91,8 @@ def callback_speechstatus(data):
 
 def request(myrequest):
     count = 0
+    global mylanguage 
+        
     if (myrequest != ""):
         count += 1
         keyword = "martina"
@@ -193,15 +195,7 @@ def request(myrequest):
             speech(answer,mylanguage)
             #connectionSocket.send("SAY")
     
-async def listen(uri):
-    async with websockets.connect(uri) as websocket:
-        while True:
-            resultDict = json.loads(await websocket.recv())
-            if not resultDict.get("text", "") == "":
-                # the result is a Python dictionary:
-                myrequest = resultDict["text"]
-                print (myrequest)
-                request(myrequest)
+
 
 
 
@@ -219,10 +213,7 @@ def listener():
     speech("Se vuoi parla con me",mylanguage)
 
     
-    
-   
-    asyncio.run(listen('ws://localhost:2700'))
-
+  
 
 
     rospy.spin()

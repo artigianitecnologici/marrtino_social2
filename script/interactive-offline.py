@@ -67,10 +67,9 @@ def gesture(msg):
 
 def speech(msg,language):
     #rospy.loginfo('Speech : %s' %(msg))
-    emotion("speak")
     say(msg,language)
     gesture('gesture')
-    emotion("normal")
+    
 
  
 def callback_asr(data):
@@ -81,14 +80,16 @@ def callback_asr(data):
         request(asr_request)
         rospy.loginfo(asr_request)
  
-    
 def callback_speechstatus(data):
     global stspeech
     stspeech = data.data
+    if (stspeech=='STOP'):
+        emotion("normal")
+    if (stspeech=='START'):
+        emotion("speak")
     rospy.loginfo(stspeech)
+
     # call 
-
-
 def request(myrequest):
     count = 0
     global mylanguage 
@@ -99,6 +100,8 @@ def request(myrequest):
         msglenght = len(myrequest)
         keylenght = len(keyword)
         mycommand = ""
+
+        flrequest = True
         if (left(myrequest.lower(),keylenght) == keyword):
             mycommand =  myrequest[keylenght+1:msglenght]
             mycommand = mycommand.lower()
@@ -124,53 +127,85 @@ def request(myrequest):
             if ((mycommand == "parla inglese") or (mycommand == "speak english") or (mycommand == "you speak english")):
                 mylanguage = "en"
                 speech("i speak english now",mylanguage)
+                flrequest = False
 
             if ((mycommand == "parla italiano") or (mycommand == "speak italian") or (mycommand == "you speak italian")):
                 mylanguage = "it"
                 speech("adesso parlo italiano",mylanguage)
+                flrequest = False
+
 
             if ((mycommand == "alza le braccia") or (mycommand == "alza le mani") or  (mycommand == "raise your arms")):
                 gesture("up")
+                flrequest = False
+
 
             if ((mycommand == "saluta") or (mycommand == "saluto") or  (mycommand == "say hello")):
                 gesture("hello")
+                flrequest = False
+
 
             if ((mycommand == "abbassa le braccia") or (mycommand == "abassa le mani")  or (mycommand == "lower your arms")):
                 gesture("down")
+                flrequest = False
+
             
             if ((mycommand=="spengiti") or (mycommand == "spegniti" ) or (mycommand == "arresta il sistema")):
                 os.system("sudo halt")
+                flrequest = False
+
 
             if (mycommand == "guarda avanti"):
                 pan(0)
                 tilt(0)
+                flrequest = False
+
             if (mycommand == "voglio cercare un hotel"):
                 #connectionSocket.send("https://www.booking.com")
                 speech("ti apro il sito di booking.com",mylanguage)
+                flrequest = False
+
                 
             if ((mycommand.count("aiuto")> 0) or (mycommand.count("help")> 0)):
                 #connectionSocket.send("https://social.marrtino.org/setup-robot/interactive-mode")
                 speech("ti apro il sito di marrtino",mylanguage)
+                flrequest = False
+
 
             if (mycommand.count("robotica") > 0):
                 #connectionSocket.send("https://www.robotics-3d.com")
                 speech("ti apro il sito di Robotics 3d che sono i migliori sul mercato",mylanguage)
+                flrequest = False
 
             if ((mycommand == "hotel a firenze") or (mycommand == "hotel at florence")):
                 #connectionSocket.send("https://www.booking.com/searchresults.it.html?ss=firenze&label=it-it-booking-desktop-VRZD0IC5lt9Ulq*ajTZ_bgS652829000338%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-65526620%3Alp9181218%3Ali%3Adec%3Adm&aid=2311236&lang=it&sb=1&src_elem=sb&src=index&dest_id=-126693&dest_type=city&group_adults=2&no_rooms=1&group_children=0&sb_travel_purpose=leisure")
                 speech("ti apro il sito di Booking per fare la prenotazione",mylanguage)
+                flrequest = False
+
 
             if ((mycommand == "quiz") or (mycommand == "apri il quiz")):
                 #connectionSocket.send("http://10.3.1.1:8080/quiz/index.html")
                 speech("Adesso proviamo a fare il quizz insieme",mylanguage)
+                flrequest = False
 
             if ((mycommand == "telepresenza") or (mycommand == "apri la telepresenza")):
                 #connectionSocket.send("http://10.3.1.1:8080/social/navigation.php")
                 speech("Adesso puoi farmi camminare e vedere da remoto quello che vedo io",mylanguage)
+                flrequest = False
 
             if ((mycommand == "Blocky") or (mycommand == "mi fai programmare")):
                 #connectionSocket.send("http://10.3.1.1:8080/program/blockly_robot.php")
                 speech("Adesso facciamo programmazione estrema insieme",mylanguage)
+                flrequest = False
+
+            if (flrequest== True):
+                #connectionSocket.send("STOP")
+                answer=bot(mycommand)
+                print(answer)
+                speech(answer,mylanguage)
+                #connectionSocket.send("SAY")
+
+        # 
 
         if myrequest=="stop":
             speech("ci vediamo alla prossima",mylanguage)
@@ -186,17 +221,6 @@ def request(myrequest):
             #connectionSocket.send("PONG")
             myrequest=""
             
-        
-        if (myrequest != "" and mycommand == ""):
-            #connectionSocket.send("STOP")
-            answer=bot(myrequest)
-            print(answer)
-            gesture("gesture")
-            speech(answer,mylanguage)
-            #connectionSocket.send("SAY")
-    
-
-
 
 
 def listener():
@@ -210,7 +234,7 @@ def listener():
     emotion("startblinking")
     gesture("gesture")
     speech("Ciao sono martina ",mylanguage)
-    speech("Se vuoi parla con me",mylanguage)
+    speech("mi raccomando chiamami per nome quando ti rivolgi a me",mylanguage)
 
     
   

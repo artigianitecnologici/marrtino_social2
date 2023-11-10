@@ -23,6 +23,8 @@ myurl = 'http://10.3.1.1:5000/bot'
 #myurl = 'http://192.168.1.8:5000/bot'
 IN_TOPIC = "/social/face_nroface"
 OUT_GESTURE_TOPIC = "/social/gesture"
+TOPIC_speech = "/speech/to_speak"
+IN_TOPIC_speechstatus = "/speech/status"
 
 tracking = False
 
@@ -50,13 +52,19 @@ def reset_face():
 
 def speech(msg,language):
     #rospy.loginfo('Speech : %s' %(msg))
-    emotion("speak")
     say(msg,language)
     gesture('gesture')
-    emotion("normal")
+    
 
+def callback_speechstatus(data):
+    global stspeech
+    stspeech = data.data
+    if stspeech == "STOP":
+        emotion("normal")
+    if stspeech == "START":
+        emotion("speak")
 
-
+    rospy.loginfo(stspeech)
  
 def timerping():
   threading.Timer(10.0, timerping).start()

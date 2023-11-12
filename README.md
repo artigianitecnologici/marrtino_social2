@@ -11,7 +11,7 @@
 
     
     export MARRTINO_APPS_HOME=$HOME/src/marrtino_apps
-    export MARRTINO_APPS_HOME2=$HOME/src/marrtino_apps2
+    #export MARRTINO_APPS_HOME2=$HOME/src/marrtino_apps2
     export MARRTINO_SOCIAL=$HOME/src/marrtino_social2
     export MARRTINO_SOCIAL2=$HOME/src/marrtino_social2
 

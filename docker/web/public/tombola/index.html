@@ -4,6 +4,67 @@
     <link rel="stylesheet" href="style.css" type="text/css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>Tombola!</title>
+    <script type="text/javascript" src="js/roslib.min.js"></script>
+    <script type="text/javascript" src="js/eventemitter2.min.js"></script>
+    <script type="text/javascript" type="text/javascript">
+        var ros = new ROSLIB.Ros({
+            url: 'ws:' + window.location.hostname +':9090'
+        });
+    
+        ros.on('connection', function () {
+          console.log("Connected");
+          document.getElementById("status").innerHTML = "Connected";
+        });
+    
+        ros.on('error', function (error) {
+          document.getElementById("status").innerHTML = "Error";
+        });
+    
+        ros.on('close', function () {
+          console.log("Closed");
+          document.getElementById("status").innerHTML = "Closed";
+        });
+        // 
+        var gestureTopic = new ROSLIB.Topic({
+            ros: ros,
+            name : '/social/gesture',
+            messageType: 'std_msgs/String'
+        });  
+          //* A topic for messaging.
+        var emotionTopic = new ROSLIB.Topic({
+            ros: ros,
+             name : '/social/emotion',
+            messageType: 'std_msgs/String'
+        });
+
+        var speechTopic = new ROSLIB.Topic({
+            ros: ros,
+            name : '/speech/to_speak',
+            messageType: 'std_msgs/String'
+        });
+
+
+        function speak( testo){
+            var msg_speak = new ROSLIB.Message({
+                data: testo
+            });
+            //FaceExpression('speak')
+            //startgesture()
+            speechTopic.publish(msg_speak); // error here als
+            console.log(msg_speak);
+            console.log("speech");   
+        }
+    
+    
+    window.onload = function () {
+	}
+
+  </script>
+
+
+
+
+
 </head>
 <body>
 
@@ -15,6 +76,7 @@
         <div class="bottom-links">
             <span class="link" id="btnReset">Reset</span> / 
             <span class="link" id="btnRefresh" data-state="on">Aggiornamento automatico: on</span>
+            <span class="link" id="status"></span>
             <!--span class="link" id="btnShow" data-state="all">Mostra: tutto</span-->
         </div>
     </div>
@@ -56,6 +118,9 @@
                     printNum(res.data.last_called.toString(), '#last-called-holder', 'big-number');
                     $('#number-' + res.data.last_called).addClass('called');
                     last_called = res.data.last_called;
+                    let strnumber = '"' + last_called + '"';
+                    speak(strnumber)
+                    
                 } else {
                     console.log(res.msg);
                     if (res.ok == 2) alert('Tabellone pieno: resettalo!');

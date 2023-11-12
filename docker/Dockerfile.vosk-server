@@ -43,7 +43,6 @@ RUN echo "20210426" > /tmp/lastdockerbuild
 EXPOSE 2700
 
 RUN cd $HOME/src && \
-
     git clone   https://github.com/artigianitecnologici/speech.git && \
     git clone https://github.com/artigianitecnologici/marrtino_social2.git 
    

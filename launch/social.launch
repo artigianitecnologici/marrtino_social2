@@ -9,8 +9,8 @@
 
   <!-- Starting face tracker node -->
  <node name="face_controller" pkg="face_tracker_control" type="face_tracker_controller" output="screen" />
-   <!-- Start ROS Bridge Server  -->
-  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
+   <!-- Start ROS Bridge Server  
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>-->
   <include file="$(find marrtino_social2)/launch/gesture.launch"/>
   <!-- 
   <node name="web_video_server" pkg="web_video_server" type="web_video_server" respawn="false" output="screen">

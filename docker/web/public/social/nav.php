@@ -59,6 +59,9 @@
         <a class="nav-link" href="../social/demorobotics.php" tabindex="-1" >Demo Social</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="../tombola/index.html" tabindex="-1" >Tombola !!</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="../social/navigation.php" tabindex="-1" >Telepresence</a>
       </li>
 	   <li class="nav-item">

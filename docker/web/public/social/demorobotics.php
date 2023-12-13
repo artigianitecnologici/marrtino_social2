@@ -55,7 +55,7 @@ var emotionTopic = new ROSLIB.Topic({
 var speechTopic = new ROSLIB.Topic({
   ros: ros,
   name : '/speech/to_speak',
-  messageType: voice.msg
+  messageType: 'std_msgs/String'
 });
 
 function speak( testo){

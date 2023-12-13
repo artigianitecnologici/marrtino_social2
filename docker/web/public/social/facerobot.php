@@ -173,15 +173,15 @@ var speechTopic = new ROSLIB.Topic({
 
 
 function speak( testo){
-var msg_speak = new ROSLIB.Message({
-      data: testo
- });
- FaceExpression('speak')
- startgesture()
- speechTopic.publish(msg_speak); // error here als
- console.log(msg_speak);
- 
- console.log("speech");   
+  var msg_speak = new ROSLIB.Message({
+        data: testo
+  });
+  FaceExpression('speak')
+  startgesture()
+  speechTopic.publish(msg_speak); // error here als
+  console.log(msg_speak);
+  
+  console.log("speech");   
 }
 
 
@@ -191,6 +191,7 @@ var msg_speak = new ROSLIB.Message({
       data: testo
  });
  FaceExpression('speak')
+  startgesture()
  speechTopic.publish(msg_speak); // error here als
  console.log(msg_speak);
  

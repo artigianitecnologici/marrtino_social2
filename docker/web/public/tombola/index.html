@@ -48,13 +48,30 @@
             var msg_speak = new ROSLIB.Message({
                 data: testo
             });
-            //FaceExpression('speak')
-            //startgesture()
+            FaceExpression('speak')
+            startgesture()
             speechTopic.publish(msg_speak); // error here als
             console.log(msg_speak);
             console.log("speech");   
         }
-    
+        
+        function FaceExpression( face){
+        var mymsg = new ROSLIB.Message({
+            data :  face   
+        });
+        emotionTopic.publish(mymsg); // error here als
+
+        console.log(face);   
+        }
+
+        function startgesture(){
+        var mymsg = new ROSLIB.Message({
+            data :  'gesture'   
+        });
+        gestureTopic.publish(mymsg); // error here als
+        console.log("gesture");   
+        }
+
     
     window.onload = function () {
 	}

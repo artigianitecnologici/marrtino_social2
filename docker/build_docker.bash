@@ -5,4 +5,4 @@
 #docker build -t marrtino:noetic_oak-d -f Dockerfile.noetic_oak-d .
 #docker build -t marrtino:noetic_orazio -f Dockerfile.noetic_orazio .
 docker build -t marrtino:social -f Dockerfile.social .
-docker build -t marrtino:vosk-server -f Dockerfile.vosk-server .
+docker build -t marrtino:voice-server -f Dockerfile.voice .

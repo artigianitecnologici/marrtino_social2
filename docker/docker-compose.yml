@@ -65,11 +65,11 @@ services:
     - $MARRTINO_SOCIAL2:/home/robot/src/marrtino_social2
 
   voice: 
-    image: marrtino:voice-server
+    image: marrtino:voice
     build:
       context: $MARRTINO_SOCIAL2/docker
       dockerfile: Dockerfile.voice
-    container_name: voice-server
+    container_name: voice 
     dns: 8.8.8.8
     network_mode: "host"
     tty: true

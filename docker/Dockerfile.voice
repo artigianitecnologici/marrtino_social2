@@ -1,7 +1,7 @@
 # Docker file for vosk server 
 # Fabio Ferrarini 
 
-# docker build -t marrtino:voice-server -f Dockerfile.voice .
+# docker build -t marrtino:voice -f Dockerfile.voice .
 
 
 FROM marrtino:noetic_system
@@ -44,7 +44,8 @@ EXPOSE 2700
 
 RUN cd $HOME/src && \
     git clone   https://github.com/artigianitecnologici/speech.git && \
-    git clone https://github.com/artigianitecnologici/marrtino_social2.git 
+    git clone https://github.com/artigianitecnologici/marrtino_social2.git && \
+    git clone --branch noetic --depth 1 https://github.com/artigianitecnologici/marrtino_apps.git 
    
 
 
@@ -57,6 +58,6 @@ RUN bash -ci "cd $HOME/ros/catkin_ws; catkin_make -j1"
 
 WORKDIR /home/robot
 
-#CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_social2/script && python3 test_asr.py" ]
-#CMD [ "/usr/bin/tmux" ]
-CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_social2/bringup && python3 voice_bringup.py -server_port 9254" ]
+
+
+CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_apps/bringup && python3 voice_bringup.py -server_port 9254" ]

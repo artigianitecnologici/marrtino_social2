@@ -304,6 +304,10 @@ Blockly.Python['user_say'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
+Blockly.Python['clear_asr'] = function(block) {
+  var code = 'clear_asr()';
+  return [code, Blockly.Python.ORDER_NONE];
+};
 
 Blockly.Python['ask_chatgpt'] = function(block) {
   var value_text = Blockly.Python.valueToCode(block, 'text', Blockly.Python.ORDER_ATOMIC);

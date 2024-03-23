@@ -43,15 +43,21 @@ def listener():
        
         try:
             myrequest =  connectionSocket.recv(1024)
+            myrequest =  myrequest.decode("utf-8")
             
         except socket.timeout: # fail after 1 second of no activity
             print("Didn't receive data! [Timeout]")
         #finally:
             #s.close()
-
+        if myrequest=="PING":
+            #connectionSocket.send("PONG")
+            myrequest=""
+        
         if (myrequest != ""):
             rospy.loginfo(myrequest)
             pubAsr.publish(myrequest)
+
+        
 
     print("Close connection on %d" % SERVER_PORT)
     connectionSocket.close()

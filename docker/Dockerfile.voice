@@ -36,6 +36,8 @@ USER robot
 # Python libs
 #RUN pip install --user sounddevice
 #RUN pip install --user sox pyalsaaudio
+RUN pip3 install websockets
+RUN pip3 install requests
 
 RUN echo "20210426" > /tmp/lastdockerbuild
 

@@ -1,0 +1,45 @@
+# Docker file for MARRtino software
+# ROS Noetic , navigation, perception & additional packages
+# Version base
+
+# docker build -t marrtino:oak-d -f Dockerfile.oak-d .
+
+FROM marrtino:noetic_system
+
+USER root
+
+RUN apt-get update && \
+    apt-get install -y \
+    ros-$ROS_DISTRO-depthai-ros && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && apt-get -y install python3-tk
+
+USER robot
+#ros-$ROS_DISTRO-realsense2-camera  \
+#        ros-$ROS_DISTRO-realsense2-description  && \
+#libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev at \
+#RUN bash -ci "cd $HOME/ros/catkin_ws; catkin_make -j1"
+
+# Trick to force build from here
+RUN mkdir -p $HOME/scripts
+
+RUN echo "20230706" > /tmp/lastdockerbuild
+
+RUN python3 -m pip install depthai-sdk 
+RUN python3 -m pip install mediapipe 
+RUN python3 -m pip install flask
+
+# marrtino_apps
+
+RUN cd $HOME/src && \
+    git clone --branch noetic --depth 1 https://github.com/artigianitecnologici/marrtino_apps.git 
+   
+
+
+WORKDIR /home/robot
+
+
+CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_social2/bringup && python3 oak-d_bringup.py -server_port 9251" ]
+

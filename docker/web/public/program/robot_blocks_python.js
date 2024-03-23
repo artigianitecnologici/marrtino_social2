@@ -292,14 +292,22 @@ Blockly.Python['run_python'] = function(block) {
 };
 
 
-Blockly.Python['user_say'] = function(block) {
-  var code = 'user_say()';
-  return [code, Blockly.Python.ORDER_NONE];
-};
 
 Blockly.Python['wait_user_speaking'] = function(block) {
   var value_seconds = Blockly.Python.valueToCode(block, 'seconds', Blockly.Python.ORDER_ATOMIC);
-  var code = 'wait_user_speaking('+value_seconds+') # second \n';
+  var code = 'wait_user_speaking('+value_seconds+') \n';
+  return code;
+};
+
+Blockly.Python['user_say'] = function(block) {
+  var code = 'get_user_say()';
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+
+Blockly.Python['ask_chatgpt'] = function(block) {
+  var value_text = Blockly.Python.valueToCode(block, 'text', Blockly.Python.ORDER_ATOMIC);
+  var code = 'ask_chatgpt('+value_text+')\n';
   return code;
 };
 

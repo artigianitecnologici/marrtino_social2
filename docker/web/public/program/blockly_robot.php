@@ -165,7 +165,6 @@
 <block type="get_nro_of_face"></block>
 </category>
 <category colour="0" name="Code">
-<block type="user_say"></block>
 <block type="wait_user_speaking">
   <value name="seconds">
     <block type="math_number">
@@ -173,6 +172,14 @@
     </block>
   </value>
 </block>
+<block type="ask_chatgpt">
+  <value name="text">
+    <block type="text">
+      <field name="TEXT">your question</field>
+    </block>
+  </value>
+</block>
+<block type="user_say"></block>
 <block type="run_python">
 
    <value name="text">

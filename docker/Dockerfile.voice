@@ -1,7 +1,7 @@
 # Docker file for vosk server 
 # Fabio Ferrarini 
 
-# docker build -t marrtino:vosk-server -f Dockerfile.vosk-server .
+# docker build -t marrtino:voice-server -f Dockerfile.voice .
 
 
 FROM marrtino:noetic_system
@@ -34,8 +34,8 @@ USER robot
 
 
 # Python libs
-RUN pip install --user vosk sounddevice
-RUN pip install --user sox pyalsaaudio
+#RUN pip install --user sounddevice
+#RUN pip install --user sox pyalsaaudio
 
 RUN echo "20210426" > /tmp/lastdockerbuild
 
@@ -59,4 +59,4 @@ WORKDIR /home/robot
 
 #CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_social2/script && python3 test_asr.py" ]
 #CMD [ "/usr/bin/tmux" ]
-CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_social2/bringup && python3 vosk_bringup.py -server_port 9252" ]
+CMD [ "/bin/bash", "-ci", "cd ~/src/marrtino_social2/bringup && python3 voice_bringup.py -server_port 9254" ]

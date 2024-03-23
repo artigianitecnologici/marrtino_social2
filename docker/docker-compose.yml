@@ -63,27 +63,27 @@ services:
     - $MARRTINO_SOCIAL2/script:/home/robot/script 
     - $MARRTINO_APPS_HOME:/home/robot/src/marrtino_apps
     - $MARRTINO_SOCIAL2:/home/robot/src/marrtino_social2
-  
-  vosk-server: 
-    image: marrtino:vosk-server
+
+  voice: 
+    image: marrtino:voice-server
     build:
       context: $MARRTINO_SOCIAL2/docker
-      dockerfile: Dockerfile.vosk-server
-    container_name: vosk-server
+      dockerfile: Dockerfile.voice
+    container_name: voice-server
     dns: 8.8.8.8
     network_mode: "host"
     tty: true
     privileged: true
     environment:
     - ROS_IP=$ROS_IP
-    - PULSE_SERVER=unix:/run/user/1000/pulse/native
+    - DISPLAY=${DISPLAY}
     volumes:
+    - /tmp/.X11-unix:/tmp/.X11-unix
     - /dev:/dev
-    - /run/user/1000/pulse/native:/run/user/1000/pulse/native
+    - $MARRTINO_SOCIAL2/script:/home/robot/script 
     - $MARRTINO_APPS_HOME:/home/robot/src/marrtino_apps
-    - $MARRTINO_SOCIAL2:/home/robot/src/marrtino_social2    
+    - $MARRTINO_SOCIAL2:/home/robot/src/marrtino_social2
 
-  
 networks:
   default:
     name: marrtino-social-network

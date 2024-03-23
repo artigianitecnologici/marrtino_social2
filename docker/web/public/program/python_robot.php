@@ -106,6 +106,11 @@
 <h3>Commands</h3>
 
 <listing style="font-size:125%;">
+
+textsay = wait_user_speaking( sec )
+result = ask_chatgpt( textsay)
+say(result)
+
 # motion
 
 enableObstacleAvoidance(False|True) 
@@ -189,18 +194,7 @@ http://[your_marrtino_ip]:11311
 
 <p>substituting "[your_marrtino_ip]" with the IP address of your MARRtino robot or your simulator.</p>
 
-<p>Finally, select "OK"</p>
 
-<p>PLEASE, REMEMBER: This application is only working when the smartphone is AWAKEN. It means that on smartphone standby the data won't be sent anymore</p>
-
-<listing style="font-size:125%;">
-
-accel_gyro()	#Read data from Accelerometer and Gyroscope on X, Y and Z axis
-illuminance()	#Read data from Illuminance sensor
-sat_nav() 	#Read data from GPS signal
-magnetometer()	#Read data from Magnetometer
-
-</listing>
 
 
 <br><br><br>

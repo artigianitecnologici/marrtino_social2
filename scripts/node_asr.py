@@ -23,4 +23,4 @@ async def listen(uri):
                 rospy.loginfo(asrtext)
                 pubAsr.publish(asrtext)
 
-asyncio.run(listen('ws://10.3.1.1:2700'))
+asyncio.run(listen('ws://127.0.0.1:2700'))

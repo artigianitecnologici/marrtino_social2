@@ -528,24 +528,11 @@ Blockly.Blocks['hand_left'] = {
     this.setInputsInline(true); 
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(50);
+    this.setColour(0);
     this.setHelpUrl('http://robotics.surfweb.eu');
  this.setHelpUrl("");
   }
 };
-
-Blockly.Blocks['user_say'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("user_say()");
-    this.setOutput(true, null);
-    this.setColour(0);
- this.setTooltip("returns user say");
- this.setHelpUrl("");
-  }
-};
-
-
 
 
 Blockly.Blocks['wait_user_speaking'] = {
@@ -561,6 +548,29 @@ Blockly.Blocks['wait_user_speaking'] = {
   }
 };
 
+Blockly.Blocks['user_say'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("user_say()");
+    this.setOutput(true, null);
+    this.setColour(0);
+ this.setTooltip("returns the user say");
+ this.setHelpUrl("");
+  }
+};
+
+
+Blockly.Blocks['ask_chatgpt'] = {
+  init: function() {
+    this.appendDummyInput().appendField("ask_chatgpt");
+    this.appendValueInput("text");
+    this.setInputsInline(true); 
+    this.setOutput(true, null);
+    this.setColour(0);
+ this.setTooltip("type ask to chatgpt");
+ this.setHelpUrl("");
+  }
+};
 
 Blockly.Blocks['tag_trigger'] = {
   init: function() {

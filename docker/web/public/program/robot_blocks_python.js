@@ -172,7 +172,7 @@ Blockly.Python['tilt'] = function(block) {
 };
 
 // 150 Rappresenza 0 
-Blockly.Python['spalla_flessione_dx'] = function(block) {
+Blockly.Python['right_shoulder_flexion'] = function(block) {
   var value_sign = block.getFieldValue('Sign');
   var value_steps = Blockly.Python.valueToCode(block, 'steps', Blockly.Python.ORDER_ATOMIC);
   if ( value_sign == '+') { 
@@ -185,11 +185,11 @@ Blockly.Python['spalla_flessione_dx'] = function(block) {
     value_steps = -value_steps;
   }
   var value_pos = (150 + parseInt(value_steps)) ; 
-  var code = 'right_shoulder_rotation('+value_pos+')\n';
+  var code = 'right_shoulder_flexion('+value_pos+')\n';
   return code;
 };
 
-Blockly.Python['spalla_flessione_sx'] = function(block) {
+Blockly.Python['left_shoulder_flexion'] = function(block) {
   var value_sign = block.getFieldValue('Sign');
   var value_steps = Blockly.Python.valueToCode(block, 'steps', Blockly.Python.ORDER_ATOMIC);
   if ( value_sign == '+') { 
@@ -201,34 +201,34 @@ Blockly.Python['spalla_flessione_sx'] = function(block) {
     if ( parseInt(value_steps) > 70 ) { value_steps = 70 } ;
   }
   var value_pos = (150 + parseInt(value_steps)) ;
-  var code = 'left_shoulder_rotation('+value_pos+')\n';
+  var code = 'left_shoulder_flexion('+value_pos+')\n';
   return code;
 };
 
 
-Blockly.Python['spalla_rotazione_dx'] = function(block) {
+Blockly.Python['right_shoulder_rotation'] = function(block) {
   var value_sign = block.getFieldValue('Sign');
   var value_steps = Blockly.Python.valueToCode(block, 'steps', Blockly.Python.ORDER_ATOMIC);
   if ( value_sign == '+') { 
     value_steps = -value_steps;
   }
   var value_pos = (150 + parseInt(value_steps)) ;
-  var code = 'right_shoulder_flexion('+value_pos+')\n';
+  var code = 'right_shoulder_rotation('+value_pos+')\n';
   return code;
 };
 
 
-Blockly.Python['spalla_rotazione_sx'] = function(block) {
+Blockly.Python['left_shoulder_rotation'] = function(block) {
   var value_sign = block.getFieldValue('Sign');
   var value_steps = Blockly.Python.valueToCode(block, 'steps', Blockly.Python.ORDER_ATOMIC);
   if ( value_sign == '-') { 
     value_steps = -value_steps;
   }
   var value_pos = (((150 + parseInt(value_steps))* 3.14 )/ 180) ;
-  var code = 'leftt_shoulder_flexion('+value_pos+')\n';
+  var code = 'left_shoulder_rotation('+value_pos+')\n';
   return code;
 };
-Blockly.Python['gomito_dx'] = function(block) {
+Blockly.Python['right_elbow'] = function(block) {
   var value_sign = block.getFieldValue('Sign');
   var value_steps = Blockly.Python.valueToCode(block, 'steps', Blockly.Python.ORDER_ATOMIC);
   if ( value_sign == '+') { 
@@ -241,7 +241,7 @@ Blockly.Python['gomito_dx'] = function(block) {
 };
 
 
-Blockly.Python['gomito_sx'] = function(block) {
+Blockly.Python['left_elbow'] = function(block) {
   var value_sign = block.getFieldValue('Sign');
   var value_steps = Blockly.Python.valueToCode(block, 'steps', Blockly.Python.ORDER_ATOMIC);
   if ( value_sign == '-') { 
@@ -250,7 +250,7 @@ Blockly.Python['gomito_sx'] = function(block) {
       value_steps = -value_steps;
   }
   var value_pos = (150 + parseInt(value_steps)) ;
-  var code = 'gomiright_elbow('+value_pos+')\n';
+  var code = 'left_elbow('+value_pos+')\n';
   return code;
 };
 

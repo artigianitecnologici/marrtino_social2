@@ -184,8 +184,8 @@ Blockly.Python['spalla_flessione_dx'] = function(block) {
     if ( parseInt(value_steps) > 70 ) { value_steps = 70 } ;
     value_steps = -value_steps;
   }
-  var value_pos = (((150 + parseInt(value_steps))* 3.14 )/ 180) ; 
-  var code = 'spalla_flessione_dx('+value_pos+')\n';
+  var value_pos = (150 + parseInt(value_steps)) ; 
+  var code = 'right_shoulder_rotation('+value_pos+')\n';
   return code;
 };
 
@@ -200,8 +200,8 @@ Blockly.Python['spalla_flessione_sx'] = function(block) {
   if ( value_sign == '-') { 
     if ( parseInt(value_steps) > 70 ) { value_steps = 70 } ;
   }
-  var value_pos = (((150 + parseInt(value_steps))* 3.14 )/ 180) ;
-  var code = 'spalla_flessione_sx('+value_pos+')\n';
+  var value_pos = (150 + parseInt(value_steps)) ;
+  var code = 'left_shoulder_rotation('+value_pos+')\n';
   return code;
 };
 
@@ -212,8 +212,8 @@ Blockly.Python['spalla_rotazione_dx'] = function(block) {
   if ( value_sign == '+') { 
     value_steps = -value_steps;
   }
-  var value_pos = (((150 + parseInt(value_steps))* 3.14 )/ 180) ;
-  var code = 'spalla_rotazione_dx('+value_pos+')\n';
+  var value_pos = (150 + parseInt(value_steps)) ;
+  var code = 'right_shoulder_flexion('+value_pos+')\n';
   return code;
 };
 
@@ -225,7 +225,7 @@ Blockly.Python['spalla_rotazione_sx'] = function(block) {
     value_steps = -value_steps;
   }
   var value_pos = (((150 + parseInt(value_steps))* 3.14 )/ 180) ;
-  var code = 'spalla_rotazione_sx('+value_pos+')\n';
+  var code = 'leftt_shoulder_flexion('+value_pos+')\n';
   return code;
 };
 Blockly.Python['gomito_dx'] = function(block) {
@@ -235,8 +235,8 @@ Blockly.Python['gomito_dx'] = function(block) {
     //if ( parseInt(value_steps) > 30 ) { value_steps = 30  }
     value_steps = -value_steps;
   }
-  var value_pos = (((150 + parseInt(value_steps))* 3.14 )/ 180) ;
-  var code = 'gomito_dx('+value_pos+')\n';
+  var value_pos = (150 + parseInt(value_steps)) ;
+  var code = 'right_elbow('+value_pos+')\n';
   return code;
 };
 
@@ -249,8 +249,8 @@ Blockly.Python['gomito_sx'] = function(block) {
       //if ( parseInt(value_steps) > 30 ) { value_steps = 30  }
       value_steps = -value_steps;
   }
-  var value_pos = (((150 + parseInt(value_steps))* 3.14 )/ 180) ;
-  var code = 'gomito_sx('+value_pos+')\n';
+  var value_pos = (150 + parseInt(value_steps)) ;
+  var code = 'gomiright_elbow('+value_pos+')\n';
   return code;
 };
 

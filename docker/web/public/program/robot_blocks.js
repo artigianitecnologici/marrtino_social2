@@ -563,12 +563,16 @@ Blockly.Blocks['clear_asr'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("clear_asr()");
-    this.setOutput(true, null);
+    //this.setOutput(true, null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
     this.setColour(0);
  this.setTooltip("returns the user say");
  this.setHelpUrl("");
   }
 };
+
+
 
 
 Blockly.Blocks['ask_chatgpt'] = {

@@ -219,6 +219,7 @@ Blockly.Python['right_shoulder_rotation'] = function(block) {
     
   }
   if ( value_sign == '-') { 
+    if ( parseInt(value_steps) > 45 ) { value_steps = 45  } ; 
     value_steps = -value_steps;
   }
 
@@ -235,6 +236,7 @@ Blockly.Python['left_shoulder_rotation'] = function(block) {
      
   }
   if ( value_sign == '-') { 
+    if ( parseInt(value_steps) > 45 ) { value_steps = 45  } ; 
     value_steps = -value_steps;
   }
   var value_pos = ( parseInt(value_steps)) ;

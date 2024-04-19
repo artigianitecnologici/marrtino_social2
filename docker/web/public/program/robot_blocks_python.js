@@ -195,10 +195,16 @@ Blockly.Python['left_shoulder_flexion'] = function(block) {
   if ( value_sign == '+') { 
     // Up
     if ( parseInt(value_steps) > 45 ) { value_steps = 45  } ; 
-    value_steps = -value_steps;
+    
   }
   if ( value_sign == '-') { 
     if ( parseInt(value_steps) > 70 ) { value_steps = 70 } ;
+   
+  }
+  if ( value_sign == '-') { 
+    // Down
+    if ( parseInt(value_steps) > 70 ) { value_steps = 70 } ;
+    value_steps = -value_steps;
   }
   var value_pos = (  parseInt(value_steps)) ;
   var code = 'left_shoulder_flexion('+value_pos+')\n';
@@ -233,7 +239,7 @@ Blockly.Python['right_elbow'] = function(block) {
   var value_steps = Blockly.Python.valueToCode(block, 'steps', Blockly.Python.ORDER_ATOMIC);
   if ( value_sign == '+') { 
     //if ( parseInt(value_steps) > 30 ) { value_steps = 30  }
-    value_steps = -value_steps;
+    
   }
   var value_pos = (  parseInt(value_steps)) ;
   var code = 'right_elbow('+value_pos+')\n';
@@ -247,7 +253,7 @@ Blockly.Python['left_elbow'] = function(block) {
   if ( value_sign == '-') { 
     // if ( value_steps > 30 )
       //if ( parseInt(value_steps) > 30 ) { value_steps = 30  }
-      value_steps = -value_steps;
+     
   }
   var value_pos = (  parseInt(value_steps)) ;
   var code = 'left_elbow('+value_pos+')\n';

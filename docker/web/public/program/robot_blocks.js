@@ -348,118 +348,118 @@ Blockly.Blocks['tilt'] = {
   }
 };
 
-Blockly.Blocks['spalla_flessione_dx'] = {
+Blockly.Blocks['right_shoulder_flexion'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("img/tilt.png", 20, 20, "Spalla DX flessione %"));
+        .appendField(new Blockly.FieldImage("img/tilt.png", 20, 20, "right_shoulder_flexion %"));
     this.appendDummyInput()
         .appendField("sign")
         .appendField(new Blockly.FieldDropdown([["+","+"],["-","-"]]), "Sign");
     this.appendValueInput("steps")
         .setCheck("Number")
-        .appendField("spalla_flessione_dx");
+        .appendField("right_shoulder_flexion");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(120);
- this.setTooltip("spalla destra Flessione");
+ this.setTooltip("right_shoulder_flexion");
  this.setHelpUrl("");
   }
 };
 
-Blockly.Blocks['spalla_flessione_sx'] = {
+Blockly.Blocks['left_shoulder_flexion'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("img/tilt.png", 20, 20, "Spalla SX flessione %"));
+        .appendField(new Blockly.FieldImage("img/tilt.png", 20, 20, "left_shoulder_flexion %"));
     this.appendDummyInput()
         .appendField("sign")
         .appendField(new Blockly.FieldDropdown([["+","+"],["-","-"]]), "Sign");
     this.appendValueInput("steps")
         .setCheck("Number")
-        .appendField("spalla_flessione_sx");
+        .appendField("left_shoulder_flexion");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(120);
- this.setTooltip("spalla sinistra Flessione");
- this.setHelpUrl("");
-  }
-};
-
-
-Blockly.Blocks['spalla_rotazione_dx'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("img/tilt.png", 20, 20, "Spalla DX rotazione %"));
-    this.appendDummyInput()
-        .appendField("sign")
-        .appendField(new Blockly.FieldDropdown([["+","+"],["-","-"]]), "Sign");
-    this.appendValueInput("steps")
-        .setCheck("Number")
-        .appendField("spalla_rotazione_dx");
-    this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(120);
- this.setTooltip("spalla destra Rotazione");
+ this.setTooltip("left_shoulder_flexion");
  this.setHelpUrl("");
   }
 };
 
 
-
-Blockly.Blocks['spalla_rotazione_sx'] = {
+Blockly.Blocks['right_shoulder_rotation'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("img/tilt.png", 20, 20, "Spalla SX rotazione %"));
+        .appendField(new Blockly.FieldImage("img/tilt.png", 20, 20, "right_shoulder_rotation %"));
     this.appendDummyInput()
         .appendField("sign")
         .appendField(new Blockly.FieldDropdown([["+","+"],["-","-"]]), "Sign");
     this.appendValueInput("steps")
         .setCheck("Number")
-        .appendField("spalla_rotazione_sx");
+        .appendField("right_shoulder_rotation");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(120);
- this.setTooltip("spalla sinistra Rotazione");
- this.setHelpUrl("");
-  }
-};
-Blockly.Blocks['gomito_dx'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("img/tilt.png", 20, 20, "Gomito DX %"));
-    this.appendDummyInput()
-        .appendField("sign")
-        .appendField(new Blockly.FieldDropdown([["+","+"],["-","-"]]), "Sign");
-    this.appendValueInput("steps")
-        .setCheck("Number")
-        .appendField("gomito_dx");
-    this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(120);
- this.setTooltip("Gomito destro Rotazione");
+ this.setTooltip("right_shoulder_rotation");
  this.setHelpUrl("");
   }
 };
 
-Blockly.Blocks['gomito_sx'] = {
+
+
+Blockly.Blocks['left_shoulder_rotation'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("img/tilt.png", 20, 20, "Gomito SX %"));
+        .appendField(new Blockly.FieldImage("img/tilt.png", 20, 20, "left_shoulder_rotation %"));
     this.appendDummyInput()
         .appendField("sign")
         .appendField(new Blockly.FieldDropdown([["+","+"],["-","-"]]), "Sign");
     this.appendValueInput("steps")
         .setCheck("Number")
-        .appendField("gomito_sx"); 
+        .appendField("left_shoulder_rotation");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(120);
- this.setTooltip("Gomito sinistro Rotazione");
+ this.setTooltip("left_shoulder_rotation");
+ this.setHelpUrl("");
+  }
+};
+Blockly.Blocks['right_elbow'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("img/tilt.png", 20, 20, "right_elbow %"));
+    this.appendDummyInput()
+        .appendField("sign")
+        .appendField(new Blockly.FieldDropdown([["+","+"]]), "Sign");
+    this.appendValueInput("steps")
+        .setCheck("Number")
+        .appendField("right_elbow");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+ this.setTooltip("right_elbow");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['left_elbow'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("img/tilt.png", 20, 20, "left_elbow %"));
+    this.appendDummyInput()
+        .appendField("sign")
+        .appendField(new Blockly.FieldDropdown([["+","+"]]), "Sign");
+    this.appendValueInput("steps")
+        .setCheck("Number")
+        .appendField("left_elbow"); 
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(120);
+ this.setTooltip("left_elbow");
  this.setHelpUrl("");
   }
 };

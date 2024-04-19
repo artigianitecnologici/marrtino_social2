@@ -224,7 +224,7 @@ Blockly.Python['left_shoulder_rotation'] = function(block) {
   if ( value_sign == '-') { 
     value_steps = -value_steps;
   }
-  var value_pos = (((150 + parseInt(value_steps))* 3.14 )/ 180) ;
+  var value_pos = (150 + parseInt(value_steps)) ;
   var code = 'left_shoulder_rotation('+value_pos+')\n';
   return code;
 };
@@ -261,7 +261,7 @@ Blockly.Python['hand_right'] = function(block) {
     //if ( parseInt(value_steps) > 30 ) { value_steps = 30  }
     value_steps = -value_steps;
   }
-  var value_pos = (((150 + parseInt(value_steps))* 3.14 )/ 180) ;
+  var value_pos = (150 + parseInt(value_steps)) ;
   var code = 'hand_right('+value_pos+')\n';
   return code;
 };
@@ -276,7 +276,7 @@ Blockly.Python['hand_left'] = function(block) {
       value_steps = -value_steps;
 
   }
-  var value_pos = (((150 + parseInt(value_steps))* 3.14 )/ 180) ;
+  var value_pos = (150 + parseInt(value_steps)) ;
   var code = 'hand_left('+value_pos+')\n';
   return code;
 };

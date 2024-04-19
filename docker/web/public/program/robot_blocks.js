@@ -314,7 +314,7 @@ Blockly.Blocks['get_nro_of_face'] = {
  this.setHelpUrl("");
   }
 };
-
+// Social
 Blockly.Blocks['pan'] = {
   init: function() {
     this.appendDummyInput()

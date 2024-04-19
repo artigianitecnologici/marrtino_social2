@@ -147,7 +147,7 @@ Blockly.Python['get_nro_of_face'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
-
+// Social ---------------------->
 
 Blockly.Python['pan'] = function(block) {
   var value_sign = block.getFieldValue('Sign');
@@ -184,7 +184,7 @@ Blockly.Python['right_shoulder_flexion'] = function(block) {
     if ( parseInt(value_steps) > 70 ) { value_steps = 70 } ;
     value_steps = -value_steps;
   }
-  var value_pos = (150 + parseInt(value_steps)) ; 
+  var value_pos = ( parseInt(value_steps)) ; 
   var code = 'right_shoulder_flexion('+value_pos+')\n';
   return code;
 };
@@ -200,7 +200,7 @@ Blockly.Python['left_shoulder_flexion'] = function(block) {
   if ( value_sign == '-') { 
     if ( parseInt(value_steps) > 70 ) { value_steps = 70 } ;
   }
-  var value_pos = (150 + parseInt(value_steps)) ;
+  var value_pos = (  parseInt(value_steps)) ;
   var code = 'left_shoulder_flexion('+value_pos+')\n';
   return code;
 };
@@ -212,7 +212,7 @@ Blockly.Python['right_shoulder_rotation'] = function(block) {
   if ( value_sign == '+') { 
     value_steps = -value_steps;
   }
-  var value_pos = (150 + parseInt(value_steps)) ;
+  var value_pos = (  parseInt(value_steps)) ;
   var code = 'right_shoulder_rotation('+value_pos+')\n';
   return code;
 };
@@ -224,7 +224,7 @@ Blockly.Python['left_shoulder_rotation'] = function(block) {
   if ( value_sign == '-') { 
     value_steps = -value_steps;
   }
-  var value_pos = (150 + parseInt(value_steps)) ;
+  var value_pos = ( parseInt(value_steps)) ;
   var code = 'left_shoulder_rotation('+value_pos+')\n';
   return code;
 };
@@ -235,7 +235,7 @@ Blockly.Python['right_elbow'] = function(block) {
     //if ( parseInt(value_steps) > 30 ) { value_steps = 30  }
     value_steps = -value_steps;
   }
-  var value_pos = (150 + parseInt(value_steps)) ;
+  var value_pos = (  parseInt(value_steps)) ;
   var code = 'right_elbow('+value_pos+')\n';
   return code;
 };
@@ -249,7 +249,7 @@ Blockly.Python['left_elbow'] = function(block) {
       //if ( parseInt(value_steps) > 30 ) { value_steps = 30  }
       value_steps = -value_steps;
   }
-  var value_pos = (150 + parseInt(value_steps)) ;
+  var value_pos = (  parseInt(value_steps)) ;
   var code = 'left_elbow('+value_pos+')\n';
   return code;
 };
@@ -261,8 +261,8 @@ Blockly.Python['hand_right'] = function(block) {
     //if ( parseInt(value_steps) > 30 ) { value_steps = 30  }
     value_steps = -value_steps;
   }
-  var value_pos = (150 + parseInt(value_steps)) ;
-  var code = 'hand_right('+value_pos+')\n';
+  var value_pos = (  parseInt(value_steps)) ;
+  var code = 'right_hand('+value_pos+')\n';
   return code;
 };
 
@@ -276,8 +276,8 @@ Blockly.Python['hand_left'] = function(block) {
       value_steps = -value_steps;
 
   }
-  var value_pos = (150 + parseInt(value_steps)) ;
-  var code = 'hand_left('+value_pos+')\n';
+  var value_pos = (  parseInt(value_steps)) ;
+  var code = 'left_hand('+value_pos+')\n';
   return code;
 };
 

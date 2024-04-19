@@ -216,8 +216,12 @@ Blockly.Python['right_shoulder_rotation'] = function(block) {
   var value_sign = block.getFieldValue('Sign');
   var value_steps = Blockly.Python.valueToCode(block, 'steps', Blockly.Python.ORDER_ATOMIC);
   if ( value_sign == '+') { 
+    
+  }
+  if ( value_sign == '-') { 
     value_steps = -value_steps;
   }
+
   var value_pos = (  parseInt(value_steps)) ;
   var code = 'right_shoulder_rotation('+value_pos+')\n';
   return code;
@@ -227,6 +231,9 @@ Blockly.Python['right_shoulder_rotation'] = function(block) {
 Blockly.Python['left_shoulder_rotation'] = function(block) {
   var value_sign = block.getFieldValue('Sign');
   var value_steps = Blockly.Python.valueToCode(block, 'steps', Blockly.Python.ORDER_ATOMIC);
+  if ( value_sign == '+') { 
+     
+  }
   if ( value_sign == '-') { 
     value_steps = -value_steps;
   }
@@ -234,6 +241,7 @@ Blockly.Python['left_shoulder_rotation'] = function(block) {
   var code = 'left_shoulder_rotation('+value_pos+')\n';
   return code;
 };
+
 Blockly.Python['right_elbow'] = function(block) {
   var value_sign = block.getFieldValue('Sign');
   var value_steps = Blockly.Python.valueToCode(block, 'steps', Blockly.Python.ORDER_ATOMIC);

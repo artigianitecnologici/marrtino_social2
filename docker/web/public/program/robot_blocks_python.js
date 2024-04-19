@@ -248,7 +248,7 @@ Blockly.Python['right_elbow'] = function(block) {
   var value_sign = block.getFieldValue('Sign');
   var value_steps = Blockly.Python.valueToCode(block, 'steps', Blockly.Python.ORDER_ATOMIC);
   if ( value_sign == '+') { 
-    //if ( parseInt(value_steps) > 30 ) { value_steps = 30  }
+    if ( parseInt(value_steps) > 80 ) { value_steps = 80  }
     
   }
   var value_pos = (  parseInt(value_steps)) ;
@@ -260,9 +260,9 @@ Blockly.Python['right_elbow'] = function(block) {
 Blockly.Python['left_elbow'] = function(block) {
   var value_sign = block.getFieldValue('Sign');
   var value_steps = Blockly.Python.valueToCode(block, 'steps', Blockly.Python.ORDER_ATOMIC);
-  if ( value_sign == '-') { 
+  if ( value_sign == '+') { 
     // if ( value_steps > 30 )
-      //if ( parseInt(value_steps) > 30 ) { value_steps = 30  }
+    if ( parseInt(value_steps) > 80 ) { value_steps = 80  }
      
   }
   var value_pos = (  parseInt(value_steps)) ;

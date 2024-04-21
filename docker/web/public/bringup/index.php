@@ -157,6 +157,7 @@
 <td><button id="asr_start_btn" onclick="send_cmd('asr_app_start')" class="btn btn-primary ">Start ASR with APP</button></td>
 <td><button id="asr_quit_btn" onclick="send_cmd('asr_app_kill')" class="btn btn-primary ">Stop  ASR with APP</button></td></td>
 </tr>
+
 </table>
 
 

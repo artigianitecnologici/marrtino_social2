@@ -1,4 +1,4 @@
-# Docker file for vosk server 
+# Docker file for voice 
 # Fabio Ferrarini 
 
 # docker build -t marrtino:voice -f Dockerfile.voice .

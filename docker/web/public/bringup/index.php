@@ -150,6 +150,13 @@
 <td><button id="asr_start_btn" onclick="send_cmd('asroffline_start')" class="btn btn-primary ">Start ASR Off line</button></td>
 <td><button id="asr_quit_btn" onclick="send_cmd('asroffline_kill')" class="btn btn-primary ">Stop  Off line</button></td></td>
 </tr>
+
+<tr height=40>
+<td width=280>ASR with APP </td> 
+<td width=80 align='center'>
+<td><button id="asr_start_btn" onclick="send_cmd('asr_app_start')" class="btn btn-primary ">Start ASR with APP</button></td>
+<td><button id="asr_quit_btn" onclick="send_cmd('asr_app_kill')" class="btn btn-primary ">Stop  ASR with APP</button></td></td>
+</tr>
 </table>
 
 

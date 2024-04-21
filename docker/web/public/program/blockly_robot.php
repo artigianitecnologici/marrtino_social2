@@ -182,6 +182,7 @@
   </value>
 </block>
 <block type="user_say"></block>
+<block type="wait_user_say"></block>
 <block type="clear_asr"></block>
 <block type="run_python">
 

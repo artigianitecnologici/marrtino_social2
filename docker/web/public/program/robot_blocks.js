@@ -534,19 +534,17 @@ Blockly.Blocks['hand_left'] = {
   }
 };
 
-
-Blockly.Blocks['wait_user_speaking'] = {
+Blockly.Blocks['wait_user_say'] = {
   init: function() {
-    this.appendValueInput("seconds")
-        .setCheck("Number")
-        .appendField("wait_user_speaking");
-    this.setInputsInline(true);
+    this.appendDummyInput()
+        .appendField("wait_user_say()");
     this.setOutput(true, null);
     this.setColour(0);
- this.setTooltip("return user say and wait xx second");
+ this.setTooltip("returns the user say - wait 10 sec");
  this.setHelpUrl("");
   }
 };
+
 
 Blockly.Blocks['user_say'] = {
   init: function() {

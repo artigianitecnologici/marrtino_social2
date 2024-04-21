@@ -309,11 +309,12 @@ Blockly.Python['run_python'] = function(block) {
 
 
 
-Blockly.Python['wait_user_speaking'] = function(block) {
-  var value_seconds = Blockly.Python.valueToCode(block, 'seconds', Blockly.Python.ORDER_ATOMIC);
-  var code = 'wait_user_speaking('+value_seconds+') \n';
-  return code;
+
+Blockly.Python['wait_user_say'] = function(block) {
+  var code = 'wait_get_user_say()';
+  return [code, Blockly.Python.ORDER_NONE];
 };
+
 
 Blockly.Python['user_say'] = function(block) {
   var code = 'get_user_say()';

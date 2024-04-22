@@ -1,0 +1,25 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/humble/include/**",
+        "/home/ubuntu/marrtinorobot2_ws/src/uros/micro-ROS-Agent/micro_ros_agent/include/**",
+        "/home/ubuntu/src/OrbbecSDK_ROS2/orbbec_camera/include/**",
+        "/home/ubuntu/src/OrbbecSDK_ROS2/orbbec_description/include/**",
+        "/home/ubuntu/src/ldlidar/include/**",
+        "/home/ubuntu/src/speech/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

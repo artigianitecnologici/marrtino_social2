@@ -1,7 +1,7 @@
 // Python code generation
 
 Blockly.Python['begin'] = function(block) {
-  var code = 'begin()\n';
+  var code = '# Generate with blockly \nbegin()\n';
   return code;
 };
 
@@ -69,14 +69,14 @@ Blockly.Python['obstacle_distance'] = function(block) {
   else if (dropdown_direction == "OPTIONLEFT") { v = 90; }
   else if (dropdown_direction == "OPTIONRIGHT") { v = -90; }
   else if (dropdown_direction == "OPTIONBACK") { v = 180; }
-  var code = 'obstacle_distance('+v+')';
+  var code = 'obstacle_distance('+v+')\n';
   return [code, Blockly.Python.ORDER_NONE];
 };
 
 Blockly.Python['distance'] = function(block) {
   var value_p1 = Blockly.Python.valueToCode(block, 'P1', Blockly.Python.ORDER_ATOMIC);
   var value_p2 = Blockly.Python.valueToCode(block, 'P2', Blockly.Python.ORDER_ATOMIC);
-  var code = 'distance('+value_p1+','+value_p2+')';
+  var code = 'distance('+value_p1+','+value_p2+')\n';
   return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -84,12 +84,12 @@ Blockly.Python['random'] = function(block) {
   Blockly.Python.definitions_.import_random="import random";
   var value_1 = Blockly.Python.valueToCode(block, 'min', Blockly.Python.ORDER_ATOMIC);
   var value_2 = Blockly.Python.valueToCode(block, 'max', Blockly.Python.ORDER_ATOMIC);
-  var code = 'random.randint('+value_1+','+value_2+')';
+  var code = 'random.randint('+value_1+','+value_2+')\n';
   return [code, Blockly.Python.ORDER_NONE];
 };
 
 Blockly.Python['marrtino_ok'] = function(block) {
-  var code = 'marrtino_ok()';
+  var code = 'marrtino_ok()\n';
   return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -311,7 +311,7 @@ Blockly.Python['run_python'] = function(block) {
 
 
 Blockly.Python['wait_user_say'] = function(block) {
-  var code = 'wait_get_user_say()';
+  var code = 'wait_get_user_say()\n';
   return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -322,13 +322,13 @@ Blockly.Python['user_say'] = function(block) {
 };
 
 Blockly.Python['clear_asr'] = function(block) {
-  var code = 'clear_asr()';
+  var code = 'clear_asr()\n';
   return [code, Blockly.Python.ORDER_NONE];
 };
 
 Blockly.Python['ask_chatgpt'] = function(block) {
   var value_text = Blockly.Python.valueToCode(block, 'text', Blockly.Python.ORDER_ATOMIC);
-  var code = 'ask_chatgpt('+value_text+')\n';
+  var code = 'ask_chatgpt('+value_text+')';
   return code;
 };
 

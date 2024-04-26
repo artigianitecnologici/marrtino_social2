@@ -178,7 +178,7 @@ Blockly.Python['tilt'] = function(block) {
   return code;
 };
 
-// 150 Rappresenza 0 
+// 150 Rappresenza 0 --
 Blockly.Python['right_shoulder_flexion'] = function(block) {
   var value_sign = block.getFieldValue('Sign');
   var value_steps = Blockly.Python.valueToCode(block, 'steps', Blockly.Python.ORDER_ATOMIC);

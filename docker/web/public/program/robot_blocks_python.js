@@ -276,7 +276,7 @@ Blockly.Python['left_elbow'] = function(block) {
   var code = 'left_elbow('+value_pos+')\n';
   return code;
 };
-
+// social hand
 Blockly.Python['hand_right'] = function(block) {
   var value_sign = block.getFieldValue('Sign');
   var value_steps = Blockly.Python.valueToCode(block, 'steps', Blockly.Python.ORDER_ATOMIC);

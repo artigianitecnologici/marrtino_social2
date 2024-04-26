@@ -136,7 +136,7 @@ function Barzelletta(){
  //document.getElementById("demo").innerHTML = num;
 
 if (num == 1) {
-   speak("ma se il mio capo si droga allora  io sono un tossico dipendente?");
+   speak("sapete quale é la differenza tra una formìca e la televisione? , , nessuna , , hanno tutte e due le antenne");
 } else if (num == 2) {
     speak(" Scusate.. ma per aprire un buon vino dòc, mi è sufficiente aprire  WORD?");
 } else {

@@ -26,15 +26,16 @@ def listener():
     speech("Ciao sono martina e sono operativa")
    
     pan(0)
-    tilt(0)
-    spalla_rotazione_dx(2.6166666666666667)
-    spalla_flessione_dx(1.57)
-    gomito_dx(3.14)
-    hand_right(2.4422222222222225)
-    hand_left(2.7911111111111113)
-    spalla_rotazione_sx(2.6166666666666667)
-    spalla_flessione_sx(3.663333333333333)
-    gomito_sx(2.0933333333333333)
+    tilt(0) 
+    # 
+    right_shoulder_flexion(-70)
+    left_shoulder_flexion(-70)
+    right_shoulder_rotation(0)
+    left_shoulder_rotation(0)
+    right_elbow(0)
+    left_elbow(0)
+    right_hand(90)
+    left_hand(90)
 
 
     # end command

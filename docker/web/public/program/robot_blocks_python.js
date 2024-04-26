@@ -209,7 +209,7 @@ Blockly.Python['left_shoulder_flexion'] = function(block) {
    
   }
   if ( value_sign == '-') { 
-    // Down
+    // Down  
     if ( parseInt(value_steps) > 70 ) { value_steps = 70 } ;
     value_steps = -value_steps;
   }

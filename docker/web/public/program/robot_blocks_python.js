@@ -10,6 +10,7 @@ Blockly.Python['end'] = function(block) {
   return code;
 };
 
+
 Blockly.Python['forward'] = function(block) {
   var value_steps = Blockly.Python.valueToCode(block, 'steps', Blockly.Python.ORDER_ATOMIC);
   var code = 'forward('+value_steps+')\n';
@@ -128,6 +129,12 @@ Blockly.Python['status'] = function(block) {
   return code;
 }
 
+Blockly.Python['gesture'] = function(block) {
+  var dropdown_position = block.getFieldValue('ROBOT_GESTURE');
+  // TODO: Assemble Python into code variable.
+  var code = 'gesture("'+dropdown_position+'")\n';
+  return code;
+}
 
 Blockly.Python['head_position'] = function(block) {
   var dropdown_position = block.getFieldValue('HEAD_POSITION');
@@ -274,8 +281,12 @@ Blockly.Python['hand_right'] = function(block) {
   var value_sign = block.getFieldValue('Sign');
   var value_steps = Blockly.Python.valueToCode(block, 'steps', Blockly.Python.ORDER_ATOMIC);
   if ( value_sign == '+') { 
-    //if ( parseInt(value_steps) > 30 ) { value_steps = 30  }
+    if ( parseInt(value_steps) > 90 ) { value_steps = 90  }
+    
+  }
+  if ( value_sign == '-') { 
     value_steps = -value_steps;
+    if ( parseInt(value_steps) > 90 ) { value_steps = 90  }
   }
   var value_pos = (  parseInt(value_steps)) ;
   var code = 'right_hand('+value_pos+')\n';
@@ -286,11 +297,14 @@ Blockly.Python['hand_right'] = function(block) {
 Blockly.Python['hand_left'] = function(block) {
   var value_sign = block.getFieldValue('Sign');
   var value_steps = Blockly.Python.valueToCode(block, 'steps', Blockly.Python.ORDER_ATOMIC);
-  if ( value_sign == '-') { 
+  if ( value_sign == '+') { 
     if ( value_steps > 30 )
-      //if ( parseInt(value_steps) > 30 ) { value_steps = 30  }
+      if ( parseInt(value_steps) > 90 ) { value_steps = 90  }
+     
+  }
+  if ( value_sign == '-') { 
       value_steps = -value_steps;
-
+      if ( parseInt(value_steps) > 90 ) { value_steps = 90  }
   }
   var value_pos = (  parseInt(value_steps)) ;
   var code = 'left_hand('+value_pos+')\n';
@@ -321,10 +335,11 @@ Blockly.Python['user_say'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
-Blockly.Python['clear_asr'] = function(block) {
+Blockly.Python['clear-asr'] = function(block) {
   var code = 'clear_asr()\n';
-  return [code, Blockly.Python.ORDER_NONE];
+  return code;
 };
+
 
 Blockly.Python['ask_chatgpt'] = function(block) {
   var value_text = Blockly.Python.valueToCode(block, 'text', Blockly.Python.ORDER_ATOMIC);

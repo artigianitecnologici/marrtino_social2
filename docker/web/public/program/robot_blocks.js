@@ -228,7 +228,7 @@ Blockly.Blocks['say'] = {
     this.appendDummyInput().appendField("say");
     this.appendValueInput("text");
     this.appendValueInput("lang").appendField("language");
-    this.setInputsInline(true); 
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(50);
@@ -242,7 +242,7 @@ Blockly.Blocks['sound'] = {
   init: function() {
     this.appendDummyInput().appendField("sound");
     this.appendValueInput("name");
-    this.setInputsInline(true); 
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(50);
@@ -250,12 +250,12 @@ Blockly.Blocks['sound'] = {
  this.setHelpUrl("");
   }
 };
- 
+
 Blockly.Blocks['status'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Face Status")
-      
+
         .appendField(new Blockly.FieldDropdown([["blink eye","startblinking"],["speech","speak"], ["stop speech","normal"] ]), "STATUS");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -278,6 +278,18 @@ Blockly.Blocks['face'] = {
   }
 };
 
+Blockly.Blocks['gesture'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("gesture")
+        .appendField(new Blockly.FieldDropdown([["init","init"],["zero","zero"],["hello","hello"], ["left","left"],["right","right"]]), "ROBOT_GESTURE");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("Gesture");
+ this.setHelpUrl("");
+  }
+};
 
 
 Blockly.Blocks['head_position'] = {
@@ -454,7 +466,7 @@ Blockly.Blocks['left_elbow'] = {
         .appendField(new Blockly.FieldDropdown([["+","+"]]), "Sign");
     this.appendValueInput("steps")
         .setCheck("Number")
-        .appendField("left_elbow"); 
+        .appendField("left_elbow");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -491,7 +503,7 @@ Blockly.Blocks['hand_left'] = {
         .appendField(new Blockly.FieldDropdown([["+","+"],["-","-"]]), "Sign");
     this.appendValueInput("steps")
         .setCheck("Number")
-        .appendField("hand_left"); 
+        .appendField("hand_left");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -504,8 +516,8 @@ Blockly.Blocks['hand_left'] = {
 
 /**
  * Common HSV hue for all blocks in this category.
- 
- Blockly.Blocks.variables.HUE = 160; 
+
+ Blockly.Blocks.variables.HUE = 160;
 
  Blockly.Blocks['run_python'] = {
    init: function() {
@@ -525,7 +537,7 @@ Blockly.Blocks['hand_left'] = {
   init: function() {
     this.appendDummyInput().appendField("run_python");
     this.appendValueInput("text");
-    this.setInputsInline(true); 
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(0);
@@ -557,15 +569,17 @@ Blockly.Blocks['user_say'] = {
   }
 };
 
-Blockly.Blocks['clear_asr'] = {
+
+
+Blockly.Blocks['clear-asr'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("clear_asr()");
-    //this.setOutput(true, null);
+        .appendField("clear-asr")
+     //   .appendField(new Blockly.FieldDropdown([["clear","inclearit"],["zero","zero"],["hello","hello"], ["left","left"],["right","right"]]), "ROBOT_GESTURE");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(0);
- this.setTooltip("returns the user say");
+    this.setColour(230);
+ this.setTooltip("clear-asr");
  this.setHelpUrl("");
   }
 };
@@ -577,7 +591,7 @@ Blockly.Blocks['ask_chatgpt'] = {
   init: function() {
     this.appendDummyInput().appendField("ask_chatgpt");
     this.appendValueInput("text");
-    this.setInputsInline(true); 
+    this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(0);
  this.setTooltip("type ask to chatgpt");
@@ -645,7 +659,7 @@ Blockly.Blocks['get_image'] = {
 Blockly.Blocks['face_detection'] = {
   init: function() {
     this.appendValueInput("img")
-        .appendField("face_detection()"); 
+        .appendField("face_detection()");
     this.setOutput(true, null);
     //this.setInputsInline(true);
     //this.setPreviousStatement(true, null);

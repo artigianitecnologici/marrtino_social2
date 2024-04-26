@@ -124,14 +124,24 @@ def gesture_pos2():
     hand_left(3.3144444444444447)
 
 def gesture_poszero():
-    spalla_flessione_dx(1.57)
-    spalla_flessione_sx(3.663333333333333)
-    spalla_rotazione_dx(3.14)
-    spalla_rotazione_sx(2.0933333333333333)
-    gomito_dx(3.14)
-    gomito_sx(2.0933333333333333)
-    hand_right(1.57)
-    hand_left(3.663333333333333)
+    right_shoulder_flexion(-70)
+    left_shoulder_flexion(-70)
+    right_shoulder_rotation(0)
+    left_shoulder_rotation(0)
+    right_elbow(0)
+    left_elbow(0)
+    right_hand(90)
+    left_hand(90)
+
+def gesture_init():
+    right_shoulder_flexion(-70)
+    left_shoulder_flexion(-70)
+    right_shoulder_rotation(0)
+    left_shoulder_rotation(0)
+    right_elbow(0)
+    left_elbow(0)
+    right_hand(90)
+    left_hand(90)
 
 def gesture_anim():
     head_position("front")
@@ -176,9 +186,6 @@ def spalla_rotazione_dx(msg):
     spalla_dx_rot_pub.publish(msg)
 
 def spalla_flessione_dx(msg):
-       
-    if (msg > 3.314 ):
-        msg = 3.314
     print('spalla_flessione_dx: %s' %(msg))
     spalla_dx_fle_pub.publish(msg)
 
@@ -196,8 +203,6 @@ def spalla_rotazione_sx(msg):
 def spalla_flessione_sx(msg):
     #
     # 1.918 = +40  -> Limite up
-    if (msg < 1.918 ):
-        msg = 1.918
     print('spalla_flessione_sx: %s'  %(msg))
     spalla_sx_fle_pub.publish(msg)
 
@@ -243,7 +248,58 @@ def head_position(msg):
     if (msg == 'up'):
         pan_pub.publish(0)
         tilt_pub.publish(-0.5)
+# create function en english and value degree
+#############################################
+# Calcoliamo i gradi relativi 150 = Centro
 
+def right_shoulder_rotation(vdeg):
+    vrad = DEG2RAD(150 + vdeg)
+    spalla_rotazione_dx(vrad)
+
+def left_shoulder_rotation(vdeg):
+    vdeg = -vdeg
+    vrad = DEG2RAD(150 + vdeg)
+    spalla_rotazione_sx(vrad)
+
+def right_shoulder_flexion(vdeg):
+    vdeg = -vdeg
+    vrad = DEG2RAD(150 + vdeg)
+    spalla_flessione_dx(vrad)
+
+def left_shoulder_flexion(vdeg):
+   
+    vrad = DEG2RAD(150 + vdeg)
+    spalla_flessione_sx(vrad)
+
+def right_elbow(vdeg):
+    vrad = DEG2RAD(150 + vdeg)
+    gomito_dx(vrad)
+    
+def left_elbow(vdeg):
+    vdeg = -vdeg
+    vrad = DEG2RAD( 150 + vdeg)
+    gomito_sx(vrad)
+  
+def right_hand(vdeg):
+    vdeg = -vdeg
+    vrad = DEG2RAD(150 + vdeg)
+    hand_right(vrad)
+    
+def left_hand(vdeg):
+    vrad = DEG2RAD( 150 + vdeg)
+    hand_left(vrad)
+
+# Angle functions
+
+def DEG2RAD(a):
+    return a*math.pi/180.0
+
+def RAD2DEG(a):
+    return a/math.pi*180.0
+#def get_nro_of_face:
+#    return 1
+
+###########################################
 # time in seconds
 TIME_DELAY = 5
 rospy.set_param("face_reset_timer",TIME_DELAY)
@@ -269,6 +325,8 @@ def stop_timer():
 
 def callback_gesture(data):
     gesture = data.data
+    if (gesture == 'init'):
+        gesture_init()
     if (gesture == 'gesture'):
         gesture_anim()
     if (gesture == 'zero'):

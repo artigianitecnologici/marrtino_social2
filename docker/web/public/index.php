@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="social/bootstrap/css/bootstrap.min.css">
-  <script src="https://meet.jit.si/external_api.js"></script>
+  <!--<script src="https://meet.jit.si/external_api.js"></script>-->
   <script src="social/js/jquery-3.4.1.min.js"></script>
   <script src="social/bootstrap/js/bootstrap.min.js"></script>
   

@@ -148,6 +148,7 @@
 
 </category>
 <category colour="120" name="Social">
+<block type="gesture"> </block>
 <block type="head_position"> </block>
 <block type="status"> </block>
 <block type="face"> </block>
@@ -183,7 +184,7 @@
 </block>
 <block type="user_say"></block>
 <block type="wait_user_say"></block>
-<block type="clear_asr"></block>
+<block type="clear-asr"></block>
 <block type="run_python">
 
    <value name="text">

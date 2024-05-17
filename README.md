@@ -146,4 +146,5 @@ Remove screen saver
 
 
 sudo chown -R www-data:www-data tmp
- sudo chown -R $USER:$USER tmp
+
+sudo chown -R $USER:$USER tmp

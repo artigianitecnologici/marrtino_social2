@@ -13,13 +13,24 @@ ARG MACHTYPE=default
 # System libs
 
 USER root
+RUN apt-get update -q && \
+    apt-get upgrade -yq && \
+    apt-get install -yq wget curl git build-essential vim sudo lsb-release locales bash-completion
 
-RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+#RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu bionic main" > /etc/apt/sources.list.d/ros-latest.list'
+RUN curl -k https://raw.githubusercontent.com/ros/rosdistro/master/ros.key | sudo apt-key add -
 
 RUN apt-get update && \
     apt-get install -y \
         v4l-utils python-pip \
-        cmake g++ git \
+        cmake g++ git libsox-fmt-all      && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && \
+    apt-get install -y \
+        mpg321 \
         ros-melodic-rgbd-launch ros-melodic-web-video-server \
         ros-melodic-camera-info-manager ros-melodic-libuvc \
         ros-melodic-image-view ros-melodic-rosbridge-server  && \
@@ -36,17 +47,18 @@ USER robot
 RUN pip install --user telepot
 RUN pip install --user requests
 RUN pip install --user gtts
-
+# 
 RUN mkdir -p $HOME/src/dynamixel &&  cd $HOME/src/dynamixel && \
-    git clone https://github.com/ROBOTIS-GIT/dynamixel-workbench.git && \
-    git clone https://github.com/ROBOTIS-GIT/dynamixel-workbench-msgs.git && \
-    git clone https://github.com/ROBOTIS-GIT/DynamixelSDK.git
+    git clone -b melodic-devel https://github.com/ROBOTIS-GIT/dynamixel-workbench.git && \
+    git clone -b melodic-devel https://github.com/ROBOTIS-GIT/dynamixel-workbench-msgs.git && \
+    git clone -b melodic-devel https://github.com/ROBOTIS-GIT/DynamixelSDK.git && \
+    git clone https://github.com/arebgun/dynamixel_motor.git 
  
 RUN mkdir -p $HOME/src &&  cd $HOME/src && \
     git clone https://github.com/arebgun/dynamixel_motor.git && \
     git clone https://github.com/artigianitecnologici/face_tracker_pkg.git && \
     git clone https://github.com/artigianitecnologici/face_tracker_control.git  && \
-    git clone https://github.com/artigianitecnologici/marrtino_social2.git 
+    git clone -b marrtinav3 https://github.com/artigianitecnologici/marrtino_social2.git 
    
    
     

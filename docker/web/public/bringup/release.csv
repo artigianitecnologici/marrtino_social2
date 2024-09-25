@@ -1,3 +1,5 @@
+21/09/2024;Add google TTS  add node /social/speech/to_speak ../status ../language;v.2.005;Update
+20/09/2024;Upgrade to ubuntu 22.04 add xrdp
 24/10/2023;Bringup add ;v.2.003;Update
 23/10/2023;Fix servo movement range;v.2.001;Fix
 23/10/2023;facerobot function speak EN and IT on a single form and save button;v.2.001;Update

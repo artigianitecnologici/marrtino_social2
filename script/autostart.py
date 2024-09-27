@@ -8,6 +8,13 @@ sys.path.append(os.getenv("MARRTINO_APPS_HOME")+"/program")
 
 from robot_cmd_ros import *
 
+OUT_GESTURE_TOPIC = "/social/gesture"
+gesture_pub = rospy.Publisher(OUT_GESTURE_TOPIC,String,queue_size=10)
+
+def gesture(msg):
+    gesture_pub.publish(msg)
+
+
 def speech(msg):
     #rospy.loginfo('Speech : %s' %(msg))
     emotion("speak")
@@ -28,14 +35,7 @@ def listener():
     pan(0)
     tilt(0) 
     # 
-    right_shoulder_flexion(-70)
-    left_shoulder_flexion(-70)
-    right_shoulder_rotation(0)
-    left_shoulder_rotation(0)
-    right_elbow(0)
-    left_elbow(0)
-    right_hand(90)
-    left_hand(90)
+    gesture('init')
 
 
     # end command

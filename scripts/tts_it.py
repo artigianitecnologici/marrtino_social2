@@ -1,30 +1,53 @@
-#!/usr/bin/python
-# -*- coding:utf-8 -*-
-import rospy 
-from std_msgs.msg import String
+# -*- coding: utf-8 -*-
+from pydub import AudioSegment
 from gtts import gTTS
 import os
-from subprocess import Popen, PIPE
-import requests.packages.urllib3
-requests.packages.urllib3.disable_warnings()
-tmpfile = "/tmp/cacheita.mp3"
+import time
 
-def callback(data):
-    rospy.loginfo('I heard %s', data.data)
-    try:
-        mytxt = data.data
-        mytxt.decode("utf-8")
-        tts = gTTS(mytxt, lang='it')
-        tts.save(tmpfile)
-        pitch = "600"
-        p=Popen("play " + tmpfile + " -q pitch 600" , stdout=PIPE, shell=True)
-        #"play " +  filename + " -q" + pitch + bass + treble + volume; 
-        p.wait()
-        os.remove(tmpfile)
-    except Exception as e:
-        print("receive msg,but parse exception:", e)
+def adjust_pitch(sound, octaves=0.0):
+    new_sample_rate = int(sound.frame_rate * (2.0 ** octaves))
+    pitch_changed_sound = sound._spawn(sound.raw_data, overrides={'frame_rate': new_sample_rate})
+    return pitch_changed_sound.set_frame_rate(44100)
 
-if __name__ == '__main__':
-    rospy.init_node('marrtino_speack_it_node', anonymous=True)
-    rospy.Subscriber('speak_it', String, callback, queue_size=1)
-    rospy.spin()
+def adjust_speed(sound, speed=1.0):
+    new_sound = sound._spawn(sound.raw_data, overrides={
+        "frame_rate": int(sound.frame_rate * speed)
+    })
+    return new_sound.set_frame_rate(44100)
+
+def adjust_pitch_and_speed(file_path, octaves=0.0, speed=1.0):
+    sound = AudioSegment.from_file(file_path)
+    pitch_changed_sound = adjust_pitch(sound, octaves)
+    final_sound = adjust_speed(pitch_changed_sound, speed)
+    output_file = f'output_with_pitch_{octaves}_and_speed_{speed}.mp3'
+    final_sound.export(output_file, format='mp3')
+    return output_file
+
+def text_to_speech(text, lang='en'):
+    tts = gTTS(text=text, lang=lang)
+    tts.save('original.mp3')
+
+def main():
+    text = input("Enter text to convert to speech: ")
+    lang = input("Enter language (e.g., 'it' for Italian, 'en' for English): ")
+
+    # Generate the original audio file from text
+    text_to_speech(text, lang)
+
+    # Speed is fixed for this example, but you can also vary it in a similar way if needed
+    speed = 1.0
+
+    # Loop through pitch values from -1.0 to 1.0 in steps of 0.2
+    for octaves in range(-10, 11, 2):  # This gives -1.0, -0.8, ..., 1.0
+        octaves_value = octaves / 10.0
+        print(f"Testing pitch: {octaves_value}")
+        output_file = adjust_pitch_and_speed('original.mp3', octaves=octaves_value, speed=speed)
+        
+        # Play the file
+        os.system(f'mpg321 {output_file}')
+        
+        # Delay between playing each pitch variation
+        time.sleep(1)
+
+if __name__ == "__main__":
+    main()

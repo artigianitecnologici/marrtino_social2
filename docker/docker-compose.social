@@ -1,7 +1,7 @@
-  social:
+  social: 
     image: marrtino:social
     build:
-      context: $MARRTINO_APPS_HOME2/docker
+      context: $MARRTINO_SOCIAL2/docker
       dockerfile: Dockerfile.social
     container_name: social
     dns: 8.8.8.8
@@ -12,6 +12,6 @@
     - ROS_IP=$ROS_IP
     volumes:
     - /dev:/dev
-    - $MARRTINO_APPS_HOME2:/home/robot/src/marrtino_apps
-    - $MARRTINO_SOCIAL2:/home/robot/src/social
-
+    - $MARRTINO_APPS_HOME:/home/robot/src/marrtino_apps
+    - $MARRTINO_SOCIAL2:/home/robot/src/marrtino_social2
+    - $HOE/src/narrtino_package:/home/robot/src/narrtino_package

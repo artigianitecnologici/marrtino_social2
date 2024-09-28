@@ -14,6 +14,7 @@
     #export MARRTINO_APPS_HOME2=$HOME/src/marrtino_apps2
     export MARRTINO_SOCIAL=$HOME/src/marrtino_social2
     export MARRTINO_SOCIAL2=$HOME/src/marrtino_social2
+    export MARRTINO_PACKAGE=$HOME/src/marrtino_package
 
     export ROS_IP=127.0.0.1
     #export ROS_IP=192.168.1.86

@@ -43,7 +43,7 @@ services:
     - /dev:/dev
     - $MARRTINO_APPS_HOME:/home/robot/src/marrtino_apps
     - $MARRTINO_SOCIAL2:/home/robot/src/marrtino_social2
-    - $HOME/src/narrtino_package:/home/robot/src/narrtino_package
+    - $MARRTINO_PACKAGE:/home/robot/src/narrtino_package
 
   
 

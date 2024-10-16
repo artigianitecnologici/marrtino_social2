@@ -45,14 +45,14 @@ RUN echo "20210426" > /tmp/lastdockerbuild
 EXPOSE 2700
 
 RUN cd $HOME/src && \
-    git clone --btanch marrtinav3  https://github.com/artigianitecnologici/marrtino_social2.git && \
-    git clone --branch marrtinov3 --depth 1 https://github.com/artigianitecnologici/marrtino_apps.git 
-    
+    git clone --branch marrtinav3  https://github.com/artigianitecnologici/marrtino_social2.git && \
+    git clone --branch marrtinov3 --depth 1 https://github.com/artigianitecnologici/marrtino_apps.git && \
+    git clone https://github.com/artigianitecnologici/marrtino_package.git
 
 
 RUN cd $HOME/ros/catkin_ws/src && \
-    ln -s $HOME/src/marrtino_social2/ . && \
-    ln -s $HOME/src/speech/ .
+    ln -s $HOME/src/marrtino_social2/ . 
+    
 
 RUN bash -ci "cd $HOME/ros/catkin_ws; catkin_make -j1"
 

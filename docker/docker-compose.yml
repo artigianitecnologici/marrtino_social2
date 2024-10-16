@@ -66,6 +66,7 @@ services:
     - $MARRTINO_SOCIAL2/script:/home/robot/script 
     - $MARRTINO_APPS_HOME:/home/robot/src/marrtino_apps
     - $MARRTINO_SOCIAL2:/home/robot/src/marrtino_social2
+    - $MARRTINO_PACKAGE:/home/robot/src/marrtino_package
 
 networks:
   default:

@@ -178,6 +178,10 @@ var speechLanguageTopic = new ROSLIB.Topic({
 });
 
 function speak( testo){
+  var language_speak = new ROSLIB.Message({
+      data: 'it'
+ });
+ speechLanguageTopic.publish(language_speak);
   var msg_speak = new ROSLIB.Message({
         data: testo
   });
@@ -191,7 +195,11 @@ function speak( testo){
 
 
 function speaken( testo){
-testo=testo+'###en';  
+var language_speak = new ROSLIB.Message({
+      data: 'en'
+ });
+ speechLanguageTopic.publish(language_speak);
+  
 var msg_speak = new ROSLIB.Message({
       data: testo
  });

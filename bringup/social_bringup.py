@@ -24,7 +24,7 @@ def run_server(port):
     sock.listen(1)
     print("ROS social server started on port %d ..." %port)
 
-    tmux = TmuxSend('bringup', ['netcat','social','interactive','autostart','offline','cmd'])
+    tmux = TmuxSend('bringup', ['netcat','social','interactive','autostart','offline','cmd','gtp'])
 
     connected = False
     dorun = True

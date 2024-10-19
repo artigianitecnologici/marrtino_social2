@@ -24,11 +24,18 @@ myurl = 'http://10.3.1.1:5000/bot'
 IN_TOPIC = "/social/face_nroface"
 OUT_GESTURE_TOPIC = "/social/gesture"
 TOPIC_speech = "/speech/to_speak"
+TOPIC_emotion = "/social/emotion"
 IN_TOPIC_speechstatus = "/speech/status"
 
 tracking = False
 
 gesture_pub = rospy.Publisher(OUT_GESTURE_TOPIC,String,queue_size=10)
+emotion_pub = rospy.Publisher(TOPIC_emotion, String, queue_size=1,   latch=True)
+
+def emotion(msg):
+    #
+    print('social/emotion %s' %(msg))
+    emotion_pub.publish(msg)
 
 
 def bot(msg):

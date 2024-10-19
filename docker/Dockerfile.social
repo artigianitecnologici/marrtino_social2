@@ -50,7 +50,7 @@ RUN pip install --user gtts
 
 
 
-RUN mkdir -p $HOME/src/dynamixel &&  cd $HOME/src/dynamixel && \n
+RUN mkdir -p $HOME/src/dynamixel &&  cd $HOME/src/dynamixel && \
     git clone -b melodic-devel https://github.com/ROBOTIS-GIT/dynamixel-workbench.git && \
     git clone -b melodic-devel https://github.com/ROBOTIS-GIT/dynamixel-workbench-msgs.git && \
     git clone -b melodic-devel https://github.com/ROBOTIS-GIT/DynamixelSDK.git  

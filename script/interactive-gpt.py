@@ -21,9 +21,10 @@ from robot_cmd_ros import *
 myurl = 'http://10.3.1.1:5000/bot'
 TOPIC_nroface = "/social/face_nroface"
 TOPIC_gesture = "/social/gesture"
-TOPIC_speech = "/speech/to_speak"
+TOPIC_speech = "/social/speech/to_speak"
+TOPIC_speechstatus = "/social/speech/status"
+TOPIC_language = "/social/speech/language"
 TOPIC_emotion = "/social/emotion"
-TOPIC_speechstatus = "/speech/status"
 TOPIC_response_gtp = "/gtpresponse"
 TOPIC_request_gtp = "/gtprequest"
 
@@ -32,6 +33,8 @@ tracking = False
 gesture_pub = rospy.Publisher(TOPIC_gesture, String, queue_size=10)
 emotion_pub = rospy.Publisher(TOPIC_emotion, String, queue_size=1, latch=True)
 gpt_request_publisher = rospy.Publisher(TOPIC_request_gtp, String, queue_size=10)
+speech_pub =  rospy.Publisher(TOPIC_speech, String, queue_size=1,   latch=True)
+language_pub = rospy.Publisher(TOPIC_language, String, queue_size=1,   latch=True)
 
 # Funzione di connessione socket con gestione degli errori
 def create_server_socket(server_address, server_port, retries=5, retry_delay=5):
@@ -53,12 +56,17 @@ def create_server_socket(server_address, server_port, retries=5, retry_delay=5):
                 raise e
     raise RuntimeError("Impossibile avviare il server socket dopo vari tentativi")
 
-# Definizione della funzione di callback prima di usarla
 def callback_gtpresponse(msg):
     try:
         json_data = json.loads(msg.data)
         rospy.loginfo("Messaggio decodificato ricevuto:")
         rospy.loginfo(json.dumps(json_data, indent=4, ensure_ascii=False))
+
+        # Helper function per estrarre il primo elemento se è una lista
+        def extract_first_element(value):
+            if isinstance(value, list) and len(value) > 0:
+                return value[0]  # Restituisce il primo elemento della lista
+            return value  # Se non è una lista, restituisce il valore così com'è
 
         status = json_data.get("status", "N/A")
         msg_field = json_data.get("msg", "N/A")
@@ -66,32 +74,39 @@ def callback_gtpresponse(msg):
         data = json_data.get("data", {})
         action = json_data.get("action", "N/A")
 
-        macro_vr = data.get("macro_vr", [])
-        emotion = data.get("emotion", [])
-        language = data.get("language", [])
-        speech = data.get("speech", [])
-        head = data.get("head", [])
-        gesture = data.get("gesture", [])
-        wait = data.get("wait", [])
-        url = data.get("url", [])
-        message = data.get("message", "N/A")
+        macro_vr = extract_first_element(data.get("macro_vr", []))
+        emotion_value = extract_first_element(data.get("emotion", []))
+        language = extract_first_element(data.get("language", []))
+        speech_value = extract_first_element(data.get("speech", []))
+        head = extract_first_element(data.get("head", []))
+        gesture = extract_first_element(data.get("gesture", []))
+        wait = extract_first_element(data.get("wait", []))
+        url = extract_first_element(data.get("url", []))
+        message = extract_first_element(data.get("message", "N/A"))
 
         rospy.loginfo("Status: %s" % status)
         rospy.loginfo("Msg: %s" % msg_field)
         rospy.loginfo("Error: %s" % error)
         rospy.loginfo("Action: %s" % action)
         rospy.loginfo("Macro VR: %s" % macro_vr)
-        rospy.loginfo("Emotion: %s" % emotion)
+        rospy.loginfo("Emotion: %s" % emotion_value)
         rospy.loginfo("Language: %s" % language)
-        rospy.loginfo("Speech: %s" % speech)
+        rospy.loginfo("Speech: %s" % speech_value)
         rospy.loginfo("Head: %s" % head)
         rospy.loginfo("Gesture: %s" % gesture)
         rospy.loginfo("Wait: %s" % wait)
         rospy.loginfo("URL: %s" % url)
         rospy.loginfo("Message: %s" % message)
+
+        # Se vuoi eseguire funzioni per modificare lo stato del robot:
+        emotion(emotion_value)
+        setlanguage(language)
+        nspeech(speech_value)
         
     except json.JSONDecodeError:
         rospy.logerr("Errore nella decodifica del messaggio JSON")
+
+
 
 # Sottoscrizione al topic dopo la definizione della funzione callback
 gpt_response_sub = rospy.Subscriber(TOPIC_response_gtp, String, callback_gtpresponse)
@@ -99,6 +114,14 @@ gpt_response_sub = rospy.Subscriber(TOPIC_response_gtp, String, callback_gtpresp
 def emotion(msg):
     print 'social/emotion %s' % (msg)
     emotion_pub.publish(msg)
+
+def nspeech(msg):
+    print '/social/speech/to_speak %s' % (msg)
+    speech_pub.publish(msg)
+
+def setlanguage(msg):
+    print '/social/speech/language %s' % (msg)
+    language_pub.publish(msg)
 
 def gpt_request_pub(msg):
     print 'gpt_request_pub %s' % (msg)
@@ -136,9 +159,9 @@ def gesture(msg):
 def reset_face():    
     rospy.loginfo("resetting face")
 
-def speech(msg, language):
-    say(msg, language)
-    gesture('gesture')
+# def speech(msg, language):
+#     say(msg, language)
+#     gesture('gesture')
 
 def callback_speechstatus(data):
     global stspeech
@@ -153,7 +176,7 @@ def timerping():
     threading.Timer(10.0, timerping).start()
     print "Ciao mondo!"
 
-def callback(data):
+def callback(data):# detect face  
     global tracking
     if data.data == 0 and tracking:
         tracking = False
@@ -174,11 +197,12 @@ def listener():
     reset_face()
     emotion("startblinking")
     gesture("gesture")
-    speech("Ciao sono martina", mylanguage)
-    speech("Apri l'applicazione e parla con me", mylanguage)
+    #setlanguage(mylanguage)
+    say("Ciao sono martina ",mylanguage)
+    say("Apri la applicazione e parla con me",mylanguage)
 
     # Utilizzo della funzione che gestisce gli errori del socket
-    serverSocket = create_server_socket(SERVER_ADDRESS, SERVER_PORT)
+   # serverSocket = create_server_socket(SERVER_ADDRESS, SERVER_PORT)
 
     connectionSocket, clientAddress = serverSocket.accept()
     myloop = True
@@ -271,5 +295,10 @@ def listener():
     connectionSocket.close()
     end()
 
+serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+serverSocket.bind((SERVER_ADDRESS, SERVER_PORT))        # Bind to the port
+serverSocket.listen(1)
+
+print("Server waiting on (%s, %d)" % (SERVER_ADDRESS, SERVER_PORT))
 # Avvio del listener
 listener()

@@ -1,0 +1,12 @@
+<launch>
+  <!-- Esegui il nodo AskToGPT -->
+  <node pkg="marrtino_package" type="node_asktogtp.py" name="asktogpt" output="screen">
+    
+    <!-- Passa il parametro del file di configurazione -->
+    <param name="config_file" value="$(find marrtino_package)/config/config.yaml" />
+    
+    <!-- Definisci il gruppo da utilizzare (puoi cambiarlo qui) -->
+    <param name="group" value="museo" />
+    
+  </node>
+</launch>

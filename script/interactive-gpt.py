@@ -27,6 +27,9 @@ TOPIC_language = "/social/speech/language"
 TOPIC_emotion = "/social/emotion"
 TOPIC_response_gtp = "/gtpresponse"
 TOPIC_request_gtp = "/gtprequest"
+TOPIC_pan = "pan_controller/command"
+TOPIC_tilt = "tilt_controller/command"
+
 
 tracking = False
 
@@ -35,6 +38,8 @@ emotion_pub = rospy.Publisher(TOPIC_emotion, String, queue_size=1, latch=True)
 gpt_request_publisher = rospy.Publisher(TOPIC_request_gtp, String, queue_size=10)
 speech_pub =  rospy.Publisher(TOPIC_speech, String, queue_size=1,   latch=True)
 language_pub = rospy.Publisher(TOPIC_language, String, queue_size=1,   latch=True)
+pan_pub = rospy.Publisher(TOPIC_pan, Float64, queue_size=1,   latch=True)
+tilt_pub = rospy.Publisher(TOPIC_tilt, Float64, queue_size=1,   latch=True)
 
 # Funzione di connessione socket con gestione degli errori
 def create_server_socket(server_address, server_port, retries=5, retry_delay=5):
@@ -56,55 +61,100 @@ def create_server_socket(server_address, server_port, retries=5, retry_delay=5):
                 raise e
     raise RuntimeError("Impossibile avviare il server socket dopo vari tentativi")
 
-def callback_gtpresponse(msg):
-    try:
-        json_data = json.loads(msg.data)
-        rospy.loginfo("Messaggio decodificato ricevuto:")
-        rospy.loginfo(json.dumps(json_data, indent=4, ensure_ascii=False))
 
-        # Helper function per estrarre il primo elemento se è una lista
-        def extract_first_element(value):
-            if isinstance(value, list) and len(value) > 0:
-                return value[0]  # Restituisce il primo elemento della lista
-            return value  # Se non è una lista, restituisce il valore così com'è
+def pan(msg):
+    # valori da -0.5  0 0.5 
+    print('Pan Position: %s' %(msg))
+    pan_pub.publish(msg)
 
-        status = json_data.get("status", "N/A")
-        msg_field = json_data.get("msg", "N/A")
-        error = json_data.get("error", "N/A")
-        data = json_data.get("data", {})
-        action = json_data.get("action", "N/A")
+def tilt(msg):
+    #
+    print('Tilt Position: %s' %(msg))
+    tilt_pub.publish(msg)
 
-        macro_vr = extract_first_element(data.get("macro_vr", []))
-        emotion_value = extract_first_element(data.get("emotion", []))
-        language = extract_first_element(data.get("language", []))
-        speech_value = extract_first_element(data.get("speech", []))
-        head = extract_first_element(data.get("head", []))
-        gesture = extract_first_element(data.get("gesture", []))
-        wait = extract_first_element(data.get("wait", []))
-        url = extract_first_element(data.get("url", []))
-        message = extract_first_element(data.get("message", "N/A"))
-
-        rospy.loginfo("Status: %s" % status)
-        rospy.loginfo("Msg: %s" % msg_field)
-        rospy.loginfo("Error: %s" % error)
-        rospy.loginfo("Action: %s" % action)
-        rospy.loginfo("Macro VR: %s" % macro_vr)
-        rospy.loginfo("Emotion: %s" % emotion_value)
-        rospy.loginfo("Language: %s" % language)
-        rospy.loginfo("Speech: %s" % speech_value)
-        rospy.loginfo("Head: %s" % head)
-        rospy.loginfo("Gesture: %s" % gesture)
-        rospy.loginfo("Wait: %s" % wait)
-        rospy.loginfo("URL: %s" % url)
-        rospy.loginfo("Message: %s" % message)
-
-        # Se vuoi eseguire funzioni per modificare lo stato del robot:
-        emotion(emotion_value)
-        setlanguage(language)
-        nspeech(speech_value)
+def head_position(msg):
+    print('Head : %s' %(msg))
+    if (msg == 'front'):
+        pan_pub.publish(0)
+        tilt_pub.publish(0)
+    if (msg == 'left'):
+        pan_pub.publish(0.5)
+        tilt_pub.publish(0)
+    if (msg == 'half_left'):
+        pan_pub.publish(0.25)
+        tilt_pub.publish(0)
+    if (msg == 'right'):
+        pan_pub.publish(-0.5)
+        tilt_pub.publish(0)
+    if (msg == 'half_right'):
+        pan_pub.publish(-0.25)
+        tilt_pub.publish(0)
+    if (msg == 'down'):
+        pan_pub.publish(0)
+        tilt_pub.publish(0.5)
+    if (msg == 'up'):
+        pan_pub.publish(0)
         
-    except json.JSONDecodeError:
-        rospy.logerr("Errore nella decodifica del messaggio JSON")
+  # Helper function per estrarre il primo elemento se è una lista
+def extract_first_element(value):
+    if isinstance(value, list) and len(value) > 0:
+        return value[0]  # Restituisce il primo elemento della lista
+    return value  # Se non è una lista, restituisce il valore così com'è
+
+def callback_gtpresponse(msg):
+     
+    json_data = json.loads(msg.data)
+    rospy.loginfo("Messaggio decodificato ricevuto:")
+   # rospy.loginfo(json.dumps(json_data, indent=4, ensure_ascii=False))
+    status = json_data.get("status", "N/A")
+    msg_field = json_data.get("msg", "N/A")
+    error = json_data.get("error", "N/A")
+    data = json_data.get("data", {})
+    action = json_data.get("action", "N/A")
+   # macro_vr = extract_first_element(data.get("macro_vr", []))
+    emotion_value = extract_first_element(data.get("emotion", []))
+    emotion_value = emotion_value.lower()
+    language = extract_first_element(data.get("language", [])) 
+  
+    head_value = extract_first_element(data.get("head", [])).lower()
+    gesture_value = extract_first_element(data.get("gesture", []))
+    wait = extract_first_element(data.get("wait", []))
+    url = extract_first_element(data.get("url", [])) 
+    message = extract_first_element(data.get("message", "N/A"))
+    speech_value = message
+  # Stampa i dati estratti
+    print("Status: %s" % status)
+    print("Msg: %s" % msg_field)
+    print("Error: %s" % error)
+    print("Action: %s" % action)
+    # print("Macro VR: %s" % macro_vr)
+    print("Emotion: %s" % emotion_value)
+    print("Language: %s" % language)
+    print("Head: %s" % head_value)
+    print("Gesture: %s" % gesture_value)
+    print("Wait: %s" % wait)
+    print("URL: %s" % url)
+    print("Message: %s" % message)
+
+   # rospy.loginfo("Message: %s" % message.decode)
+    # Se vuoi eseguire funzioni per modificare lo stato del robot:
+    # if (error == 'False'):
+   # if isinstance(emotion_value, str) and emotion_value != '':
+    emotion(emotion_value)
+   # if isinstance(gesture_value, str) and gesture_value != '':
+    gesture(gesture_value)
+
+   # if isinstance(head_value, str) and head_value != '':
+    head_position(head_value)
+    setlanguage('it')
+   # 
+    nspeech(speech_value)
+    # else:
+    #     nspeech("si è verificato un errore con gtp")
+
+    
+    # except json.JSONDecodeError:
+    #     rospy.logerr("Errore nella decodifica del messaggio JSON")
 
 
 
@@ -197,7 +247,7 @@ def listener():
     reset_face()
     emotion("startblinking")
     gesture("gesture")
-    #setlanguage(mylanguage)
+    setlanguage(mylanguage)
     say("Ciao sono martina ",mylanguage)
     say("Apri la applicazione e parla con me",mylanguage)
 

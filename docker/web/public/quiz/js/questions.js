@@ -32,7 +32,7 @@ let questions = [
       "Mi dispiace",
       "Per favore"
     ]
-  },
+  }, 
     {
     numb: 4,
     question: "Come dici in italiano la parola inglese Thank you?",

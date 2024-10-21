@@ -113,11 +113,20 @@ def callback_gtpresponse(msg):
     action = json_data.get("action", "N/A")
    # macro_vr = extract_first_element(data.get("macro_vr", []))
     emotion_value = extract_first_element(data.get("emotion", []))
-    emotion_value = emotion_value.lower()
+    
     language = extract_first_element(data.get("language", [])) 
   
-    head_value = extract_first_element(data.get("head", [])).lower()
-    gesture_value = extract_first_element(data.get("gesture", []))
+    head_value = extract_first_element(data.get("head", []))
+    # Controlla se la chiave "gesture" è presente e se contiene una lista non vuota
+    if "gesture" in data and isinstance(data["gesture"], list) and data["gesture"]:
+        gesture_value = data["gesture"][0]  # Estrai il primo elemento
+        gesture(gesture_value.lower())
+        print("Gesture trovata: ")
+    else:
+        gesture_value = None  # Valore di default nel caso "gesture" non sia presente o sia vuota
+        print("Gesture non presente o lista vuota")
+    
+    
     wait = extract_first_element(data.get("wait", []))
     url = extract_first_element(data.get("url", [])) 
     message = extract_first_element(data.get("message", "N/A"))
@@ -139,13 +148,14 @@ def callback_gtpresponse(msg):
    # rospy.loginfo("Message: %s" % message.decode)
     # Se vuoi eseguire funzioni per modificare lo stato del robot:
     # if (error == 'False'):
-   # if isinstance(emotion_value, str) and emotion_value != '':
-    emotion(emotion_value)
-   # if isinstance(gesture_value, str) and gesture_value != '':
-    gesture(gesture_value)
+    if isinstance(emotion_value, str) and emotion_value != '':
+        emotion_value = emotion_value.lower()
+        emotion(emotion_value)
+    # if gesture_value != '':
+    #     gesture(gesture_value)
 
-   # if isinstance(head_value, str) and head_value != '':
-    head_position(head_value)
+    # if  head_value != '':
+    #     head_position(head_value)
     setlanguage('it')
    # 
     nspeech(speech_value)
@@ -334,13 +344,18 @@ def listener():
 
             if myrequest == "PING":
                 connectionSocket.send("PONG")
+            else:
+                gpt_request_pub(myrequest)   
 
             if myrequest and not mycommand:
                 connectionSocket.send("STOP")
-                answer = bot(myrequest)
-                gesture("gesture")
-                speech(answer, mylanguage)
-                connectionSocket.send("SAY")
+
+                      
+
+               # answer = bot(myrequest)
+           # gesture("gesture")
+              #  speech(answer, mylanguage)
+            connectionSocket.send("SAY")
 
     connectionSocket.close()
     end()

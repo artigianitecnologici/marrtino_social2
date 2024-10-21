@@ -8,3 +8,4 @@ docker/web/public/social/tmp/facerobot.txt
 vosk-server/vosk-model-it-0.22
 backup
 
+docker/web/public/tombola/db.json
